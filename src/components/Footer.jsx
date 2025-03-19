@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <footer className="footer">
-            <p>© 2025 Juan David - Todos los derechos reservados</p>
+        <footer className="bg-gray-900 text-white p-4 mt-10 text-center">
+            © 2025 Juan David Garzón - Todos los derechos reservados
         </footer>
     );
 };
