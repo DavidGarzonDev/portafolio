@@ -1,10 +1,15 @@
 import React from 'react'
-
+import Header from "./components/Header"
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
+  
 const App = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <h1 className="text-4xl font-bold">Juan David</h1>
-      <p className="text-lg mt-2">Desarrollador en formación</p>
+    
+    <div className="container">
+      <Header/>
+      <Home />
+      <Footer />
     </div>
   )
 }
