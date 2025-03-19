@@ -17,7 +17,6 @@ const App = () => {
         
         <Header/>
 
-        {/* Secciones con los componentes */}
         <section id="about" className="min-h-screen flex items-center justify-center">
           <About />
         </section>
