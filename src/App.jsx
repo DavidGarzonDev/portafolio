@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Contact from "./pages/Contact"
 import { Routes, Route } from 'react-router-dom';
+import "./styles/index.css"
 
   
 const App = () => {
@@ -19,8 +20,11 @@ const App = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact/>}/>
       </Routes>
-      <Footer/>
+      <Footer />
       
+      <h1 class="text-3xl font-bold underline">
+        Juan david!
+      </h1>
       </>
   )
 }

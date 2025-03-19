@@ -1,45 +1,65 @@
-import React, { useState } from 'react'
-import "../pages/Contact.css";
-
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
+import "../styles/Contact.css";
 
 const Contact = () => {
-    const [formData, setFormData] = useState(
-        {
-            name: "",
-            email: "",
-            message: "",
-            
-        }
-    );
+    const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
     
-    const [errors, setErrors] = useState({});
 
-    const handleChange = (e) => { 
-        setFormData({...formData,[e.target.name]: e.target.value})
+
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        message: ""
+    });
+
+    const [errors, setErrors] = useState({});
+    const [sent, setSent] = useState(false);
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const validate = () => { 
+    const validate = () => {
         let newErrors = {};
-            if(!formData.name.trim()) newErrors.name = "El nombre es obligatorio.";
-            if(!formData.email.includes("@")) newErrors.email = "Correo no válido.";
-            if (!formData.message.trim()) newErrors.message = "Mensaje vacío.";
-        
+        if (!formData.name.trim()) newErrors.name = "El nombre es obligatorio.";
+        if (!formData.email.includes("@")) newErrors.email = "Correo no válido.";
+        if (!formData.message.trim()) newErrors.message = "Mensaje vacío.";
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
-    }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            console.log("Formulario enviado:", formData);
-            alert("Mensaje enviado!");
-            setFormData({ name: "", email: "", message: "" }); // Limpiar el formulario
+            emailjs
+                .send(
+                    serviceID,
+                    templateID,
+                    {
+                        user_name: formData.name,
+                        user_email: formData.email,
+                        message: formData.message,
+                        to_email: import.meta.env.VITE_MY_EMAIL
+                    },
+                    publicKey
+                )
+                .then(() => {
+                    setSent(true);
+                    setFormData({ name: "", email: "", message: "" });
+                    setTimeout(() => setSent(false), 3000);
+                })
+                .catch((error) => console.error("Error al enviar el mensaje:", error));
         }
     };
-
 
     return (
         <div>
             <h2>Contacto</h2>
+            {sent && <p style={{ color: "green" }}>Mensaje enviado con éxito!</p>}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Nombre:</label>
                 <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
@@ -56,7 +76,7 @@ const Contact = () => {
                 <button type="submit">Enviar</button>
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default Contact
+export default Contact;
