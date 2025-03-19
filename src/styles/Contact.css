@@ -6,7 +6,9 @@ form {
     max-width: 400px;
     margin: auto;
 }
-
+html {
+    scroll-behavior: smooth;
+}
 input,
 textarea {
     margin-bottom: 10px;

@@ -1,5 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -16,7 +24,9 @@
   text-align: center;
   padding: 50px;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 a {
   font-weight: 500;
   color: #646cff;

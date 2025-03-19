@@ -13,18 +13,29 @@ const App = () => {
   return (
     <>
     
-      <Header/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact/>}/>
-      </Routes>
-      <Footer />
-      
-      <h1 class="text-3xl font-bold underline">
-        Juan david!
-      </h1>
+      <div className="font-poppins">
+        {/* Barra de navegación con enlaces a cada sección */}
+        <nav className="fixed top-0 w-full bg-white shadow-md p-4">
+          <ul className="flex space-x-4 justify-center">
+            <li><a href="#about" className="text-blue-500">Sobre mí</a></li>
+            <li><a href="#projects" className="text-blue-500">Proyectos</a></li>
+            <li><a href="#contact" className="text-blue-500">Contacto</a></li>
+          </ul>
+        </nav>
+
+        {/* Secciones con los componentes */}
+        <section id="about" className="min-h-screen flex items-center justify-center">
+          <About />
+        </section>
+
+        <section id="projects" className="min-h-screen flex items-center justify-center">
+          <Projects />
+        </section>
+
+        <section id="contact" className="min-h-screen flex items-center justify-center">
+          <Contact />
+        </section>
+      </div>
       </>
   )
 }
