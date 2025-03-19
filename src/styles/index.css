@@ -18,40 +18,29 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #000000, #1a1a1a);
-  /* Negro moderno */
+  background: linear-gradient(to bottom, #000000, #1e1e1e);
   color: white;
   text-align: center;
 }
 
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  padding: 10px 0;
-}
 
 nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 20px;
-}
-
-nav ul li {
-  display: inline;
+  gap: 60px;
 }
 
 nav ul li a {
-  color: #38bdf8;
-  text-decoration: none;
-  font-weight: 500;
+  color: #ffffff;
+  text-decoration: ;
+  font-weight: 900;
   transition: color 0.3s;
+  
 }
 
 nav ul li a:hover {
-  color: #0ea5e9;
+  color: #ffffff;
 }
 
 .container {
@@ -69,8 +58,8 @@ nav ul li a:hover {
   height: 180px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #38bdf8;
-  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.5);
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
 }
 
 h1 {
@@ -83,7 +72,7 @@ h2 {
   font-size: 1.8rem;
   font-weight: 400;
   margin-bottom: 10px;
-  color: #38bdf8;
+  color: #fa6060;
 }
 
 p {
