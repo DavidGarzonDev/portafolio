@@ -10,13 +10,12 @@ const About = () => {
                     <img src={MiFoto} alt="Mi foto" />
                 </div>
             </div>
+            <h2>¡Hola!, soy</h2>
             <h1 class="text-5xl md:text-6xl font-extrabold text-white">
-                David Garzon
+                Desarrollador de software
             </h1>
-            <h2 class="text-3xl"
-            >Sobre mí
-            </h2>
-            <p>Desarrollador en formación | Estudiante de Ingeniería de Sistemas en la Universidad del Valle</p>
+            
+            <p>Me llamo David Garzon y soy Junior Fullstack</p>
             <p>
                 Apasionado por la tecnología y el desarrollo de software. Siempre en busca de aprender, mejorar y crear soluciones innovadoras.
             </p>
