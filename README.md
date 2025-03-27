@@ -43,9 +43,4 @@ Este proyecto es una página web personal diseñada para mostrar mis proyectos, 
    npm start
    ```
 
-## 📬 Contacto
-- **LinkedIn:** [Tu perfil](https://linkedin.com/in/tu-perfil)
-- **GitHub:** [Tu GitHub](https://github.com/tu-usuario)
-- **Correo:** tuemail@example.com
-
 ¡Gracias por visitar mi portafolio! 😊
