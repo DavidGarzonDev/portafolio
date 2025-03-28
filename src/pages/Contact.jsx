@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-import "../styles/Contact.css";
 
 const Contact = () => {
     const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;

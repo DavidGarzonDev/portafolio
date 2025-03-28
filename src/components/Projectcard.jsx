@@ -2,11 +2,13 @@ import React from "react";
 
 const ProjectCard = ({ title, description, image, link }) => {
     return (
-        <div className="flex justify-center items-center min-h-screen">
-            <div className="card bg-base-100 w-96 shadow-lg">
-                <figure>
-                    <img src={image} alt={title} className="object-cover h-48 w-full" />
-                </figure>
+        <div className="flex items-center">
+            <div className="card bg-base-100 w-90 shadow-lg">
+                {image == "" && (
+                    <figure>
+                        <img src={image} alt={title} className="object-cover h-48 w-full" />
+                    </figure>
+                )}
                 <div className="card-body">
                     <h2 className="card-title">{title}</h2>
                     <p>{description}</p>

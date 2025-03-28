@@ -1,37 +1,30 @@
 import About from "./pages/About"
 import Projects from "./pages/Projects"
-import React from 'react'
-import Header from "./components/Header"
-import Home from "./pages/Home";
-import Footer from "./components/Footer";
+import Header from "./pages/Header"
+import Footer from "./pages/Footer";
 import Contact from "./pages/Contact"
-import { Routes, Route } from 'react-router-dom';
+
 import "./styles/index.css"
 
-  
+
 const App = () => {
   return (
     <>
+      <Header />
+      <section id="about">
+        <About />
+      </section>
 
-      <div className="font-poppins">
-        
-        <Header/>
+      <section id="projects">
+        <Projects />
+      </section>
 
-        <section id="about" className="min-h-screen flex items-center justify-center">
-          <About />
-        </section>
+      <section id="contact">
+        <Contact />
+      </section>
+      <Footer />
 
-        <section id="projects" className="min-h-screen flex items-center justify-center">
-          <Projects />
-        </section>
-
-        <section id="contact" className="min-h-screen flex items-center justify-center">
-          <Contact />
-        </section>
-
-        <Footer/>
-      </div>
-      </>
+    </>
   )
 }
 

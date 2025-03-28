@@ -1,8 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
 
-* {
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
+@theme {
+  --font-family: 'Poppins', sans-serif;
+  --color-primary: #1d4ed8;
+  --color-secondary: #f87171;
+}
+
+:root {
+  font-family: var(--font-family);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -13,16 +19,9 @@ html {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
   background: linear-gradient(to bottom, #000000, #1e1e1e);
   color: white;
-  text-align: center;
 }
-
 
 nav ul {
   list-style: none;
@@ -33,10 +32,9 @@ nav ul {
 
 nav ul li a {
   color: #ffffff;
-  text-decoration: ;
+  text-decoration: none;
   font-weight: 900;
   transition: color 0.3s;
-  
 }
 
 nav ul li a:hover {
@@ -60,23 +58,4 @@ nav ul li a:hover {
   object-fit: cover;
   border: 4px solid #ffffff;
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
-}
-
-h1 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-top: 20px;
-}
-
-h2 {
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin-bottom: 10px;
-  color: #fa6060;
-}
-
-p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin-top: 10px;
 }
