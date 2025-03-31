@@ -1,10 +1,8 @@
 @import "tailwindcss";
-@plugin "daisyui";
 
 @theme {
   --font-family: 'Poppins', sans-serif;
-  --color-primary: #1d4ed8;
-  --color-secondary: #f87171;
+  
 }
 
 :root {
@@ -14,12 +12,13 @@
   box-sizing: border-box;
 }
 
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: linear-gradient(to bottom, #000000, #1e1e1e);
+  background: #0D0D0D;
   color: white;
 }
 
