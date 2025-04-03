@@ -2,9 +2,9 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <header className="fixed top-0 left-0 w-full bg-transparent backdrop-blur-md z-50 py-4 shadow-sm">
+        <header className="fixed top-0 left-0 w-full bg-transparent backdrop-blur-md z-50 py-0 shadow-sm ">
             <nav className="w-full">
-                <ul className="flex justify-center space-x-8 md:space-x-16 w-full">
+                <ul className="flex justify-center space-x-0 md:space-x-15 w-full p-2">
                     {[
                         { id: 'about', text: 'Sobre mí' },
                         { id: 'projects', text: 'Proyectos' },
