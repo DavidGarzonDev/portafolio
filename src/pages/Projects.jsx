@@ -22,7 +22,6 @@ const Projects = () => {
                 <ProjectCard
                     image={Pulmones}
                     title="ExploraPulmones 3D – Aprendizaje Interactivo sobre la Salud Pulmonar"
-                    description="Es una aplicación web interactiva que enseña sobre la anatomía pulmonar y enfermedades respiratorias mediante un modelo 3D. Este proyecto destaca mis habilidades en desarrollo web 3D e interactividad. 🚀"
                     githubLink="https://github.com/DavidGarzonDev/proyecto-web-3d"
                     vercelLink="https://proyecto-web-3d.vercel.app"
                     technologies={["React + vite", "Three.js", "CSS" , "Drei"]}

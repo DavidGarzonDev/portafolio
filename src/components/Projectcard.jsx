@@ -2,7 +2,6 @@ import React from "react";
 
 const ProjectCard = ({
     title,
-    description,
     image,
     githubLink,
     vercelLink,
@@ -31,10 +30,7 @@ const ProjectCard = ({
                 {image && <h2 className="text-3xl font-bold mb-2">{title}</h2>}
 
                 
-                <p className="text-gray-300 mb-4 text-lg leading-relaxed"> {/* Texto más grande y espaciado */}
-                    {description}
-                </p>
-
+                
                 {/* Tecnologías */}
                 {technologies.length > 0 && (
                     <div className="mt-auto mb-4">

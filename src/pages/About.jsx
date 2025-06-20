@@ -62,6 +62,7 @@ const About = () => {
                             />
                         </a>
                     </div>
+                    
                 </div>
             </div>
         </div>
