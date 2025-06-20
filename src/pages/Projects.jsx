@@ -26,6 +26,13 @@ const Projects = () => {
                     vercelLink="https://proyecto-web-3d.vercel.app"
                     technologies={["React + vite", "Three.js", "CSS" , "Drei"]}
                 />
+                <ProjectCard
+                    image={Pulmones}
+                    title="ExploraPulmones 3D – Aprendizaje Interactivo sobre la Salud Pulmonar"
+                    githubLink="https://github.com/DavidGarzonDev/proyecto-web-3d"
+                    vercelLink="https://proyecto-web-3d.vercel.app"
+                    technologies={["React + vite", "Three.js", "CSS" , "Drei"]}
+                />
             </div>
         </main>
     );
