@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectCard from '../components/Projectcard';
 import Pulmones from "../assets/pulmones.png";
+import TuRifa from "../assets/rifa.png";
 
 const Projects = () => {
     return (
@@ -27,11 +28,11 @@ const Projects = () => {
                     technologies={["React + vite", "Three.js", "CSS" , "Drei"]}
                 />
                 <ProjectCard
-                    image={Pulmones}
-                    title="ExploraPulmones 3D – Aprendizaje Interactivo sobre la Salud Pulmonar"
-                    githubLink="https://github.com/DavidGarzonDev/proyecto-web-3d"
-                    vercelLink="https://proyecto-web-3d.vercel.app"
-                    technologies={["React + vite", "Three.js", "CSS" , "Drei"]}
+                    image={TuRifa}
+                    title="Tu Rifa – Plataforma web para sorteos digitales"
+                    githubLink="https://github.com/DavidGarzonDev/TuRifa"
+                    vercelLink="https://tu-rifa-h6e6.vercel.app"
+                    technologies={["React + vite", "TailwindCSS", "CSS","Node.js"]}
                 />
             </div>
         </main>
