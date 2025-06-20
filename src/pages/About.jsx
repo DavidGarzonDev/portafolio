@@ -10,15 +10,18 @@ const About = () => {
             <div className="flex flex-col md:flex-row items-center gap-6 max-w-5xl w-full">
 
                 {/* Foto */}
-                <div className="relative">
-                    <div className="w-60 md:w-80 rounded-full flex items-center justify-center">
-                        <img
-                            src={MiFoto}
-                            alt="Mi foto"
-                            className="w-90 md:w-80 rounded-full object-cover"
-                        />
-                    </div>
+                <div className="relative w-60 md:w-200 flex items-center justify-center ">
+                    {/* Fondo difuminado */}
+                    <div className="absolute inset-0 bg-green-400 rounded-full blur-3xl opacity-20 z-0" />
+
+                    {/* Imagen encima */}
+                    <img
+                        src={MiFoto}
+                        alt="Mi foto"
+                        className="relative z-10 w-100 md:w-90  rounded-full object-cover"
+                    />
                 </div>
+
 
                 {/* Texto */}
                 <div className="text-center md:text-left">
@@ -32,7 +35,11 @@ const About = () => {
                         Tecnólogo en Desarrollo de Software en formación por la Universidad del Valle, con enfoque en el desarrollo Front-End.
                     </p>
                     <p className="mt-2 text-lg text-gray-300">
-                        Trabajo con <span className="font-medium text-white">React, JavaScript y PostgreSQL</span>, aplicando buenas prácticas con Git y GitHub bajo metodologías ágiles como Scrum. Me apasiona construir soluciones simples, eficientes y centradas en el usuario.
+                        Trabajo con <span className="font-medium text-white">React, JavaScript y PostgreSQL</span>, aplicando buenas prácticas con Git y GitHub bajo metodologías ágiles como Scrum.
+                    </p >
+
+                    <p className="mt-2 text-lg text-gray-300">
+                        Me apasiona construir soluciones simples, eficientes y centradas en el usuario.
                     </p>
 
                     {/* Iconos de Redes Sociales */}
@@ -62,7 +69,7 @@ const About = () => {
                             />
                         </a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
