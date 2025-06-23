@@ -59,3 +59,7 @@ nav ul li a:hover {
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
   
 }
+::selection {
+  background-color: #22c55e; /* Tailwind: green-500 */
+  color: white; /* color del texto seleccionado */
+}
