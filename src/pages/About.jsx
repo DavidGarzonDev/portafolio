@@ -6,7 +6,7 @@ import LinkedinIcon from "../assets/linkedln-icon.png";
 
 const About = () => {
     return (
-        <div className="min-h-screen flex items-center justify-center p-5">
+        <div className="min-h-screen flex items-center justify-center p-20   ">
             <div className="flex flex-col md:flex-row items-center gap-6 max-w-5xl w-full">
 
                 {/* Foto */}
