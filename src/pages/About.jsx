@@ -74,7 +74,7 @@ const About = () => {
                             rel="noopener noreferrer"
                             className="p-3 bg-green-500 rounded-2xl hover:bg-green-600 transition-all transform hover:scale-110 flex items-center justify-center"
                         >
-                            <img src= "/public/Cv/cv.png" alt="Descargar CV" className="w-8 h-8 md:w-10 md:h-10" />
+                            <img src= "/Cv/cv.png" alt="Descargar CV" className="w-8 h-8 md:w-10 md:h-10" />
                                 
                         </a>
 
