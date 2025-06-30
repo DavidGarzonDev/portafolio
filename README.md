@@ -12,7 +12,7 @@
 ### Frontend
 - ⚛️ React  
 - 🟩 JavaScript  
-- 🎨 CSS3 + HTML5  
+- 🎨 TaiwindCss + HTML5  
 
 ### Backend
 - 🌿 Node.js *(En proceso de integración)*
