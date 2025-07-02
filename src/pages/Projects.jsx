@@ -27,6 +27,13 @@ const Projects = () => {
                     vercelLink="https://tu-rifa-h6e6.vercel.app"
                     technologies={["React + vite", "TailwindCSS", "CSS","Node.js"]}
                 />
+                <ProjectCard
+                    
+                    title="K A N J U – Plataforma ecommerce de ropa"
+                    githubLink="https://github.com/DavidGarzonDev/kanju"
+                    vercelLink="https://kanju.vercel.app"
+                    technologies={["React + vite", "TailwindCSS", "CSS","Node.js"]}
+                />
             </div>
         </main>
     );
