@@ -6,6 +6,7 @@ import Contact from "./pages/Contact"
 
 import "./styles/index.css"
 import ScrollHint from "./components/ScrollHint";
+import { TechSlider } from "./components/TechSlider";
 
 
 const App = () => {
@@ -16,7 +17,7 @@ const App = () => {
       <section id="about">
         <About />
       </section>
-      <ScrollHint />
+      <TechSlider />
 
       <section id="projects">
         <Projects />

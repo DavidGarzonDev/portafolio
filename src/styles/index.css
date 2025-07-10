@@ -63,3 +63,12 @@ nav ul li a:hover {
   background-color: #22c55e; /* Tailwind: green-500 */
   color: white; /* color del texto seleccionado */
 }
+
+@keyframes slide {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-slide {
+  animation: slide 20s linear infinite;
+}
