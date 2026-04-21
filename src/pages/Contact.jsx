@@ -75,8 +75,10 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center text-white mb-8">Contáctame</h2>
+        <section id="contact" className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div className="glass-panel p-6 md:p-10">
+            <h2 className="section-title text-3xl font-bold text-center text-white mb-3">Contáctame</h2>
+            <p className="text-gray-300 text-center mb-8">¿Tienes una idea o proyecto? Escríbeme y lo construimos juntos.</p>
             
             {sent && (
                 <div className="mb-6 p-4 bg-white/10 border border-white/30 text-white rounded backdrop-blur-md">
@@ -85,7 +87,7 @@ const Contact = () => {
             )}
             
             {errors.submit && (
-                <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                <div className="mb-6 p-4 bg-red-500/10 border border-red-400 text-red-300 rounded">
                     {errors.submit}
                 </div>
             )}
@@ -157,6 +159,7 @@ const Contact = () => {
                     </button>
                 </div>
             </form>
+            </div>
         </section>
     );
 };

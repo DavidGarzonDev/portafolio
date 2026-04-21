@@ -9,15 +9,20 @@ const ProjectCard = ({
     
 }) => {
     return (
+ codex/update-background-to-black-with-white-accents-tlh6lu
+        <div className="bg-white/5 backdrop-blur-md text-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full border border-white/15 hover:border-white/50 transition-all hover:scale-[1.02] hover:-translate-y-1">
+
         <div className="bg-white/5 backdrop-blur-md text-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full border border-white/15 hover:border-white/50 transition-all hover:scale-105">
+main
             
             {image ? (
-                <div className="w-full aspect-video bg-gray-800">
+                <div className="w-full aspect-video bg-gray-800 relative">
                     <img
                         src={image}
                         alt={title}
                         className="object-cover h-full w-full"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 </div>
             ) : (
                 <div className="p-6 pb-0">
@@ -55,7 +60,7 @@ const ProjectCard = ({
                             href={githubLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all hover:scale-105"
+                            className="flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-all hover:scale-105"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

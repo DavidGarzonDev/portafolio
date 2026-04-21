@@ -6,8 +6,8 @@ import LinkedinIcon from "../assets/linkedln-icon.png";
 
 const About = () => {
     return (
-        <div className="min-h-screen flex items-center justify-center p-20   ">
-            <div className="flex flex-col md:flex-row items-center gap-6 max-w-5xl w-full">
+        <div className="min-h-screen flex items-center justify-center px-6 pt-28 pb-12">
+            <div className="glass-panel flex flex-col md:flex-row items-center gap-6 max-w-5xl w-full p-8 md:p-12">
 
                 {/* Foto */}
                 <div className="relative w-60 md:w-200 flex items-center justify-center ">
@@ -31,6 +31,11 @@ const About = () => {
                     <h1 className="text-4xl md:text-6xl font-bold mt-2">
                         Desarrollador Fullstack Junior
                     </h1>
+                    <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
+                        <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm text-gray-200">React</span>
+                        <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm text-gray-200">Node.js</span>
+                        <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm text-gray-200">PostgreSQL</span>
+                    </div>
                     <p className="mt-4 text-lg text-gray-300">
                         Tecnólogo en Desarrollo de Software en formación por la Universidad del Valle, con enfoque en el desarrollo Front-End.
                     </p>
@@ -78,6 +83,10 @@ const About = () => {
                                 
                         </a>
 
+                    </div>
+                    <div className="flex gap-3 mt-6 justify-center md:justify-start">
+                        <a href="#projects" className="px-5 py-2 rounded-lg bg-white text-black font-semibold hover:bg-gray-200 transition-all">Ver proyectos</a>
+                        <a href="#contact" className="px-5 py-2 rounded-lg bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/20 transition-all">Hablemos</a>
                     </div>
 
                 </div>
