@@ -21,14 +21,14 @@ const ProjectCard = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 </div>
             ) : (
-                <div className="p-6 pb-0">
-                    <h2 className="text-4xl font-bold mb-2">{title}</h2>
+                <div>
+                    <h2 className="text-4xl font-semibold mb-2">{title}</h2>
                 </div>
             )}
 
-            <div className="flex flex-col flex-grow p-6">
+            <div className="flex flex-col flex-grow pt-6">
                 
-                {image && <h2 className="text-3xl font-bold mb-2">{title}</h2>}
+                {image && <h2 className="text-2xl md:text-3xl font-semibold mb-2">{title}</h2>}
 
                 
                 
@@ -50,7 +50,7 @@ const ProjectCard = ({
                 )}
 
                 {/* Botones */}
-                <div className="flex justify-end gap-3 mt-4">
+                <div className="flex justify-start gap-3 mt-4">
                     {githubLink && (
                         <a
                             href={githubLink}
@@ -91,7 +91,7 @@ const ProjectCard = ({
                     )}
                 </div>
             </div>
-        </div>
+        </article>
     );
 };
 

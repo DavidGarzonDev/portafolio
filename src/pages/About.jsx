@@ -1,9 +1,6 @@
 import React from 'react';
 import MiFoto from "../assets/mi-foto.png";
 
-import GithubIcon from "../assets/github-icon.png";
-import LinkedinIcon from "../assets/linkedln-icon.png";
-
 const About = () => {
     return (
         <div className="min-h-screen flex items-center justify-center px-6 pt-28 pb-12">
@@ -28,8 +25,8 @@ const About = () => {
                     <h2 className="text-2xl md:text-3xl font-bold">
                         <span className="text-white">¡Hola!, soy David Garzón</span>
                     </h2>
-                    <h1 className="text-4xl md:text-6xl font-bold mt-2">
-                        Desarrollador Fullstack Junior
+                    <h1 className="text-4xl md:text-6xl font-semibold mt-2 leading-tight">
+                        Desarrollador Backend con visión Fullstack
                     </h1>
                     <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
                         <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm text-gray-200">React</span>
@@ -37,10 +34,10 @@ const About = () => {
                         <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm text-gray-200">PostgreSQL</span>
                     </div>
                     <p className="mt-4 text-lg text-gray-300">
-                        Tecnólogo en Desarrollo de Software en formación por la Universidad del Valle, con enfoque en el desarrollo Front-End.
+                        Tecnólogo en Desarrollo de Software en formación por la Universidad del Valle, enfocado en construir servicios robustos, escalables y bien documentados.
                     </p>
                     <p className="mt-2 text-lg text-gray-300">
-                        Trabajo con <span className="font-medium text-white">React, JavaScript y PostgreSQL</span>, aplicando buenas prácticas con Git y GitHub bajo metodologías ágiles como Scrum.
+                        Trabajo con <span className="font-medium text-white">Node.js, bases de datos relacionales y arquitectura por capas</span>, sin dejar de cuidar la experiencia en interfaces.
                     </p >
 
                     <p className="mt-2 text-lg text-gray-300">
@@ -48,18 +45,14 @@ const About = () => {
                     </p>
 
                     {/* Iconos de Redes Sociales */}
-                    <div className="flex justify-center md:justify-start gap-4 mt-8">
+                    <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-8">
                         <a
                             href="https://github.com/DavidGarzonDev"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-3 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition-all transform hover:scale-110 backdrop-blur-md"
                         >
-                            <img
-                                src={GithubIcon}
-                                alt="GitHub"
-                                className="w-8 h-8 md:w-10 md:h-10"
-                            />
+                            GitHub
                         </a>
                         <a
                             href="https://www.linkedin.com/in/davidgarzondev/"
@@ -67,11 +60,7 @@ const About = () => {
                             rel="noopener noreferrer"
                             className="p-3 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition-all transform hover:scale-110 backdrop-blur-md"
                         >
-                            <img
-                                src={LinkedinIcon}
-                                alt="LinkedIn"
-                                className="w-8 h-8 md:w-10 md:h-10"
-                            />
+                            LinkedIn
                         </a>
                         <a
                             href="/Cv/cv-h.pdf"
@@ -79,8 +68,7 @@ const About = () => {
                             rel="noopener noreferrer"
                             className="p-3 bg-white text-black hover:bg-gray-200 transition-all transform hover:scale-110 flex items-center justify-center rounded-full"
                         >
-                            <img src= "/Cv/cv.png" alt="Descargar CV" className="w-8 h-8 md:w-10 md:h-10" />
-                                
+                            Descargar CV
                         </a>
 
                     </div>
