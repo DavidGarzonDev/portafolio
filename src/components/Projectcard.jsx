@@ -9,10 +9,10 @@ const ProjectCard = ({
     
 }) => {
     return (
-        <article className="text-white py-8 border-b border-white/15">
+        <div className="bg-white/5 backdrop-blur-md text-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full border border-white/15 hover:border-white/50 transition-all hover:scale-[1.02] hover:-translate-y-1">
             
             {image ? (
-                <div className="w-full aspect-video bg-gray-800/40 relative rounded-2xl overflow-hidden">
+                <div className="w-full aspect-video bg-gray-800 relative">
                     <img
                         src={image}
                         alt={title}
@@ -56,7 +56,7 @@ const ProjectCard = ({
                             href={githubLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all"
+                            className="flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-all hover:scale-105"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ const ProjectCard = ({
                             href={vercelLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full hover:bg-gray-200 transition-all"
+                            className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-all hover:scale-105"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

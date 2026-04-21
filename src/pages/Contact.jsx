@@ -76,6 +76,7 @@ const Contact = () => {
 
     return (
         <section id="contact" className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div className="glass-panel p-6 md:p-10">
             <h2 className="section-title text-3xl font-bold text-center text-white mb-3">Contáctame</h2>
             <p className="text-gray-300 text-center mb-8">¿Tienes una idea o proyecto? Escríbeme y lo construimos juntos.</p>
             
@@ -158,6 +159,7 @@ const Contact = () => {
                     </button>
                 </div>
             </form>
+            </div>
         </section>
     );
 };
