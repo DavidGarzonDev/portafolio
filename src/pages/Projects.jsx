@@ -5,7 +5,7 @@ import TuRifa from "../assets/rifa.png";
 
 const Projects = () => {
     return (
-        <main className="min-h-screen bg-gradient-to-b  flex flex-col items-center py-16">
+        <main className="min-h-screen flex flex-col items-center py-16">
             {/* Título */}
             <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
                 Mis Proyectos

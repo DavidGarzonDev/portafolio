@@ -12,7 +12,7 @@ const About = () => {
                 {/* Foto */}
                 <div className="relative w-60 md:w-200 flex items-center justify-center ">
                     {/* Fondo difuminado */}
-                    <div className="absolute inset-0 bg-green-400 rounded-full blur-3xl opacity-20 z-0" />
+                    <div className="absolute inset-0 bg-white rounded-full blur-3xl opacity-20 z-0" />
 
                     {/* Imagen encima */}
                     <img
@@ -26,7 +26,7 @@ const About = () => {
                 {/* Texto */}
                 <div className="text-center md:text-left">
                     <h2 className="text-2xl md:text-3xl font-bold">
-                        <span className="text-green-400">¡Hola!, soy David Garzón</span>
+                        <span className="text-white">¡Hola!, soy David Garzón</span>
                     </h2>
                     <h1 className="text-4xl md:text-6xl font-bold mt-2">
                         Desarrollador Fullstack Junior
@@ -48,7 +48,7 @@ const About = () => {
                             href="https://github.com/DavidGarzonDev"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 rounded-2xl hover:bg-gray-300 transition-all transform hover:scale-110"
+                            className="p-3 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition-all transform hover:scale-110 backdrop-blur-md"
                         >
                             <img
                                 src={GithubIcon}
@@ -60,7 +60,7 @@ const About = () => {
                             href="https://www.linkedin.com/in/davidgarzondev/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-blue-600 rounded-2xl hover:bg-blue-500 transition-all transform hover:scale-110"
+                            className="p-3 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition-all transform hover:scale-110 backdrop-blur-md"
                         >
                             <img
                                 src={LinkedinIcon}
@@ -72,7 +72,7 @@ const About = () => {
                             href="/Cv/cv-h.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-green-500 hover:bg-green-600 transition-all transform hover:scale-110 flex items-center justify-center rounded-full"
+                            className="p-3 bg-white text-black hover:bg-gray-200 transition-all transform hover:scale-110 flex items-center justify-center rounded-full"
                         >
                             <img src= "/Cv/cv.png" alt="Descargar CV" className="w-8 h-8 md:w-10 md:h-10" />
                                 
