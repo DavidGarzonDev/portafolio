@@ -9,7 +9,7 @@ const ProjectCard = ({
     
 }) => {
     return (
-        <div className="bg-neutral-900 text-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full border border-gray-700 hover:border-green-400 transition-all hover:scale-105">
+        <div className="bg-white/5 backdrop-blur-md text-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full border border-white/15 hover:border-white/50 transition-all hover:scale-105">
             
             {image ? (
                 <div className="w-full aspect-video bg-gray-800">
@@ -39,7 +39,7 @@ const ProjectCard = ({
                             {technologies.map((tech, index) => (
                                 <span
                                     key={index}
-                                    className="px-3 py-1 bg-emerald-900 rounded-full text-sm text-green-300 hover:scale-110 transition-all cursor-pointer"
+                                    className="px-3 py-1 bg-white/10 border border-white/20 rounded-full text-sm text-gray-200 hover:scale-110 transition-all cursor-pointer"
                                 >
                                     {tech}
                                 </span>
@@ -74,7 +74,7 @@ const ProjectCard = ({
                             href={vercelLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-500 transition-all hover:scale-105"
+                            className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-all hover:scale-105"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

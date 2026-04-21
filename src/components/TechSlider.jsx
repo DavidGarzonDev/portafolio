@@ -3,15 +3,15 @@ import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaPython, FaGitAlt }
 import { SiTypescript, SiPostgresql } from "react-icons/si";
 
 const techIcons = [
-    { icon: <FaHtml5 className="text-orange-500" />, name: "HTML" },
-    { icon: <FaCss3Alt className="text-blue-500" />, name: "CSS" },
-    { icon: <FaJsSquare className="text-yellow-400" />, name: "JavaScript" },
-    { icon: <FaReact className="text-cyan-400" />, name: "React" },
-    { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
-    { icon: <FaPython className="text-blue-300" />, name: "Python" },
-    { icon: <SiTypescript className="text-blue-600" />, name: "TypeScript" },
-    { icon: <SiPostgresql className="text-indigo-500" />, name: "PostgreSQL" },
-    { icon: <FaGitAlt className="text-orange-600" />, name: "Git" },
+    { icon: <FaHtml5 className="text-white" />, name: "HTML" },
+    { icon: <FaCss3Alt className="text-gray-300" />, name: "CSS" },
+    { icon: <FaJsSquare className="text-gray-200" />, name: "JavaScript" },
+    { icon: <FaReact className="text-white" />, name: "React" },
+    { icon: <FaNodeJs className="text-gray-300" />, name: "Node.js" },
+    { icon: <FaPython className="text-gray-200" />, name: "Python" },
+    { icon: <SiTypescript className="text-white" />, name: "TypeScript" },
+    { icon: <SiPostgresql className="text-gray-300" />, name: "PostgreSQL" },
+    { icon: <FaGitAlt className="text-gray-200" />, name: "Git" },
 ];
 
 export const TechSlider = () => {
