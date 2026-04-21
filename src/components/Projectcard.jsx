@@ -9,11 +9,7 @@ const ProjectCard = ({
     
 }) => {
     return (
- codex/update-background-to-black-with-white-accents-tlh6lu
         <div className="bg-white/5 backdrop-blur-md text-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full border border-white/15 hover:border-white/50 transition-all hover:scale-[1.02] hover:-translate-y-1">
-
-        <div className="bg-white/5 backdrop-blur-md text-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full border border-white/15 hover:border-white/50 transition-all hover:scale-105">
-main
             
             {image ? (
                 <div className="w-full aspect-video bg-gray-800 relative">
