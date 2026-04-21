@@ -75,17 +75,19 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center text-green-500 mb-8">Contáctame</h2>
+        <section id="contact" className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div className="glass-panel p-6 md:p-10">
+            <h2 className="section-title text-3xl font-bold text-center text-white mb-3">Contáctame</h2>
+            <p className="text-gray-300 text-center mb-8">¿Tienes una idea o proyecto? Escríbeme y lo construimos juntos.</p>
             
             {sent && (
-                <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                <div className="mb-6 p-4 bg-white/10 border border-white/30 text-white rounded backdrop-blur-md">
                     ¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto.
                 </div>
             )}
             
             {errors.submit && (
-                <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                <div className="mb-6 p-4 bg-red-500/10 border border-red-400 text-red-300 rounded">
                     {errors.submit}
                 </div>
             )}
@@ -101,7 +103,7 @@ const Contact = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 rounded-lg border ${errors.name ? 'border-red-500' : 'border-gray-600'} bg-gray-700 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent`}
+                        className={`w-full px-4 py-2 rounded-lg border ${errors.name ? 'border-red-500' : 'border-white/20'} bg-white/10 text-white focus:ring-2 focus:ring-white focus:border-transparent backdrop-blur-md`}
                         placeholder="Tu nombre completo"
                     />
                     {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
@@ -117,7 +119,7 @@ const Contact = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-600'} bg-gray-700 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent`}
+                        className={`w-full px-4 py-2 rounded-lg border ${errors.email ? 'border-red-500' : 'border-white/20'} bg-white/10 text-white focus:ring-2 focus:ring-white focus:border-transparent backdrop-blur-md`}
                         placeholder="tu@email.com"
                     />
                     {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
@@ -133,7 +135,7 @@ const Contact = () => {
                         rows="5"
                         value={formData.message}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 rounded-lg border ${errors.message ? 'border-red-500' : 'border-gray-600'} bg-gray-700 text-white focus:ring-2 focus:ring-green-500 focus:border-transparent`}
+                        className={`w-full px-4 py-2 rounded-lg border ${errors.message ? 'border-red-500' : 'border-white/20'} bg-white/10 text-white focus:ring-2 focus:ring-white focus:border-transparent backdrop-blur-md`}
                         placeholder="Escribe tu mensaje aquí (mínimo 10 caracteres)..."
                     ></textarea>
                     {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
@@ -143,11 +145,11 @@ const Contact = () => {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className={`w-full py-3 px-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-200 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                        className={`w-full py-3 px-4 bg-white hover:bg-gray-200 text-black font-medium rounded-lg transition duration-200 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                     >
                         {isSubmitting ? (
                             <span className="flex items-center justify-center">
-                                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
@@ -157,6 +159,7 @@ const Contact = () => {
                     </button>
                 </div>
             </form>
+            </div>
         </section>
     );
 };
