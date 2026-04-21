@@ -9,25 +9,26 @@ const ProjectCard = ({
     
 }) => {
     return (
-        <div className="bg-neutral-900 text-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full border border-gray-700 hover:border-green-400 transition-all hover:scale-105">
+        <article className="text-white py-8 border-b border-white/15">
             
             {image ? (
-                <div className="w-full aspect-video bg-gray-800">
+                <div className="w-full aspect-video bg-gray-800/40 relative rounded-2xl overflow-hidden">
                     <img
                         src={image}
                         alt={title}
                         className="object-cover h-full w-full"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 </div>
             ) : (
-                <div className="p-6 pb-0">
-                    <h2 className="text-4xl font-bold mb-2">{title}</h2>
+                <div>
+                    <h2 className="text-4xl font-semibold mb-2">{title}</h2>
                 </div>
             )}
 
-            <div className="flex flex-col flex-grow p-6">
+            <div className="flex flex-col flex-grow pt-6">
                 
-                {image && <h2 className="text-3xl font-bold mb-2">{title}</h2>}
+                {image && <h2 className="text-2xl md:text-3xl font-semibold mb-2">{title}</h2>}
 
                 
                 
@@ -39,7 +40,7 @@ const ProjectCard = ({
                             {technologies.map((tech, index) => (
                                 <span
                                     key={index}
-                                    className="px-3 py-1 bg-emerald-900 rounded-full text-sm text-green-300 hover:scale-110 transition-all cursor-pointer"
+                                    className="px-3 py-1 bg-white/10 border border-white/20 rounded-full text-sm text-gray-200 hover:scale-110 transition-all cursor-pointer"
                                 >
                                     {tech}
                                 </span>
@@ -49,13 +50,13 @@ const ProjectCard = ({
                 )}
 
                 {/* Botones */}
-                <div className="flex justify-end gap-3 mt-4">
+                <div className="flex justify-start gap-3 mt-4">
                     {githubLink && (
                         <a
                             href={githubLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all hover:scale-105"
+                            className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +75,7 @@ const ProjectCard = ({
                             href={vercelLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-500 transition-all hover:scale-105"
+                            className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full hover:bg-gray-200 transition-all"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +91,7 @@ const ProjectCard = ({
                     )}
                 </div>
             </div>
-        </div>
+        </article>
     );
 };
 

@@ -11,24 +11,25 @@ import { TechSlider } from "./components/TechSlider";
 
 const App = () => {
   return (
-    <>
+    <main className="relative overflow-hidden">
       <Header />
+      <ScrollHint />
 
-      <section id="about">
+      <section id="about" className="relative">
         <About />
       </section>
       <TechSlider />
 
-      <section id="projects">
+      <section id="projects" className="relative">
         <Projects />
       </section>
 
-      <section id="contact">
+      <section id="contact" className="relative pb-16">
         <Contact />
       </section>
       <Footer />
 
-    </>
+    </main>
   )
 }
 
