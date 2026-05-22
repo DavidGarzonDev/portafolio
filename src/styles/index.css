@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-family: 'Poppins', sans-serif;
-  
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 :root {
@@ -11,7 +10,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 
 html {
   scroll-behavior: smooth;
@@ -53,17 +51,17 @@ section {
 }
 
 ::selection {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   color: #050505;
 }
 
 @keyframes slide {
-  0% { transform: translateX(0%); }
+  0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
 .animate-slide {
-  animation: slide 20s linear infinite;
+  animation: slide 25s linear infinite;
 }
 
 .animate-slide:hover {
