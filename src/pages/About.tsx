@@ -90,7 +90,7 @@ const About = () => {
                   <img src={LinkedinIcon} alt="LinkedIn" className="w-5 h-5" />
                 </a>
                 <a
-                  href="/Cv/cv-h.pdf"
+                  href="/Cv/HvAc.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-sm text-zinc-400 hover:border-zinc-600 hover:text-white hover:bg-zinc-800 transition-all"
