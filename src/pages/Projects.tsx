@@ -1,6 +1,7 @@
 import FadeIn from '@/components/FadeIn'
 import ProjectCard from '@/components/Projectcard'
 import { PROJECTS_DATA } from '@/constants'
+import useSEO from '@/hooks/useSEO'
 import { openInNewTab } from '@/utils/helpers'
 import GessatImg from '@/assets/gessat.png'
 
@@ -9,6 +10,10 @@ const PROJECT_IMAGES: Record<string, string> = {
 }
 
 const Projects = () => {
+  useSEO({
+    title: 'Proyectos — David Garzón',
+    description: 'Proyectos reales en producción. Gessat: plataforma SG-SST para empresas colombianas.',
+  })
   return (
     <section className="min-h-screen flex flex-col items-center py-24 px-6" aria-labelledby="projects-title">
       <div className="max-w-5xl w-full">

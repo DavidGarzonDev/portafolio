@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/constants'
+import useSEO from '@/hooks/useSEO'
 
 const container = {
   hidden: {},
@@ -13,6 +14,10 @@ const item = {
 }
 
 const Hero = () => {
+  useSEO({
+    title: 'David Garzón — Desarrollador Fullstack',
+    description: 'Desarrollador Fullstack de Colombia. Construyo software completo, de la idea al producto.',
+  })
   return (
     <section className="min-h-screen flex flex-col justify-center px-6 pt-16 text-center" aria-label="Presentación">
       <motion.div

@@ -1,9 +1,12 @@
 import { Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import Header from './pages/Header'
 import Footer from './pages/Footer'
 import Hero from './pages/Hero'
 import TechSlider from './components/TechSlider'
+import CustomCursor from './components/CustomCursor'
+import PageTransition from './components/PageTransition'
 import './styles/index.css'
 
 const About = lazy(() => import('./pages/About'))
@@ -23,22 +26,35 @@ const NotFound = () => (
 )
 
 const App = () => {
+  const location = useLocation()
+
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0a0a]">
+      <CustomCursor />
       <Header />
       <main className="flex-grow">
         <Suspense fallback={<LoadingSpinner />}>
-          <Routes>
-            <Route path="/" element={
-              <>
-                <Hero />
-                <TechSlider />
-              </>
-            } />
-            <Route path="/about" element={<section aria-label="Sobre mí"><About /></section>} />
-            <Route path="/projects" element={<section aria-label="Proyectos"><Projects /></section>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={
+                <PageTransition>
+                  <Hero />
+                  <TechSlider />
+                </PageTransition>
+              } />
+              <Route path="/about" element={
+                <PageTransition>
+                  <section aria-label="Sobre mí"><About /></section>
+                </PageTransition>
+              } />
+              <Route path="/projects" element={
+                <PageTransition>
+                  <section aria-label="Proyectos"><Projects /></section>
+                </PageTransition>
+              } />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AnimatePresence>
         </Suspense>
       </main>
       <Footer />

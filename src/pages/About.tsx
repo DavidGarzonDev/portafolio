@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import FadeIn from '@/components/FadeIn'
 import { SOCIAL_LINKS, PERSONAL_INFO, EXPERIENCE } from '@/constants'
+import useSEO from '@/hooks/useSEO'
 import MiFoto from '@/assets/mi-foto.jpg'
 import GithubIcon from '@/assets/github-icon.png'
 import LinkedinIcon from '@/assets/linkedln-icon.png'
@@ -34,6 +35,10 @@ const GraduationIcon = () => (
 )
 
 const About = () => {
+  useSEO({
+    title: 'Sobre mí — David Garzón',
+    description: 'Conocé mi experiencia, stack tecnológico y trayectoria como Desarrollador Fullstack.',
+  })
   return (
     <div className="min-h-screen px-6 py-24">
       <div className="max-w-5xl mx-auto">
