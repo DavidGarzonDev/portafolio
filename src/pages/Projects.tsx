@@ -3,7 +3,7 @@ import ProjectCard from '@/components/Projectcard'
 import { PROJECTS_DATA } from '@/constants'
 import useSEO from '@/hooks/useSEO'
 import { openInNewTab } from '@/utils/helpers'
-import GessatImg from '@/assets/gessat.png'
+import GessatImg from '@/assets/gessat.jpg'
 
 const PROJECT_IMAGES: Record<string, string> = {
   '1': GessatImg,
