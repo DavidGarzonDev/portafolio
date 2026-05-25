@@ -43,6 +43,7 @@ const Projects = () => {
               githubLink={project.githubLink}
               siteLink={project.siteLink}
               technologies={[...project.technologies]}
+              priority={i === 0}
               onSiteClick={() => project.siteLink && openInNewTab(project.siteLink)}
             />
             </FadeIn>

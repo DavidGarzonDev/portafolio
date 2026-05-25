@@ -8,6 +8,7 @@ interface ProjectCardProps {
   githubLink?: string
   siteLink?: string
   technologies?: string[]
+  priority?: boolean
   onGitHubClick?: () => void
   onSiteClick?: () => void
 }
@@ -20,6 +21,7 @@ const ProjectCard = ({
   githubLink,
   siteLink,
   technologies = [],
+  priority = false,
   onGitHubClick,
   onSiteClick,
 }: ProjectCardProps) => {
@@ -37,7 +39,9 @@ const ProjectCard = ({
             src={image}
             alt={`Captura del proyecto ${title}`}
             className="object-cover h-full w-full"
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchPriority={priority ? 'high' : 'auto'}
           />
         </div>
       )}
