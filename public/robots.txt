@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://davidgarzon.dev/sitemap.xml
+Sitemap: https://www.davidgarzon.dev/sitemap.xml
