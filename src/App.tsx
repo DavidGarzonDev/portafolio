@@ -7,6 +7,7 @@ import Hero from './pages/Hero'
 import TechSlider from './components/TechSlider'
 import CustomCursor from './components/CustomCursor'
 import PageTransition from './components/PageTransition'
+import ScrollToTop from './components/ScrollToTop'
 import './styles/index.css'
 
 const About = lazy(() => import('./pages/About'))
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0a0a]">
+      <ScrollToTop />
       <CustomCursor />
       <Header />
       <main className="flex-grow">
