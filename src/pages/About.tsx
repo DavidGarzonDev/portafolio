@@ -143,16 +143,19 @@ const About = () => {
 
                       <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
                         {item.logo && LOGOS[item.logo] ? (
-                          <div className="bg-white rounded-lg px-3 py-1.5 inline-flex items-center h-9">
-                            <img
-                              src={LOGOS[item.logo]}
-                              alt={`Logo de ${item.company}`}
-                              className="h-5 w-auto object-contain"
-                            />
+                          <div className="inline-flex items-center gap-2.5">
+                            <div className="bg-white rounded-lg px-2.5 py-1.5 inline-flex items-center h-10">
+                              <img
+                                src={LOGOS[item.logo]}
+                                alt={`Logo de ${item.company}`}
+                                className="h-6 w-auto object-contain"
+                              />
+                            </div>
+                            <span className="text-sm font-medium text-zinc-300">{item.company}</span>
                           </div>
                         ) : (
-                          <div className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 inline-flex items-center h-9">
-                            <span className="text-xs text-zinc-400 font-medium">{item.company}</span>
+                          <div className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 inline-flex items-center h-10">
+                            <span className="text-sm text-zinc-300 font-medium">{item.company}</span>
                           </div>
                         )}
 
