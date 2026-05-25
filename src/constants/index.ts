@@ -39,7 +39,7 @@ export const PERSONAL_INFO = {
   name: 'David Garzón',
   title: 'Desarrollador Fullstack',
   description:
-    'Desarrollador Full Stack con experiencia en soluciones empresariales usando Python (FastAPI), React, Preact y SQL. He trabajado en entornos productivos reales, participando en levantamiento de requisitos, definición funcional y desarrollo de nuevas funcionalidades.',
+    'Desarrollador Full Stack con experiencia en soluciones empresariales usando Python (FastAPI), React y SQL. He trabajado en entornos productivos reales, participando en levantamiento de requisitos, definición funcional y desarrollo de nuevas funcionalidades.',
   passion:
     'Me interesa construir software mantenible que genere valor real. Si tienes un proyecto o una idea, hablemos — mi meta a largo plazo es tener mi propia empresa de desarrollo.',
   location: 'Yumbo, Valle del Cauca',
@@ -76,13 +76,12 @@ export const EXPERIENCE = [
     role: 'Desarrollador Full Stack',
     company: 'Startup — España',
     type: 'work' as const,
-    duration: 'Mar 2026 — Actualidad',
+    duration: 'Mar 2026 — May 2026',
     location: 'Remoto',
     logo: undefined,
     description:
       'Desarrollo y mantenimiento de un CRM empresarial para gestión comercial de e-commerce y dropshipping. Levantamiento de requisitos, elaboración de PRD, implementación de funcionalidades con FastAPI y Preact sobre arquitectura modular aplicando TDD, DDD y KISS.',
     tags: ['FastAPI', 'Python', 'Preact', 'SQL', 'TDD', 'DDD'],
-    current: true,
   },
 ] as const
 
