@@ -35,15 +35,15 @@ const Particles = () => {
       canvas.style.height = `${height}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      // Densidad baja: ~1 partícula por cada 18.000 px², con tope.
-      const count = Math.min(Math.round((width * height) / 18000), 90)
+      // ~1 partícula por cada 6.000 px², con tope.
+      const count = Math.min(Math.round((width * height) / 6000), 260)
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        r: Math.random() * 1.1 + 0.3,
-        vx: (Math.random() - 0.5) * 0.08,
-        vy: -(Math.random() * 0.12 + 0.03),
-        alpha: Math.random() * 0.25 + 0.05,
+        r: Math.random() * 1.6 + 0.5,
+        vx: (Math.random() - 0.5) * 0.12,
+        vy: -(Math.random() * 0.2 + 0.05),
+        alpha: Math.random() * 0.45 + 0.25,
         twinkle: Math.random() * Math.PI * 2,
       }))
     }
@@ -58,7 +58,7 @@ const Particles = () => {
           if (p.x < -4) p.x = width + 4
           if (p.x > width + 4) p.x = -4
         }
-        const a = p.alpha * (0.7 + 0.3 * Math.sin(t / 1400 + p.twinkle))
+        const a = p.alpha * (0.65 + 0.35 * Math.sin(t / 1200 + p.twinkle))
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(255, 255, 255, ${a})`

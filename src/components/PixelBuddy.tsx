@@ -1,7 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { cn } from '@/utils/helpers'
 
 /**
- * Mascota pixel-art blanca que camina de lado a lado.
+ * Mascotas pixel-art blancas.
  * Cada "pixel" es una unidad del viewBox; shape-rendering="crispEdges" mantiene los bordes nítidos.
  */
 
@@ -9,10 +10,11 @@ const P = ({ x, y, w = 1, h = 1 }: { x: number; y: number; w?: number; h?: numbe
   <rect x={x} y={y} width={w} height={h} />
 )
 
-const Buddy = () => (
+export const Buddy = ({ size = 64 }: { size?: number }) => (
   <svg
     viewBox="0 0 16 15"
-    className="w-16 h-auto"
+    width={size}
+    height={(size * 15) / 16}
     shapeRendering="crispEdges"
     aria-hidden="true"
   >
@@ -27,7 +29,6 @@ const Buddy = () => (
     {/* Cuerpo que rebota */}
     <g className="buddy-bob">
       <g className="fill-white">
-        {/* Cuerpo con esquinas recortadas */}
         <P x={3} y={3} w={10} h={1} />
         <P x={2} y={4} w={12} h={6} />
         <P x={3} y={10} w={10} h={1} />
@@ -65,36 +66,75 @@ const Buddy = () => (
   </svg>
 )
 
-const PixelBuddy = () => {
+interface WalkerProps {
+  /** Distancia en px que recorre hacia cada lado desde su punto de partida. */
+  distance: number
+  /** Segundos que tarda una ida y vuelta completa. */
+  duration: number
+  delay?: number
+  size?: number
+}
+
+/** Un muñequito que camina de ida y vuelta, siempre mirando al frente (sin voltearse). */
+const Walker = ({ distance, duration, delay = 0, size = 64 }: WalkerProps) => {
   const reduceMotion = useReducedMotion()
 
-  if (reduceMotion) {
-    return (
-      <div className="flex justify-center mb-8">
-        <Buddy />
-      </div>
-    )
-  }
+  if (reduceMotion) return <Buddy size={size} />
 
   return (
-    <div className="relative h-16 w-full max-w-xs mx-auto mb-8 overflow-hidden" aria-hidden="true">
-      <motion.div
-        className="absolute left-1/2 bottom-0 -ml-8 buddy-walking"
-        animate={{
-          x: [-110, 110, 110, -110, -110],
-          scaleX: [1, 1, -1, -1, 1],
-        }}
-        transition={{
-          duration: 12,
-          times: [0, 0.46, 0.5, 0.96, 1],
-          ease: 'linear',
-          repeat: Infinity,
-        }}
-      >
-        <Buddy />
-      </motion.div>
-    </div>
+    <motion.div
+      className="buddy-walking"
+      animate={{ x: [-distance, distance, distance, -distance, -distance] }}
+      transition={{
+        duration,
+        delay,
+        times: [0, 0.46, 0.5, 0.96, 1],
+        ease: 'easeInOut',
+        repeat: Infinity,
+      }}
+    >
+      <Buddy size={size} />
+    </motion.div>
   )
 }
+
+/** Muñequito principal de la portada. */
+const PixelBuddy = () => (
+  <div className="flex justify-center h-16 w-full max-w-xs mx-auto mb-8 overflow-hidden" aria-hidden="true">
+    <Walker distance={110} duration={12} />
+  </div>
+)
+
+/**
+ * Posición, recorrido y tamaño de cada muñequito del fondo. Están sobre todo en los
+ * márgenes para no tapar el contenido; los marcados como `desktop` no salen en celular.
+ */
+const CROWD = [
+  { top: '14%', left: '6%', distance: 40, duration: 9, delay: 0, size: 36, opacity: 0.95 },
+  { top: '30%', left: '88%', distance: 50, duration: 11, delay: 1.5, size: 44, opacity: 0.9 },
+  { top: '52%', left: '4%', distance: 35, duration: 8, delay: 3, size: 28, opacity: 0.85, desktop: true },
+  { top: '70%', left: '90%', distance: 30, duration: 10, delay: 0.8, size: 32, opacity: 0.95 },
+  { top: '86%', left: '12%', distance: 60, duration: 13, delay: 2.2, size: 40, opacity: 0.9, desktop: true },
+  { top: '13%', left: '72%', distance: 45, duration: 12, delay: 4, size: 26, opacity: 0.8, desktop: true },
+  { top: '42%', left: '94%', distance: 20, duration: 7, delay: 1, size: 24, opacity: 0.8, desktop: true },
+  { top: '92%', left: '78%', distance: 50, duration: 10, delay: 3.5, size: 34, opacity: 0.9 },
+  { top: '64%', left: '2%', distance: 25, duration: 9, delay: 5, size: 22, opacity: 0.75, desktop: true },
+  { top: '22%', left: '18%', distance: 30, duration: 14, delay: 2.8, size: 20, opacity: 0.7, desktop: true },
+] as const
+
+/** Grupo de muñequitos que caminan por el fondo de todo el sitio. */
+export const BuddyCrowd = () => (
+  <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
+    {CROWD.map((b, i) => (
+      <div
+        key={i}
+        className={cn('absolute', 'desktop' in b && b.desktop && 'hidden md:block')}
+        style={{ top: b.top, left: b.left, opacity: b.opacity, transform: 'translate(-50%, -50%)' }}
+      >
+        <Walker distance={b.distance} duration={b.duration} delay={b.delay} size={b.size} />
+      </div>
+    ))}
+  </div>
+)
 
 export default PixelBuddy
