@@ -28,11 +28,11 @@ export const PROJECTS_DATA: readonly ProjectData[] = [
     id: '1',
     title: 'Conectate OSS',
     description: {
-      es: 'Plataforma de gestión operativa para un proveedor de internet por fibra óptica, diseñada y construida desde cero y en uso diario en producción. Centraliza facturación y cobranza, pagos en línea, clientes, soporte técnico, instalaciones, inventario y documentación de la red. Incluye atención omnicanal integrada con Meta (WhatsApp, Facebook e Instagram), Chatwoot y n8n, con un asistente que responde a los clientes con información en tiempo real de la plataforma. Arquitectura multiempresa con control de acceso por roles.',
-      en: 'Operations platform for a fiber-optic internet provider, designed and built from scratch and used daily in production. It brings together billing and collections, online payments, customers, technical support, installations, inventory and network documentation. It includes omnichannel customer service integrated with Meta (WhatsApp, Facebook and Instagram), Chatwoot and n8n, with an assistant that answers customers using real-time data from the platform. Multi-tenant architecture with role-based access control.',
+      es: 'Plataforma de gestión operativa para un proveedor de internet por fibra óptica, diseñada y construida desde cero y en uso diario en producción. Centraliza facturación y cobranza, pagos en línea, clientes, soporte técnico, instalaciones, inventario y documentación de la red. Incluye atención omnicanal integrada con Meta (WhatsApp, Facebook e Instagram), Chatwoot y n8n, con un asistente que responde a los clientes con información en tiempo real de la plataforma. Arquitectura multiempresa con control de acceso por roles, desplegada en servidores Proxmox propios.',
+      en: 'Operations platform for a fiber-optic internet provider, designed and built from scratch and used daily in production. It brings together billing and collections, online payments, customers, technical support, installations, inventory and network documentation. It includes omnichannel customer service integrated with Meta (WhatsApp, Facebook and Instagram), Chatwoot and n8n, with an assistant that answers customers using real-time data from the platform. Multi-tenant architecture with role-based access control, deployed on in-house Proxmox servers.',
     },
     badge: { es: 'Empresa real · En producción', en: 'Real company · In production' },
-    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Docker', 'n8n', 'Chatwoot', 'Meta'],
+    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Docker', 'Proxmox', 'n8n', 'Chatwoot', 'Meta'],
   },
   {
     id: '2',
@@ -70,6 +70,7 @@ export const TECH_STACK = [
   { name: 'PostgreSQL' },
   { name: 'SQL' },
   { name: 'Docker' },
+  { name: 'Proxmox' },
   { name: 'n8n' },
   { name: 'Chatwoot' },
   { name: 'Git' },
@@ -116,10 +117,10 @@ export const EXPERIENCE: readonly ExperienceItem[] = [
     logo: 'conectate',
     current: true,
     description: {
-      es: 'Diseño y desarrollo de Conectate OSS, la plataforma con la que opera la empresa: un monolito modular con Clean Architecture y DDD, construido con TDD y desplegado con Docker. Migré la facturación desde un sistema de terceros a una solución propia. Implementé la atención omnicanal con Meta, Chatwoot y n8n, además de integraciones con pasarelas de pago, gestión de red y telefonía IP. Desarrollo asistido por agentes de IA (Claude Code) con revisión y control de calidad en cada entrega.',
-      en: "Design and development of Conectate OSS, the platform the company runs on: a modular monolith with Clean Architecture and DDD, built with TDD and deployed with Docker. I migrated billing from a third-party system to an in-house solution. I implemented omnichannel customer service with Meta, Chatwoot and n8n, plus integrations with payment gateways, network management and VoIP. AI-assisted development (Claude Code) with review and quality control on every delivery.",
+      es: 'Diseño y desarrollo de Conectate OSS, la plataforma con la que opera la empresa: un monolito modular con Clean Architecture y DDD, construido con TDD y desplegado con Docker. Administro los servidores Proxmox donde corren la plataforma y sus entornos de pruebas. Migré la facturación desde un sistema de terceros a una solución propia. Implementé la atención omnicanal con Meta, Chatwoot y n8n, además de integraciones con pasarelas de pago, gestión de red y telefonía IP. Desarrollo asistido por agentes de IA (Claude Code) con revisión y control de calidad en cada entrega.',
+      en: "Design and development of Conectate OSS, the platform the company runs on: a modular monolith with Clean Architecture and DDD, built with TDD and deployed with Docker. I manage the Proxmox servers that host the platform and its testing environments. I migrated billing from a third-party system to an in-house solution. I implemented omnichannel customer service with Meta, Chatwoot and n8n, plus integrations with payment gateways, network management and VoIP. AI-assisted development (Claude Code) with review and quality control on every delivery.",
     },
-    tags: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Docker', 'n8n', 'Chatwoot'],
+    tags: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Docker', 'Proxmox', 'n8n', 'Chatwoot'],
   },
   {
     id: '2',
