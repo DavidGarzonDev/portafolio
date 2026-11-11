@@ -59,12 +59,13 @@ export const UI = {
     es: 'Cosas que construí y que están funcionando en producción para clientes reales.',
     en: 'Things I built that are running in production for real clients.',
   },
-  projectsListLabel: { es: 'Lista de proyectos', en: 'Project list' },
   projectScreenshot: { es: 'Imagen del proyecto', en: 'Project image' },
   technologiesOf: { es: 'Tecnologías de', en: 'Technologies of' },
   viewSite: { es: 'Ver sitio', en: 'View site' },
   viewSiteOf: { es: 'Ver sitio de', en: 'View site of' },
   viewCodeOf: { es: 'Ver código en GitHub de', en: 'View GitHub code of' },
+  featured: { es: 'Destacado', en: 'Featured' },
+  privateProject: { es: 'Plataforma privada', en: 'Private platform' },
 
   // General
   loading: { es: 'Cargando', en: 'Loading' },
