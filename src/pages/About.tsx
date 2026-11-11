@@ -7,10 +7,12 @@ import GithubIcon from '@/assets/github-icon.png'
 import LinkedinIcon from '@/assets/linkedln-icon.png'
 import UnivalleLogo from '@/assets/Univalle.svg.png'
 import SiesaLogo from '@/assets/siesa.png'
+import ConectateLogo from '@/assets/conectate-logo.png'
 
 const LOGOS: Record<string, string> = {
   univalle: UnivalleLogo,
   siesa: SiesaLogo,
+  conectate: ConectateLogo,
 }
 
 const ColombiaFlag = () => (

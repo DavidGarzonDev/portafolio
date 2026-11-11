@@ -3,16 +3,20 @@ import ProjectCard from '@/components/Projectcard'
 import { PROJECTS_DATA } from '@/constants'
 import useSEO from '@/hooks/useSEO'
 import { openInNewTab } from '@/utils/helpers'
+import ConectateImg from '@/assets/conectate.jpg'
 import GessatImg from '@/assets/gessat.jpg'
+import PizzateloImg from '@/assets/pizzatelo.jpg'
 
 const PROJECT_IMAGES: Record<string, string> = {
-  '1': GessatImg,
+  '1': ConectateImg,
+  '2': GessatImg,
+  '3': PizzateloImg,
 }
 
 const Projects = () => {
   useSEO({
     title: 'Proyectos — David Garzón',
-    description: 'Proyectos reales en producción. Gessat: plataforma SG-SST para empresas colombianas.',
+    description: 'Proyectos reales en producción: Conectate OSS, plataforma para un ISP de fibra óptica; Gessat, plataforma SG-SST con capacitaciones; y el menú web de Pizzatelo.',
   })
   return (
     <section className="min-h-screen flex flex-col items-center py-24 px-6" aria-labelledby="projects-title">
@@ -44,6 +48,7 @@ const Projects = () => {
               siteLink={project.siteLink}
               technologies={[...project.technologies]}
               priority={i === 0}
+              onGitHubClick={() => project.githubLink && openInNewTab(project.githubLink)}
               onSiteClick={() => project.siteLink && openInNewTab(project.siteLink)}
             />
             </FadeIn>
