@@ -1,82 +1,59 @@
+# Portafolio — David Garzón
 
+[![Sitio](https://img.shields.io/badge/davidgarzon.dev-000?style=for-the-badge&logo=vercel&logoColor=white)](https://www.davidgarzon.dev)
 
+Portafolio personal en español e inglés, con proyectos en producción, experiencia y educación. Estilo minimalista en blanco y negro, con una mascota pixel-art interactiva y partículas de fondo.
 
-# 🌿 Portafolio Web - Juan David
+## Stack
 
-[![Ver en Vivo](https://img.shields.io/badge/🟢%20Ver%20Portafolio%20Online-00cc66?style=for-the-badge)](https://portafolio-umber-xi.vercel.app/#about)
+- **React 19** + **TypeScript** (modo estricto)
+- **Vite** y **Tailwind CSS v4**
+- **Framer Motion** para animaciones
+- **React Router** para las páginas
+- **Vitest** + Testing Library para pruebas
+- **ESLint** con `typescript-eslint`
+- Desplegado en **Vercel**
 
-> 💻 Bienvenido a mi portafolio personal, donde muestro quién soy, lo que hago y hacia dónde voy como desarrollador de software.
+## Características
 
-## 🧠 Tecnologías
+- **Bilingüe (ES/EN)**: botón en el encabezado; recuerda la elección del visitante y, si no hay, usa el idioma del navegador.
+- **Mascota interactiva**: camina en la portada, salta en arco a la esquina al hacer scroll, salta al cambiar de página o al darle clic, mira hacia el mouse y saluda la primera vez que alguien entra.
+- **Partículas** en un canvas de fondo.
+- Respeta `prefers-reduced-motion`.
 
-### Frontend
-- ⚛️ React  
-- 🟩 JavaScript  
-- 🎨 TaiwindCss + HTML5  
+## Desarrollo
 
-### Backend
-- 🌿 Node.js *(En proceso de integración)*
-
-### Otros
-- 🛠️ Git & GitHub  
-- 📦 Vite (o Create React App si aplica)
-
-## 🧾 Descripción
-
-Este portafolio está diseñado con un enfoque minimalista y moderno, usando **tonalidades verdes** que representan crecimiento, frescura y energía. El objetivo es reflejar mi perfil como desarrollador, mis habilidades y los proyectos en los que he trabajado, además de facilitar el contacto profesional.
-
-## 📁 Estructura del Proyecto
-
+```bash
+npm install
 ```
 
-📦 mi-portafolio/
-├── public/               # Archivos estáticos
-├── src/
-│   ├── components/       # Componentes reutilizables
-│   ├── pages/            # Secciones del sitio
-│   ├── App.js            # Componente principal
-│   └── index.js          # Punto de entrada
-├── README.md
-├── package.json
+```bash
+npm run dev
+```
 
-````
+Otros comandos:
 
-## ⚙️ Instalación y Uso Local
+```bash
+npm run build       # build de producción
+npm run lint        # ESLint
+npm run typecheck   # revisa tipos sin compilar
+npm test            # pruebas
+```
 
-1. 🔁 Clona este repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/mi-portafolio.git
+## Estructura
 
+```
+src/
+├── components/   # PixelBuddy, Particles, ProjectCard, TechIcon…
+├── constants/    # ⭐ proyectos, experiencia y perfil (textos en ES y EN)
+├── i18n/         # idioma: contexto, hook y textos de la interfaz
+├── pages/        # Hero, About, Projects, Header, Footer
+├── hooks/        # useSEO
+└── styles/       # estilos globales y animaciones
+```
 
-2. 📂 Entra en la carpeta del proyecto:
+Para cambiar contenido, edita `src/constants/index.ts`. Cada texto visible lleva su versión `es` y `en`; las pruebas fallan si falta alguna.
 
-   ```bash
-   cd mi-portafolio
-   ```
+## Contacto
 
-3. 📦 Instala las dependencias:
-
-   ```bash
-   npm install
-   ```
-
-4. 🚀 Ejecuta el proyecto:
-
-   ```bash
-   npm start
-   ```
-
-## ✨ Enlace al Portafolio
-
-🌐 **[portafolio-umber-xi.vercel.app](https://portafolio-umber-xi.vercel.app/#about)**
-
-## 📬 Contacto
-
-¿Tienes alguna oportunidad o colaboración en mente?
-👉 Puedes escribirme a **[juanxavif@gmail.com](mailto:juanxavif@gmail.com)** o a través del formulario de contacto en el portafolio.
-
----
-
-### 🟢 Gracias por visitar mi portafolio ✨
-
-
+[LinkedIn](https://www.linkedin.com/in/davidgarzondev/) · [juanxavif@gmail.com](mailto:juanxavif@gmail.com)

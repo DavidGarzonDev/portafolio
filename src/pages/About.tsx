@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import FadeIn from '@/components/FadeIn'
-import { SOCIAL_LINKS, PERSONAL_INFO, EXPERIENCE } from '@/constants'
+import { SOCIAL_LINKS, PERSONAL_INFO, EXPERIENCE, type ExperienceItem } from '@/constants'
+import useLanguage from '@/i18n/useLanguage'
 import useSEO from '@/hooks/useSEO'
 import TechIcon from '@/components/TechIcon'
 import MiFoto from '@/assets/mi-foto.jpg'
@@ -10,14 +11,14 @@ import UnivalleLogo from '@/assets/Univalle.svg.png'
 import SiesaLogo from '@/assets/siesa.png'
 import ConectateLogo from '@/assets/conectate-logo.png'
 
-const LOGOS: Record<string, string> = {
+const LOGOS: Record<NonNullable<ExperienceItem['logo']>, string> = {
   univalle: UnivalleLogo,
   siesa: SiesaLogo,
   conectate: ConectateLogo,
 }
 
-const ColombiaFlag = () => (
-  <svg width="22" height="15" viewBox="0 0 22 15" aria-label="Bandera de Colombia">
+const ColombiaFlag = ({ label }: { label: string }) => (
+  <svg width="22" height="15" viewBox="0 0 22 15" role="img" aria-label={label}>
     <rect width="22" height="7.5" fill="#FCD116" />
     <rect y="7.5" width="22" height="3.75" fill="#003893" />
     <rect y="11.25" width="22" height="3.75" fill="#CE1126" />
@@ -44,21 +45,38 @@ const AwardIcon = () => (
   </svg>
 )
 
-type TimelineEntry = (typeof EXPERIENCE)[number]
-
 const WORK = EXPERIENCE.filter((item) => item.type === 'work')
 const EDUCATION = EXPERIENCE.filter((item) => item.type === 'education')
 
-const Timeline = ({ items }: { items: readonly TimelineEntry[] }) => (
-  <div className="relative">
-    <div className="absolute left-4 top-0 bottom-0 w-px bg-zinc-800" aria-hidden="true" />
+/** Logo de la empresa sobre fondo blanco, con tamaño fijo para que todos se vean parejos. */
+const CompanyLogo = ({ item }: { item: ExperienceItem }) => {
+  const { t } = useLanguage()
+  if (!item.logo) {
+    return (
+      <div className="flex-shrink-0 h-20 min-w-20 px-4 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+        <span className="text-lg font-bold text-zinc-300">{item.company.charAt(0)}</span>
+      </div>
+    )
+  }
+  return (
+    <div className="flex-shrink-0 h-20 w-32 sm:w-40 px-3 py-2 rounded-xl bg-white flex items-center justify-center">
+      <img
+        src={LOGOS[item.logo]}
+        alt={`${t('logoOf')} ${item.company}`}
+        className="max-h-full max-w-full object-contain"
+      />
+    </div>
+  )
+}
 
-    <ol className="space-y-10">
-      {items.map((item) => {
-        const isCurrent = 'current' in item && item.current
-        const achievement = 'achievement' in item ? item.achievement : undefined
+const Timeline = ({ items }: { items: readonly ExperienceItem[] }) => {
+  const { t, tr } = useLanguage()
+  return (
+    <div className="relative">
+      <div className="absolute left-4 top-0 bottom-0 w-px bg-zinc-800" aria-hidden="true" />
 
-        return (
+      <ol className="space-y-12">
+        {items.map((item) => (
           <motion.li
             key={item.id}
             className="relative pl-12"
@@ -67,55 +85,42 @@ const Timeline = ({ items }: { items: readonly TimelineEntry[] }) => (
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className={`absolute left-0 top-1 w-8 h-8 rounded-full flex items-center justify-center border ${
-              isCurrent
+            <div className={`absolute left-0 top-6 w-8 h-8 rounded-full flex items-center justify-center border ${
+              item.current
                 ? 'bg-white text-black border-white'
                 : 'bg-zinc-900 text-zinc-400 border-zinc-800'
             }`}>
               {item.type === 'education' ? <GraduationIcon /> : <BriefcaseIcon />}
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
-              {item.logo && LOGOS[item.logo] ? (
-                <div className="inline-flex items-center gap-2.5">
-                  <div className="bg-white rounded-lg px-2.5 py-1.5 inline-flex items-center h-10">
-                    <img
-                      src={LOGOS[item.logo]}
-                      alt={`Logo de ${item.company}`}
-                      className="h-6 w-auto object-contain"
-                    />
-                  </div>
-                  <span className="text-sm font-medium text-zinc-300">{item.company}</span>
+            <div className="flex flex-wrap items-center gap-4 mb-4">
+              <CompanyLogo item={item} />
+              <div className="min-w-0 flex-1">
+                <p className="text-base font-medium text-zinc-200">{item.company}</p>
+                <div className="flex flex-wrap items-center gap-2 mt-0.5">
+                  <span className="text-xs text-zinc-500">{tr(item.duration)}</span>
+                  {item.current && (
+                    <span className="text-xs text-white border border-white/20 bg-white/5 px-2 py-0.5 rounded-full">
+                      {t('current')}
+                    </span>
+                  )}
                 </div>
-              ) : (
-                <div className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 inline-flex items-center h-10">
-                  <span className="text-sm text-zinc-300 font-medium">{item.company}</span>
-                </div>
-              )}
-
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-zinc-600">{item.duration}</span>
-                {isCurrent && (
-                  <span className="text-xs text-white border border-white/20 bg-white/5 px-2 py-0.5 rounded-full">
-                    Actual
-                  </span>
-                )}
               </div>
             </div>
 
-            <h3 className="text-white font-semibold text-lg leading-tight">{item.role}</h3>
-            <p className="text-zinc-600 text-sm mb-2">{item.location}</p>
+            <h3 className="text-white font-semibold text-lg leading-tight">{tr(item.role)}</h3>
+            <p className="text-zinc-600 text-sm mb-2">{tr(item.location)}</p>
 
-            {achievement && (
+            {item.achievement && (
               <p className="inline-flex items-center gap-2 text-sm text-zinc-200 border border-zinc-800 bg-zinc-900 rounded-lg px-3 py-1.5 mb-3">
                 <AwardIcon />
-                {achievement}
+                {tr(item.achievement)}
               </p>
             )}
 
-            <p className="text-zinc-400 text-sm leading-relaxed mb-3">{item.description}</p>
+            <p className="text-zinc-400 text-sm leading-relaxed mb-3">{tr(item.description)}</p>
 
-            <ul className="flex flex-wrap gap-2" aria-label="Tecnologías usadas">
+            <ul className="flex flex-wrap gap-2" aria-label={t('technologiesUsed')}>
               {item.tags.map((tag) => (
                 <li key={tag}>
                   <span className="inline-flex items-center gap-1.5 text-xs text-zinc-500 border border-zinc-800 bg-zinc-900 px-2.5 py-1 rounded-full">
@@ -126,17 +131,15 @@ const Timeline = ({ items }: { items: readonly TimelineEntry[] }) => (
               ))}
             </ul>
           </motion.li>
-        )
-      })}
-    </ol>
-  </div>
-)
+        ))}
+      </ol>
+    </div>
+  )
+}
 
 const About = () => {
-  useSEO({
-    title: 'Sobre mí — David Garzón',
-    description: 'Conocé mi experiencia, stack tecnológico y trayectoria como Desarrollador Fullstack.',
-  })
+  const { t, tr } = useLanguage()
+  useSEO({ title: t('seoAboutTitle'), description: t('seoAboutDescription') })
   return (
     <div className="min-h-screen px-6 py-24">
       <div className="max-w-5xl mx-auto">
@@ -147,39 +150,39 @@ const About = () => {
             <div className="flex-shrink-0 w-48 md:w-64">
               <img
                 src={MiFoto}
-                alt={`Foto de ${PERSONAL_INFO.name}`}
+                alt={`${t('photoOf')} ${PERSONAL_INFO.name}`}
                 className="w-full aspect-square rounded-full object-cover border border-zinc-800"
               />
             </div>
 
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
-                <ColombiaFlag />
+                <ColombiaFlag label={t('flagLabel')} />
                 <p className="text-zinc-600 text-xs tracking-widest uppercase">
                   {PERSONAL_INFO.location}
                 </p>
               </div>
-              <h2 className="text-sm text-zinc-500 mb-1">Hola, soy</h2>
+              <h2 className="text-sm text-zinc-500 mb-1">{t('hello')}</h2>
               <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-2">
                 {PERSONAL_INFO.name}
               </h1>
               <p className="text-xl md:text-2xl text-zinc-400 font-light mb-6">
-                {PERSONAL_INFO.title}
+                {tr(PERSONAL_INFO.title)}
               </p>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                {PERSONAL_INFO.description}
+                {tr(PERSONAL_INFO.description)}
               </p>
               <p className="text-zinc-500 leading-relaxed">
-                {PERSONAL_INFO.passion}
+                {tr(PERSONAL_INFO.passion)}
               </p>
 
-              <nav className="flex justify-center md:justify-start gap-3 mt-8" aria-label="Redes sociales">
+              <nav className="flex justify-center md:justify-start gap-3 mt-8" aria-label={t('socialLinks')}>
                 <a
                   href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-zinc-600 hover:bg-zinc-800 transition-all"
-                  aria-label="GitHub — abre en nueva pestaña"
+                  aria-label={`GitHub ${t('opensNewTab')}`}
                 >
                   <img src={GithubIcon} alt="GitHub" className="w-5 h-5 invert" />
                 </a>
@@ -188,7 +191,7 @@ const About = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-zinc-600 hover:bg-zinc-800 transition-all"
-                  aria-label="LinkedIn — abre en nueva pestaña"
+                  aria-label={`LinkedIn ${t('opensNewTab')}`}
                 >
                   <img src={LinkedinIcon} alt="LinkedIn" className="w-5 h-5" />
                 </a>
@@ -197,7 +200,7 @@ const About = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-sm text-zinc-400 hover:border-zinc-600 hover:text-white hover:bg-zinc-800 transition-all"
-                  aria-label="Descargar CV"
+                  aria-label={t('downloadCv')}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -212,8 +215,8 @@ const About = () => {
         {/* Experiencia */}
         <FadeIn delay={0.1}>
           <section className="mb-24" aria-labelledby="experience-title">
-            <p className="text-zinc-600 text-xs tracking-widest uppercase mb-2">Recorrido</p>
-            <h2 id="experience-title" className="text-2xl font-bold text-white tracking-tight mb-10">Experiencia</h2>
+            <p className="text-zinc-600 text-xs tracking-widest uppercase mb-2">{t('experienceEyebrow')}</p>
+            <h2 id="experience-title" className="text-2xl font-bold text-white tracking-tight mb-10">{t('experienceTitle')}</h2>
             <Timeline items={WORK} />
           </section>
         </FadeIn>
@@ -221,8 +224,8 @@ const About = () => {
         {/* Educación */}
         <FadeIn delay={0.1}>
           <section aria-labelledby="education-title">
-            <p className="text-zinc-600 text-xs tracking-widest uppercase mb-2">Formación</p>
-            <h2 id="education-title" className="text-2xl font-bold text-white tracking-tight mb-10">Educación</h2>
+            <p className="text-zinc-600 text-xs tracking-widest uppercase mb-2">{t('educationEyebrow')}</p>
+            <h2 id="education-title" className="text-2xl font-bold text-white tracking-tight mb-10">{t('educationTitle')}</h2>
             <Timeline items={EDUCATION} />
           </section>
         </FadeIn>

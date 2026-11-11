@@ -1,26 +1,25 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/constants'
 import useSEO from '@/hooks/useSEO'
 import PixelBuddy from '@/components/PixelBuddy'
+import useLanguage from '@/i18n/useLanguage'
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12 } },
 }
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 }
 
 const Hero = () => {
-  useSEO({
-    title: 'David Garzón — Desarrollador Fullstack',
-    description: 'Desarrollador Fullstack de Colombia. Construyo software completo, de la idea al producto.',
-  })
+  const { t, tr } = useLanguage()
+  useSEO({ title: t('seoHomeTitle'), description: t('seoHomeDescription') })
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 pt-16 text-center" aria-label="Presentación">
+    <section className="min-h-screen flex flex-col justify-center px-6 pt-16 text-center" aria-label={t('seoHomeTitle')}>
       <motion.div
         className="max-w-4xl mx-auto w-full"
         variants={container}
@@ -32,7 +31,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.p variants={item} className="text-zinc-600 text-xs tracking-widest uppercase mb-8 text-center">
-          Disponible para proyectos
+          {t('available')}
         </motion.p>
 
         <motion.h1
@@ -45,7 +44,7 @@ const Hero = () => {
         </motion.h1>
 
         <motion.p variants={item} className="text-xl md:text-2xl text-zinc-400 font-light max-w-lg mx-auto mb-12">
-          {PERSONAL_INFO.title}. Construyo software completo, de la idea al producto.
+          {tr(PERSONAL_INFO.title)}. {t('tagline')}
         </motion.p>
 
         <motion.div variants={item} className="flex flex-wrap gap-4 justify-center">
@@ -53,7 +52,7 @@ const Hero = () => {
             to="/projects"
             className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-zinc-100 text-black font-medium rounded-lg transition-all text-sm"
           >
-            Ver proyectos
+            {t('viewProjects')}
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

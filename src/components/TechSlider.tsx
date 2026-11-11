@@ -1,13 +1,15 @@
 import { TECH_STACK } from '@/constants'
 import TechIcon from '@/components/TechIcon'
+import useLanguage from '@/i18n/useLanguage'
 
 const TechSlider = () => {
+  const { t } = useLanguage()
   return (
-    <section className="py-10 border-y border-zinc-900 overflow-hidden" aria-label="Tecnologías que utilizo">
+    <section className="py-10 border-y border-zinc-900 overflow-hidden" aria-label={t('techListLabel')}>
       <div
         className="flex gap-6 animate-slide w-max"
         role="list"
-        aria-label="Lista de tecnologías"
+       
       >
         {[...TECH_STACK, ...TECH_STACK].map((tech, index) => (
           <div

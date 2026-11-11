@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type RefObject } from 'react'
-import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type KeyboardEvent, type ReactNode, type RefObject } from 'react'
+import { AnimatePresence, motion, useAnimationControls, useReducedMotion, type TargetAndTransition } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
+import useLanguage from '@/i18n/useLanguage'
 
 /**
  * Mascotas pixel-art blancas.
@@ -11,13 +12,19 @@ const P = ({ x, y, w = 1, h = 1 }: { x: number; y: number; w?: number; h?: numbe
   <rect x={x} y={y} width={w} height={h} />
 )
 
-export const Buddy = ({ size = 64 }: { size?: number }) => (
+interface Look {
+  x: number
+  y: number
+}
+
+export const Buddy = ({ size = 64, look = { x: 0, y: 0 } }: { size?: number; look?: Look }) => (
   <svg
     viewBox="0 0 16 15"
     width={size}
     height={(size * 15) / 16}
     shapeRendering="crispEdges"
     aria-hidden="true"
+    className="[filter:drop-shadow(1px_0_0_#0a0a0a)_drop-shadow(-1px_0_0_#0a0a0a)_drop-shadow(0_1px_0_#0a0a0a)_drop-shadow(0_-1px_0_#0a0a0a)]"
   >
     {/* Antena */}
     <g className="fill-zinc-500">
@@ -41,10 +48,12 @@ export const Buddy = ({ size = 64 }: { size?: number }) => (
         <P x={14} y={6} w={2} h={2} />
       </g>
 
-      {/* Ojos que parpadean */}
-      <g className="fill-[#0a0a0a] buddy-eyes">
-        <P x={5} y={5} w={1} h={2} />
-        <P x={10} y={5} w={1} h={2} />
+      {/* Ojos que parpadean y miran hacia el mouse (se mueven un pixel) */}
+      <g transform={`translate(${look.x} ${look.y})`}>
+        <g className="fill-[#0a0a0a] buddy-eyes">
+          <P x={5} y={5} w={1} h={2} />
+          <P x={10} y={5} w={1} h={2} />
+        </g>
       </g>
 
       {/* Boca de terminal: _ */}
@@ -72,17 +81,27 @@ interface WalkerProps {
   duration: number
   delay?: number
   size?: number
+  look?: Look
+  /** Algo que acompaña al muñequito mientras camina, como el globo de diálogo. */
+  overlay?: ReactNode
 }
 
 /** Un muñequito que camina de ida y vuelta, siempre mirando al frente (sin voltearse). */
-const Walker = ({ distance, duration, delay = 0, size = 64 }: WalkerProps) => {
+const Walker = ({ distance, duration, delay = 0, size = 64, look, overlay }: WalkerProps) => {
   const reduceMotion = useReducedMotion()
 
-  if (reduceMotion) return <Buddy size={size} />
+  if (reduceMotion) {
+    return (
+      <div className="relative">
+        {overlay}
+        <Buddy size={size} look={look} />
+      </div>
+    )
+  }
 
   return (
     <motion.div
-      className="buddy-walking"
+      className="buddy-walking relative"
       animate={{ x: [-distance, distance, distance, -distance, -distance] }}
       transition={{
         duration,
@@ -92,7 +111,8 @@ const Walker = ({ distance, duration, delay = 0, size = 64 }: WalkerProps) => {
         repeat: Infinity,
       }}
     >
-      <Buddy size={size} />
+      {overlay}
+      <Buddy size={size} look={look} />
     </motion.div>
   )
 }
@@ -172,7 +192,7 @@ const jumpFrom = ({ dx, dy, toTop }: { dx: number; dy: number; toTop: number }) 
 /** Saltito en el mismo sitio (al cambiar de página). Aterriza en el 72% de la animación. */
 const HOP_SECONDS = 0.95
 const HOP_LANDING = 0.72
-const HOP = {
+const HOP: TargetAndTransition = {
   opacity: 1,
   x: 0,
   y: [0, 0, -70, 0, -16, 0],
@@ -181,7 +201,7 @@ const HOP = {
   transition: {
     duration: HOP_SECONDS,
     times: [0, 0.12, 0.42, HOP_LANDING, 0.86, 1],
-    ease: ['easeOut', 'easeOut', 'easeIn', 'easeOut', 'easeIn'] as const,
+    ease: ['easeOut', 'easeOut', 'easeIn', 'easeOut', 'easeIn'],
   },
 }
 
@@ -265,6 +285,91 @@ const Dust = ({ puffs }: { puffs: Puff[] }) => (
   </>
 )
 
+/* ── Interacción: mirar al mouse y saludar ─────────────────────────────── */
+
+/** Hacia dónde mira el muñequito: -1, 0 o 1 en cada eje según dónde esté el puntero. */
+const useLook = (body: RefObject<HTMLElement | null>) => {
+  const [look, setLook] = useState<Look>({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      if (!body.current) return
+      const r = rectOf(body.current)
+      if (!r.width) return
+      const dx = e.clientX - (r.left + r.width / 2)
+      const dy = e.clientY - (r.top + r.height / 2)
+      const x = Math.abs(dx) < r.width * 0.6 ? 0 : Math.sign(dx)
+      const y = Math.abs(dy) < r.height * 0.6 ? 0 : Math.sign(dy)
+      setLook((prev) => (prev.x === x && prev.y === y ? prev : { x, y }))
+    }
+    window.addEventListener('pointermove', onMove, { passive: true })
+    return () => window.removeEventListener('pointermove', onMove)
+  }, [body])
+
+  return look
+}
+
+/** Enter o espacio activan el muñequito igual que un clic. */
+const onKey = (action: () => void) => (e: KeyboardEvent) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault()
+    action()
+  }
+}
+
+const GREETED_KEY = 'buddy-greeted'
+let greetedThisVisit = false
+
+/** Devuelve true solo la primera vez que alguien entra al sitio. */
+const consumeGreeting = () => {
+  if (greetedThisVisit) return false
+  greetedThisVisit = true
+  try {
+    if (window.localStorage.getItem(GREETED_KEY)) return false
+    window.localStorage.setItem(GREETED_KEY, '1')
+  } catch {
+    // Sin almacenamiento: saluda en cada visita, no pasa nada.
+  }
+  return true
+}
+
+/** Globo de diálogo: se muestra unos segundos cuando se llama a `say()`. */
+const useSpeech = () => {
+  const [open, setOpen] = useState(false)
+  const timer = useRef<number | undefined>(undefined)
+
+  useEffect(() => () => window.clearTimeout(timer.current), [])
+
+  const say = useCallback((ms = 2600) => {
+    setOpen(true)
+    window.clearTimeout(timer.current)
+    timer.current = window.setTimeout(() => setOpen(false), ms)
+  }, [])
+
+  return { open, say }
+}
+
+const Bubble = ({ open, text }: { open: boolean; text: string }) => (
+  <div className="absolute left-1/2 bottom-full mb-3 -translate-x-1/2 pointer-events-none">
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0, y: 8, scale: 0.6 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 4, scale: 0.8 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+          style={{ originY: 1 }}
+          className="relative whitespace-nowrap rounded-md bg-white px-2.5 py-1 font-mono text-xs font-bold text-black"
+          role="status"
+        >
+          {text}
+          <span className="absolute left-1/2 top-full -ml-1 h-2 w-2 -translate-y-1 rotate-45 bg-white" aria-hidden="true" />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+)
+
 /* ── Muñequito de la portada ─────────────────────────────── */
 
 const PixelBuddy = () => {
@@ -275,6 +380,27 @@ const PixelBuddy = () => {
   const reduceMotion = useReducedMotion()
   const first = useRef(true)
   const { puffs, land } = useDust(slotRef, bodyRef)
+  const look = useLook(bodyRef)
+  const { open, say } = useSpeech()
+  const { t } = useLanguage()
+
+  // Saludo la primera vez que alguien entra, si el muñequito empieza en la portada.
+  useEffect(() => {
+    if (inHero && consumeGreeting()) {
+      const id = window.setTimeout(() => say(3200), 900)
+      return () => window.clearTimeout(id)
+    }
+  }, [say])
+
+  const onClick = () => {
+    if (reduceMotion) {
+      say()
+      return
+    }
+    jump.start(HOP)
+    land(HOP_SECONDS * HOP_LANDING * 1000)
+    say()
+  }
 
   // Saber si la portada está en pantalla y recordar dónde está el muñequito.
   useEffect(() => {
@@ -323,18 +449,24 @@ const PixelBuddy = () => {
   }, [visible, jump, reduceMotion, land])
 
   return (
-    <div
-      ref={slotRef}
-      className="relative z-40 flex justify-center h-16 w-full max-w-xs mx-auto mb-8"
-      aria-hidden="true"
-    >
+    <div ref={slotRef} className="relative z-40 flex justify-center h-16 w-full max-w-xs mx-auto mb-8">
       <motion.div
         ref={bodyRef}
         animate={jump}
         initial={{ opacity: visible ? 1 : 0 }}
-        style={{ originY: 1 }}
+        style={{ originY: 1, pointerEvents: visible ? 'auto' : 'none' }}
       >
-        <Walker distance={110} duration={12} />
+        <div
+          role="button"
+          onClick={onClick}
+          onKeyDown={onKey(onClick)}
+          className="cursor-pointer rounded-md outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          aria-label={t('buddyJump')}
+          aria-hidden={!visible}
+          tabIndex={visible ? 0 : -1}
+        >
+          <Walker distance={110} duration={12} look={look} overlay={<Bubble open={open} text={t('buddyHello')} />} />
+        </div>
       </motion.div>
       <Dust puffs={puffs} />
     </div>
@@ -354,6 +486,27 @@ export const FloatingBuddy = () => {
   const wasInHero = useRef(visibleInHero)
   const first = useRef(true)
   const { puffs, land } = useDust(boxRef, ref)
+  const look = useLook(ref)
+  const { open, say } = useSpeech()
+  const { t } = useLanguage()
+
+  // Saludo la primera vez que alguien entra, si la visita empieza fuera de la portada.
+  useEffect(() => {
+    if (!inHero && consumeGreeting()) {
+      const id = window.setTimeout(() => say(3200), 900)
+      return () => window.clearTimeout(id)
+    }
+  }, [say])
+
+  const onClick = () => {
+    if (reduceMotion) {
+      say()
+      return
+    }
+    jump.start(HOP)
+    land(HOP_SECONDS * HOP_LANDING * 1000)
+    say()
+  }
 
   useEffect(() => {
     floatEl = ref.current
@@ -394,14 +547,24 @@ export const FloatingBuddy = () => {
   }, [pathname, visibleInHero, reduceMotion, jump, land])
 
   return (
-    <div ref={boxRef} className="fixed bottom-4 left-6 md:left-10 z-40 pointer-events-none" aria-hidden="true">
+    <div ref={boxRef} className="fixed bottom-4 left-6 md:left-10 z-40 pointer-events-none">
       <motion.div
         ref={ref}
         animate={jump}
         initial={{ opacity: visibleInHero ? 0 : 1 }}
-        style={{ originY: 1 }}
+        style={{ originY: 1, pointerEvents: visibleInHero ? 'none' : 'auto' }}
       >
-        <Walker distance={24} duration={8} size={48} />
+        <div
+          role="button"
+          onClick={onClick}
+          onKeyDown={onKey(onClick)}
+          className="cursor-pointer rounded-md outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          aria-label={t('buddyJump')}
+          aria-hidden={visibleInHero}
+          tabIndex={visibleInHero ? -1 : 0}
+        >
+          <Walker distance={24} duration={8} size={48} look={look} overlay={<Bubble open={open} text={t('buddyHello')} />} />
+        </div>
       </motion.div>
       <Dust puffs={puffs} />
     </div>
