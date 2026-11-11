@@ -28,22 +28,22 @@ export const PROJECTS_DATA: readonly ProjectData[] = [
     id: '1',
     title: 'Conectate OSS',
     description: {
-      es: 'Plataforma de gestión operativa para un proveedor de internet por fibra óptica, diseñada y construida desde cero y en uso diario en producción. Centraliza facturación y cobranza, pagos en línea, clientes, soporte técnico, instalaciones, inventario y documentación de la red. Incluye atención omnicanal integrada con Meta (WhatsApp, Facebook e Instagram), Chatwoot y n8n, con un asistente que responde a los clientes con información en tiempo real de la plataforma. Arquitectura multiempresa con control de acceso por roles, desplegada en servidores Proxmox propios.',
-      en: 'Operations platform for a fiber-optic internet provider, designed and built from scratch and used daily in production. It brings together billing and collections, online payments, customers, technical support, installations, inventory and network documentation. It includes omnichannel customer service integrated with Meta (WhatsApp, Facebook and Instagram), Chatwoot and n8n, with an assistant that answers customers using real-time data from the platform. Multi-tenant architecture with role-based access control, deployed on in-house Proxmox servers.',
+      es: 'Plataforma de gestión operativa para un proveedor de internet por fibra óptica, construida desde cero y en uso diario. Reúne facturación, pagos en línea, clientes, soporte, instalaciones e inventario, con atención omnicanal (Meta, Chatwoot y n8n) y un asistente que responde con datos en tiempo real. Multiempresa, con roles y desplegada en Proxmox.',
+      en: 'Operations platform for a fiber-optic internet provider, built from scratch and used daily. It brings together billing, online payments, customers, support, installations and inventory, with omnichannel service (Meta, Chatwoot and n8n) and an assistant that answers with real-time data. Multi-tenant, role-based and deployed on Proxmox.',
     },
     badge: { es: 'Empresa real · En producción', en: 'Real company · In production' },
-    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Docker', 'Proxmox', 'n8n', 'Chatwoot', 'Meta'],
+    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Docker', 'Proxmox', 'n8n'],
   },
   {
     id: '2',
     title: 'Gessat',
     description: {
-      es: 'Plataforma para que las empresas colombianas lleven su SG-SST: gestión y carga de documentos de seguridad y salud en el trabajo, capacitaciones para sus trabajadores y pagos integrados con Wompi. En uso por clientes reales.',
-      en: 'Platform for Colombian companies to run their occupational health and safety management system (SG-SST): document management and uploads, employee training courses and payments integrated with Wompi. Used by real clients.',
+      es: 'Plataforma con la que una consultora de SG-SST gestiona el sistema de seguridad y salud en el trabajo de sus empresas cliente: documentación, capacitaciones para trabajadores, usuarios con roles y permisos, control de accesos por empresa y pagos con Wompi. En producción y en uso diario.',
+      en: 'Platform an occupational health and safety (SG-SST) consultancy uses to manage the safety system of its client companies: documentation, employee training, users with roles and permissions, per-company access control and payments with Wompi. In production and used daily.',
     },
     badge: REAL_CLIENT,
     siteLink: 'https://gessat.com.co',
-    technologies: ['React', 'Vite', 'Python', 'Wompi', 'PostgreSQL', 'TailwindCSS'],
+    technologies: ['React', 'Vite', 'Python', 'PostgreSQL', 'Wompi', 'TailwindCSS', 'RBAC'],
   },
   {
     id: '3',
