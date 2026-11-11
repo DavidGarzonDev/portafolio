@@ -48,7 +48,7 @@ const AwardIcon = () => (
 const WORK = EXPERIENCE.filter((item) => item.type === 'work')
 const EDUCATION = EXPERIENCE.filter((item) => item.type === 'education')
 
-/** Logo de la empresa sobre fondo blanco, con tamaño fijo para que todos se vean parejos. */
+/** Logo de la empresa sin fondo, en un espacio de tamaño fijo para que todos se vean parejos. */
 const CompanyLogo = ({ item }: { item: ExperienceItem }) => {
   const { t } = useLanguage()
   if (!item.logo) {
@@ -59,11 +59,11 @@ const CompanyLogo = ({ item }: { item: ExperienceItem }) => {
     )
   }
   return (
-    <div className="flex-shrink-0 h-20 w-32 sm:w-40 px-3 py-2 rounded-xl bg-white flex items-center justify-center">
+    <div className="flex-shrink-0 h-20 sm:h-24 w-40 sm:w-48 flex items-center justify-start">
       <img
         src={LOGOS[item.logo]}
         alt={`${t('logoOf')} ${item.company}`}
-        className="max-h-full max-w-full object-contain"
+        className="max-h-full max-w-full object-contain object-left"
       />
     </div>
   )
@@ -85,7 +85,7 @@ const Timeline = ({ items }: { items: readonly ExperienceItem[] }) => {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className={`absolute left-0 top-6 w-8 h-8 rounded-full flex items-center justify-center border ${
+            <div className={`absolute left-0 top-7 sm:top-9 w-8 h-8 rounded-full flex items-center justify-center border ${
               item.current
                 ? 'bg-white text-black border-white'
                 : 'bg-zinc-900 text-zinc-400 border-zinc-800'
@@ -95,7 +95,7 @@ const Timeline = ({ items }: { items: readonly ExperienceItem[] }) => {
 
             <div className="flex flex-wrap items-center gap-4 mb-4">
               <CompanyLogo item={item} />
-              <div className="min-w-0 flex-1">
+              <div className="min-w-[12rem] flex-1">
                 <p className="text-base font-medium text-zinc-200">{item.company}</p>
                 <div className="flex flex-wrap items-center gap-2 mt-0.5">
                   <span className="text-xs text-zinc-500">{tr(item.duration)}</span>
