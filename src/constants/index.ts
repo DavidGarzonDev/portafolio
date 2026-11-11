@@ -86,18 +86,6 @@ export const EXPERIENCE = [
     tags: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Docker', 'n8n', 'Chatwoot'],
   },
   {
-    id: '3',
-    role: 'Desarrollador Full Stack',
-    company: 'Startup — España',
-    type: 'work' as const,
-    duration: 'Mar 2026 — May 2026',
-    location: 'Remoto',
-    logo: undefined,
-    description:
-      'Desarrollo y mantenimiento de un CRM empresarial para gestión comercial de e-commerce y dropshipping. Levantamiento de requisitos, elaboración de PRD, implementación de funcionalidades con FastAPI y Preact sobre arquitectura modular aplicando TDD, DDD y KISS.',
-    tags: ['FastAPI', 'Python', 'Preact', 'SQL', 'TDD', 'DDD'],
-  },
-  {
     id: '2',
     role: 'Ejecutivo de Soporte Técnico — Nube',
     company: 'Siesa',
