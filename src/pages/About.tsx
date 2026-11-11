@@ -48,7 +48,7 @@ const AwardIcon = () => (
 const WORK = EXPERIENCE.filter((item) => item.type === 'work')
 const EDUCATION = EXPERIENCE.filter((item) => item.type === 'education')
 
-/** Logo de la empresa sin fondo, en un espacio de tamaño fijo para que todos se vean parejos. */
+/** Logo de la empresa sin fondo; su ancho se ajusta al logo para que el nombre quede pegado. */
 const CompanyLogo = ({ item }: { item: ExperienceItem }) => {
   const { t } = useLanguage()
   if (!item.logo) {
@@ -59,13 +59,11 @@ const CompanyLogo = ({ item }: { item: ExperienceItem }) => {
     )
   }
   return (
-    <div className="flex-shrink-0 h-20 sm:h-24 w-40 sm:w-48 flex items-center justify-start">
-      <img
-        src={LOGOS[item.logo]}
-        alt={`${t('logoOf')} ${item.company}`}
-        className="max-h-full max-w-full object-contain object-left"
-      />
-    </div>
+    <img
+      src={LOGOS[item.logo]}
+      alt={`${t('logoOf')} ${item.company}`}
+      className="flex-shrink-0 h-20 sm:h-24 w-auto max-w-[10rem] sm:max-w-[12rem] object-contain"
+    />
   )
 }
 
