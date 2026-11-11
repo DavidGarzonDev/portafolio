@@ -6,6 +6,7 @@ import Footer from './pages/Footer'
 import Hero from './pages/Hero'
 import TechSlider from './components/TechSlider'
 import CustomCursor from './components/CustomCursor'
+import Particles from './components/Particles'
 import PageTransition from './components/PageTransition'
 import ScrollToTop from './components/ScrollToTop'
 import './styles/index.css'
@@ -30,7 +31,8 @@ const App = () => {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0a]">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0a] isolate">
+      <Particles />
       <ScrollToTop />
       <CustomCursor />
       <Header />

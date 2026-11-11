@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/constants'
 import useSEO from '@/hooks/useSEO'
+import PixelBuddy from '@/components/PixelBuddy'
 
 const container = {
   hidden: {},
@@ -26,6 +27,10 @@ const Hero = () => {
         initial="hidden"
         animate="show"
       >
+        <motion.div variants={item}>
+          <PixelBuddy />
+        </motion.div>
+
         <motion.p variants={item} className="text-zinc-600 text-xs tracking-widest uppercase mb-8 text-center">
           Disponible para proyectos
         </motion.p>

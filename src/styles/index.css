@@ -73,3 +73,42 @@ section {
 .animate-slide:hover {
   animation-play-state: paused;
 }
+
+/* ── Mascota pixel ─────────────────────────────── */
+@keyframes buddy-step {
+  0%, 49.9% { transform: translateY(0); }
+  50%, 100% { transform: translateY(-1px); }
+}
+@keyframes buddy-bob {
+  0%, 49.9% { transform: translateY(0); }
+  50%, 100% { transform: translateY(-1px); }
+}
+@keyframes buddy-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 97% { transform: scaleY(0.1); }
+}
+@keyframes buddy-wave {
+  0%, 49.9% { transform: translateY(0); }
+  50%, 100% { transform: translateY(-1px); }
+}
+@keyframes buddy-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@keyframes buddy-cursor {
+  0%, 49.9% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.buddy-walking .buddy-legs-a { animation: buddy-step 0.4s infinite; }
+.buddy-walking .buddy-legs-b { animation: buddy-step 0.4s infinite reverse; animation-delay: -0.2s; }
+.buddy-walking .buddy-bob { animation: buddy-bob 0.4s infinite; }
+.buddy-walking .buddy-arm-left { animation: buddy-wave 0.4s infinite; animation-delay: -0.2s; }
+.buddy-walking .buddy-arm-right { animation: buddy-wave 0.4s infinite; }
+.buddy-eyes { transform-box: fill-box; transform-origin: center; animation: buddy-blink 4s infinite; }
+.buddy-antenna { animation: buddy-pulse 2s ease-in-out infinite; }
+.buddy-cursor { animation: buddy-cursor 1s infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .buddy-eyes, .buddy-antenna, .buddy-cursor { animation: none; }
+}
