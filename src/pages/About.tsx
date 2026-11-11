@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import FadeIn from '@/components/FadeIn'
 import { SOCIAL_LINKS, PERSONAL_INFO, EXPERIENCE } from '@/constants'
 import useSEO from '@/hooks/useSEO'
+import TechIcon from '@/components/TechIcon'
 import MiFoto from '@/assets/mi-foto.jpg'
 import GithubIcon from '@/assets/github-icon.png'
 import LinkedinIcon from '@/assets/linkedln-icon.png'
@@ -34,6 +35,101 @@ const GraduationIcon = () => (
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5z" />
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
   </svg>
+)
+
+const AwardIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="8" r="6" strokeWidth={1.5} />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
+  </svg>
+)
+
+type TimelineEntry = (typeof EXPERIENCE)[number]
+
+const WORK = EXPERIENCE.filter((item) => item.type === 'work')
+const EDUCATION = EXPERIENCE.filter((item) => item.type === 'education')
+
+const Timeline = ({ items }: { items: readonly TimelineEntry[] }) => (
+  <div className="relative">
+    <div className="absolute left-4 top-0 bottom-0 w-px bg-zinc-800" aria-hidden="true" />
+
+    <ol className="space-y-10">
+      {items.map((item) => {
+        const isCurrent = 'current' in item && item.current
+        const achievement = 'achievement' in item ? item.achievement : undefined
+
+        return (
+          <motion.li
+            key={item.id}
+            className="relative pl-12"
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className={`absolute left-0 top-1 w-8 h-8 rounded-full flex items-center justify-center border ${
+              isCurrent
+                ? 'bg-white text-black border-white'
+                : 'bg-zinc-900 text-zinc-400 border-zinc-800'
+            }`}>
+              {item.type === 'education' ? <GraduationIcon /> : <BriefcaseIcon />}
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
+              {item.logo && LOGOS[item.logo] ? (
+                <div className="inline-flex items-center gap-2.5">
+                  <div className="bg-white rounded-lg px-2.5 py-1.5 inline-flex items-center h-10">
+                    <img
+                      src={LOGOS[item.logo]}
+                      alt={`Logo de ${item.company}`}
+                      className="h-6 w-auto object-contain"
+                    />
+                  </div>
+                  <span className="text-sm font-medium text-zinc-300">{item.company}</span>
+                </div>
+              ) : (
+                <div className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 inline-flex items-center h-10">
+                  <span className="text-sm text-zinc-300 font-medium">{item.company}</span>
+                </div>
+              )}
+
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-zinc-600">{item.duration}</span>
+                {isCurrent && (
+                  <span className="text-xs text-white border border-white/20 bg-white/5 px-2 py-0.5 rounded-full">
+                    Actual
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <h3 className="text-white font-semibold text-lg leading-tight">{item.role}</h3>
+            <p className="text-zinc-600 text-sm mb-2">{item.location}</p>
+
+            {achievement && (
+              <p className="inline-flex items-center gap-2 text-sm text-zinc-200 border border-zinc-800 bg-zinc-900 rounded-lg px-3 py-1.5 mb-3">
+                <AwardIcon />
+                {achievement}
+              </p>
+            )}
+
+            <p className="text-zinc-400 text-sm leading-relaxed mb-3">{item.description}</p>
+
+            <ul className="flex flex-wrap gap-2" aria-label="Tecnologías usadas">
+              {item.tags.map((tag) => (
+                <li key={tag}>
+                  <span className="inline-flex items-center gap-1.5 text-xs text-zinc-500 border border-zinc-800 bg-zinc-900 px-2.5 py-1 rounded-full">
+                    <TechIcon name={tag} className="w-3 h-3" />
+                    {tag}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </motion.li>
+        )
+      })}
+    </ol>
+  </div>
 )
 
 const About = () => {
@@ -113,88 +209,22 @@ const About = () => {
           </div>
         </FadeIn>
 
-        {/* Timeline */}
+        {/* Experiencia */}
         <FadeIn delay={0.1}>
-          <div>
+          <section className="mb-24" aria-labelledby="experience-title">
             <p className="text-zinc-600 text-xs tracking-widest uppercase mb-2">Recorrido</p>
-            <h2 className="text-2xl font-bold text-white tracking-tight mb-10">Experiencia</h2>
+            <h2 id="experience-title" className="text-2xl font-bold text-white tracking-tight mb-10">Experiencia</h2>
+            <Timeline items={WORK} />
+          </section>
+        </FadeIn>
 
-            <div className="relative">
-              <div className="absolute left-4 top-0 bottom-0 w-px bg-zinc-800" aria-hidden="true" />
-
-              <ol className="space-y-10">
-                {EXPERIENCE.map((item) => {
-                  const isCurrent = 'current' in item && item.current
-
-                  return (
-                    <motion.li
-                      key={item.id}
-                      className="relative pl-12"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: '-40px' }}
-                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <div className={`absolute left-0 top-1 w-8 h-8 rounded-full flex items-center justify-center border ${
-                        isCurrent
-                          ? 'bg-white text-black border-white'
-                          : 'bg-zinc-900 text-zinc-400 border-zinc-800'
-                      }`}>
-                        {item.type === 'education' ? <GraduationIcon /> : <BriefcaseIcon />}
-                      </div>
-
-                      <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
-                        {item.logo && LOGOS[item.logo] ? (
-                          <div className="inline-flex items-center gap-2.5">
-                            <div className="bg-white rounded-lg px-2.5 py-1.5 inline-flex items-center h-10">
-                              <img
-                                src={LOGOS[item.logo]}
-                                alt={`Logo de ${item.company}`}
-                                className="h-6 w-auto object-contain"
-                              />
-                            </div>
-                            <span className="text-sm font-medium text-zinc-300">{item.company}</span>
-                          </div>
-                        ) : (
-                          <div className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 inline-flex items-center h-10">
-                            <span className="text-sm text-zinc-300 font-medium">{item.company}</span>
-                          </div>
-                        )}
-
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs text-zinc-600">{item.duration}</span>
-                          {isCurrent && (
-                            <span className="text-xs text-white border border-white/20 bg-white/5 px-2 py-0.5 rounded-full">
-                              Actual
-                            </span>
-                          )}
-                          {item.type === 'education' && (
-                            <span className="text-xs text-zinc-500 border border-zinc-800 px-2 py-0.5 rounded-full">
-                              Educación
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <h3 className="text-white font-semibold text-lg leading-tight">{item.role}</h3>
-                      <p className="text-zinc-600 text-sm mb-2">{item.location}</p>
-                      <p className="text-zinc-400 text-sm leading-relaxed mb-3">{item.description}</p>
-
-                      <ul className="flex flex-wrap gap-2" aria-label="Tecnologías usadas">
-                        {item.tags.map((tag) => (
-                          <li key={tag}>
-                            <span className="text-xs text-zinc-500 border border-zinc-800 bg-zinc-900 px-2.5 py-1 rounded-full">
-                              {tag}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.li>
-                  )
-                })}
-              </ol>
-            </div>
-          </div>
+        {/* Educación */}
+        <FadeIn delay={0.1}>
+          <section aria-labelledby="education-title">
+            <p className="text-zinc-600 text-xs tracking-widest uppercase mb-2">Formación</p>
+            <h2 id="education-title" className="text-2xl font-bold text-white tracking-tight mb-10">Educación</h2>
+            <Timeline items={EDUCATION} />
+          </section>
         </FadeIn>
 
       </div>

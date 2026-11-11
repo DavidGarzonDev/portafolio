@@ -1,4 +1,5 @@
 import { cn } from '@/utils/helpers'
+import TechIcon from '@/components/TechIcon'
 
 interface ProjectCardProps {
   title: string
@@ -63,7 +64,8 @@ const ProjectCard = ({
           <ul className="flex flex-wrap gap-2 mt-auto" role="list" aria-label={`Tecnologías de ${title}`}>
             {technologies.map((tech, index) => (
               <li key={index}>
-                <span className="px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full text-xs text-zinc-400">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full text-xs text-zinc-400">
+                  <TechIcon name={tech} />
                   {tech}
                 </span>
               </li>

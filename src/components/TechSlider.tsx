@@ -1,4 +1,5 @@
 import { TECH_STACK } from '@/constants'
+import TechIcon from '@/components/TechIcon'
 
 const TechSlider = () => {
   return (
@@ -11,9 +12,10 @@ const TechSlider = () => {
         {[...TECH_STACK, ...TECH_STACK].map((tech, index) => (
           <div
             key={index}
-            className="flex-shrink-0 px-5 py-2 border border-zinc-800 rounded-full text-sm text-zinc-400 whitespace-nowrap"
+            className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2 border border-zinc-800 rounded-full text-sm text-zinc-400 whitespace-nowrap"
             role="listitem"
           >
+            <TechIcon name={tech.name} className="w-4 h-4" />
             {tech.name}
           </div>
         ))}
