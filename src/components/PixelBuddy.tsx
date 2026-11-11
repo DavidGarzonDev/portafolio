@@ -1,5 +1,6 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { cn } from '@/utils/helpers'
+import { useEffect, useRef, useSyncExternalStore } from 'react'
+import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 
 /**
  * Mascotas pixel-art blancas.
@@ -34,11 +35,9 @@ export const Buddy = ({ size = 64 }: { size?: number }) => (
         <P x={3} y={10} w={10} h={1} />
       </g>
 
-      {/* Brazos */}
-      <g className="fill-white buddy-arm-left">
+      {/* Brazos: van dentro del cuerpo para que nunca se despeguen */}
+      <g className="fill-white">
         <P x={0} y={6} w={2} h={2} />
-      </g>
-      <g className="fill-white buddy-arm-right">
         <P x={14} y={6} w={2} h={2} />
       </g>
 
@@ -98,43 +97,86 @@ const Walker = ({ distance, duration, delay = 0, size = 64 }: WalkerProps) => {
   )
 }
 
-/** Muñequito principal de la portada. */
-const PixelBuddy = () => (
-  <div className="flex justify-center h-16 w-full max-w-xs mx-auto mb-8 overflow-hidden" aria-hidden="true">
-    <Walker distance={110} duration={12} />
-  </div>
-)
-
-/**
- * Posición, recorrido y tamaño de cada muñequito del fondo. Están sobre todo en los
- * márgenes para no tapar el contenido; los marcados como `desktop` no salen en celular.
+/*
+ * Hay un solo muñequito. Vive en la portada mientras se ve la sección principal;
+ * al bajar o cambiar de página salta a la esquina inferior. Los dos lugares comparten
+ * `layoutId`, así framer-motion anima el viaje de un sitio al otro.
  */
-const CROWD = [
-  { top: '14%', left: '6%', distance: 40, duration: 9, delay: 0, size: 36, opacity: 0.95 },
-  { top: '30%', left: '88%', distance: 50, duration: 11, delay: 1.5, size: 44, opacity: 0.9 },
-  { top: '52%', left: '4%', distance: 35, duration: 8, delay: 3, size: 28, opacity: 0.85, desktop: true },
-  { top: '70%', left: '90%', distance: 30, duration: 10, delay: 0.8, size: 32, opacity: 0.95 },
-  { top: '86%', left: '12%', distance: 60, duration: 13, delay: 2.2, size: 40, opacity: 0.9, desktop: true },
-  { top: '13%', left: '72%', distance: 45, duration: 12, delay: 4, size: 26, opacity: 0.8, desktop: true },
-  { top: '42%', left: '94%', distance: 20, duration: 7, delay: 1, size: 24, opacity: 0.8, desktop: true },
-  { top: '92%', left: '78%', distance: 50, duration: 10, delay: 3.5, size: 34, opacity: 0.9 },
-  { top: '64%', left: '2%', distance: 25, duration: 9, delay: 5, size: 22, opacity: 0.75, desktop: true },
-  { top: '22%', left: '18%', distance: 30, duration: 14, delay: 2.8, size: 20, opacity: 0.7, desktop: true },
-] as const
+let inHero = typeof window !== 'undefined' && window.location.pathname === '/'
+const listeners = new Set<() => void>()
+const setInHero = (value: boolean) => {
+  if (inHero === value) return
+  inHero = value
+  listeners.forEach((l) => l())
+}
+const subscribe = (l: () => void) => {
+  listeners.add(l)
+  return () => listeners.delete(l)
+}
+const useInHero = () => useSyncExternalStore(subscribe, () => inHero, () => false)
 
-/** Grupo de muñequitos que caminan por el fondo de todo el sitio. */
-export const BuddyCrowd = () => (
-  <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
-    {CROWD.map((b, i) => (
-      <div
-        key={i}
-        className={cn('absolute', 'desktop' in b && b.desktop && 'hidden md:block')}
-        style={{ top: b.top, left: b.left, opacity: b.opacity, transform: 'translate(-50%, -50%)' }}
-      >
-        <Walker distance={b.distance} duration={b.duration} delay={b.delay} size={b.size} />
-      </div>
-    ))}
-  </div>
-)
+const JUMP = { type: 'spring', stiffness: 260, damping: 22 } as const
+
+/** Lugar del muñequito en la portada. */
+const PixelBuddy = () => {
+  const ref = useRef<HTMLDivElement>(null)
+  const visible = useInHero()
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => setInHero(entry.isIntersecting), {
+      threshold: 0.1,
+    })
+    observer.observe(el)
+    return () => {
+      observer.disconnect()
+      setInHero(false)
+    }
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className="flex justify-center h-16 w-full max-w-xs mx-auto mb-8 overflow-hidden"
+      aria-hidden="true"
+    >
+      {visible && (
+        <motion.div layoutId="pixel-buddy" transition={JUMP}>
+          <Walker distance={110} duration={12} />
+        </motion.div>
+      )}
+    </div>
+  )
+}
+
+/** El muñequito en la esquina inferior; salta cada vez que cambias de página. */
+export const FloatingBuddy = () => {
+  const visibleInHero = useInHero()
+  const { pathname } = useLocation()
+  const hop = useAnimationControls()
+  const reduceMotion = useReducedMotion()
+
+  useEffect(() => {
+    if (visibleInHero || reduceMotion) return
+    hop.start({
+      y: [0, -56, 0, -14, 0],
+      scaleY: [1, 1.08, 0.85, 1.03, 1],
+      transition: { duration: 0.9, times: [0, 0.35, 0.65, 0.82, 1], ease: 'easeOut' },
+    })
+  }, [pathname, visibleInHero, reduceMotion, hop])
+
+  if (visibleInHero) return null
+
+  return (
+    <div className="fixed bottom-4 left-6 md:left-10 z-40 pointer-events-none" aria-hidden="true">
+      <motion.div layoutId="pixel-buddy" transition={JUMP}>
+        <motion.div animate={hop} style={{ originY: 1 }}>
+          <Walker distance={24} duration={8} size={48} />
+        </motion.div>
+      </motion.div>
+    </div>
+  )
+}
 
 export default PixelBuddy
