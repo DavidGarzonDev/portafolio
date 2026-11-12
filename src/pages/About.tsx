@@ -102,6 +102,11 @@ const Timeline = ({ items }: { items: readonly ExperienceItem[] }) => {
                       {t('current')}
                     </span>
                   )}
+                  {item.internship && (
+                    <span className="text-xs text-zinc-400 border border-zinc-800 px-2 py-0.5 rounded-full">
+                      {t('internship')}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

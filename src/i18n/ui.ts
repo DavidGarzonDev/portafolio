@@ -49,6 +49,7 @@ export const UI = {
   educationEyebrow: { es: 'Formación', en: 'Background' },
   educationTitle: { es: 'Educación', en: 'Education' },
   current: { es: 'Actual', en: 'Current' },
+  internship: { es: 'Práctica', en: 'Internship' },
   logoOf: { es: 'Logo de', en: 'Logo of' },
   technologiesUsed: { es: 'Tecnologías usadas', en: 'Technologies used' },
 
