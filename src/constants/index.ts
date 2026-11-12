@@ -131,10 +131,10 @@ export const EXPERIENCE: readonly ExperienceItem[] = [
     location: { es: 'Colombia', en: 'Colombia' },
     logo: 'siesa',
     description: {
-      es: 'Desarrollo y optimización de herramientas internas con Python, Flask y SQL para automatizar procesos de soporte. Integración de servicios mediante APIs, refactorización de código y soporte técnico a usuarios en entornos de nube.',
-      en: 'Built and optimized internal tools with Python, Flask and SQL to automate support processes. Service integration through APIs, code refactoring and technical support for users in cloud environments.',
+      es: 'Desarrollé una plataforma interna de consultas con Python, Flask y SQL que automatizó procesos de soporte. Además, brindé soporte técnico del ERP, administré bases de datos de clientes y servidores multicliente en la nube, e instalé los componentes de Excel de la empresa.',
+      en: "Built an internal query platform with Python, Flask and SQL that automated support processes. I also provided ERP technical support, managed customer databases and multi-tenant cloud servers, and installed the company's Excel add-ins.",
     },
-    tags: ['Python', 'Flask', 'SQL', 'APIs REST'],
+    tags: ['Python', 'Flask', 'SQL', 'APIs REST', 'ERP'],
   },
   {
     id: '1',
