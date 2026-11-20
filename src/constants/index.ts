@@ -101,7 +101,7 @@ export interface ExperienceItem {
   location: Localized
   logo?: 'conectate' | 'siesa' | 'univalle'
   current?: boolean
-  /** Práctica profesional: se muestra con su propia etiqueta. */
+  /** Empezó como práctica y terminó contratado: se muestra con su propia etiqueta. */
   internship?: boolean
   achievement?: Localized
   description: Localized
@@ -134,8 +134,8 @@ export const EXPERIENCE: readonly ExperienceItem[] = [
     logo: 'siesa',
     internship: true,
     description: {
-      es: 'Práctica con las funciones de un ejecutivo de soporte técnico. Desarrollé una plataforma interna de consultas con Python, Flask y SQL que automatizó procesos de soporte. Además, brindé soporte técnico del ERP, administré bases de datos de clientes y servidores multicliente en la nube, e instalé los componentes de Excel de la empresa.',
-      en: "Internship with the responsibilities of a technical support specialist. I built an internal query platform with Python, Flask and SQL that automated support processes. I also provided ERP technical support, managed customer databases and multi-tenant cloud servers, and installed the company's Excel add-ins.",
+      es: 'Ingresé como practicante y fui contratado al terminar la práctica. Desarrollé una plataforma interna de consultas con Python, Flask y SQL que automatizó procesos de soporte. Además, brindé soporte técnico del ERP, administré bases de datos de clientes y servidores multicliente en la nube, e instalé los componentes de Excel de la empresa.',
+      en: "Joined as an intern and was hired once the internship ended. I built an internal query platform with Python, Flask and SQL that automated support processes. I also provided ERP technical support, managed customer databases and multi-tenant cloud servers, and installed the company's Excel add-ins.",
     },
     tags: ['Python', 'Flask', 'SQL', 'APIs REST', 'ERP'],
   },
