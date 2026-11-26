@@ -58,7 +58,7 @@ const BillLine = ({ to, badge, size, arrow = false, children }: BillLineProps) =
   <Link to={to} className="bill-line group relative inline-block max-w-full px-2 py-0.5">
     <span className="bill-wipe" aria-hidden="true" />
     <span className="relative block mix-blend-difference">
-      <span className={`bill-ink block text-balance pt-[0.12em] font-woodtype uppercase leading-[0.96] text-[var(--ink)] ${size}`}>{children}</span>
+      <span className={`bill-ink block text-balance pt-[0.12em] font-woodtype uppercase leading-[0.96] text-[var(--ink)] sm:leading-[0.88] ${size}`}>{children}</span>
       <span className="mt-1 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] sm:text-[11px]">
         <span>{badge}</span>
         {arrow && <Arrow className="h-4 w-4 transition-transform motion-safe:group-hover:translate-x-1" />}
@@ -87,7 +87,7 @@ const Hero = () => {
         <PixelBuddy className="relative z-30 mx-auto -mb-[5px] md:mx-0 md:ml-6" />
 
         <motion.div
-          className="bill relative border-2 border-[var(--ink)] px-4 py-5 sm:px-8 sm:py-6"
+          className="bill relative border-2 border-[var(--ink)] px-4 py-4 sm:px-8 sm:py-5"
           variants={press}
           initial={reduce ? false : 'hidden'}
           animate="show"
@@ -112,7 +112,7 @@ const Hero = () => {
           </motion.div>
 
           {/* PRESENTA */}
-          <motion.p variants={stamp} className="my-3 flex items-center gap-4 sm:my-4">
+          <motion.p variants={stamp} className="my-2.5 flex items-center gap-4 sm:my-3">
             <Ornament />
             <span className="bill-ink font-slab text-[clamp(1.25rem,3vh,2.1rem)] uppercase leading-none text-[var(--ink)]">
               {t('billPresents')}
@@ -124,14 +124,14 @@ const Hero = () => {
           <motion.ul variants={stamp} className="grid min-w-0 justify-items-center gap-y-1 text-center" aria-label={t('projectsTitle')}>
             {headliner && (
               <li className="w-full min-w-0">
-                <BillLine to={projectLink(headliner.id)} badge={tr(headliner.badge)} size="text-[clamp(2.25rem,min(10.5vh,14vw),7.25rem)]" arrow>
+                <BillLine to={projectLink(headliner.id)} badge={tr(headliner.badge)} size="text-[clamp(2.25rem,min(10vh,13vw),7.25rem)]" arrow>
                   {headliner.title}
                 </BillLine>
               </li>
             )}
             {second && (
               <li className="w-full min-w-0 border-t border-[var(--ink-dim)] pt-2">
-                <BillLine to={projectLink(second.id)} badge={tr(second.badge)} size="text-[clamp(1.75rem,min(7vh,10vw),4.5rem)]">
+                <BillLine to={projectLink(second.id)} badge={tr(second.badge)} size="text-[clamp(1.75rem,min(6.6vh,9vw),4.5rem)]">
                   {second.title}
                 </BillLine>
               </li>
@@ -151,7 +151,7 @@ const Hero = () => {
           {/* Línea final: ESCRÍBEME y sus vías, como un solo bloque centrado */}
           <motion.div
             variants={stamp}
-            className="mt-4 flex flex-col items-center gap-3 bg-[var(--ink)] px-3 py-4 text-[var(--stock)] sm:mt-5 sm:flex-row sm:justify-center sm:gap-8"
+            className="mt-3 flex flex-col items-center gap-2 bg-[var(--ink)] px-3 py-3 text-[var(--stock)] sm:mt-4 sm:flex-row sm:justify-center sm:gap-8"
           >
             <a
               href={`mailto:${SOCIAL_LINKS.email}`}
@@ -182,7 +182,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Pie de imprenta */}
-        <p className="mt-2 text-center text-[10px] uppercase tracking-[0.24em] text-[var(--ink-dim)] sm:text-right sm:text-[11px]">
+        <p className="mt-1.5 text-center text-[10px] uppercase tracking-[0.24em] text-[var(--ink-dim)] sm:text-right sm:text-[11px]">
           {t('billImprint')}
         </p>
       </div>

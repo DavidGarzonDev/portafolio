@@ -349,8 +349,15 @@ const useSpeech = () => {
   return { open, say }
 }
 
-const Bubble = ({ open, text }: { open: boolean; text: string }) => (
-  <div className="absolute left-1/2 bottom-full mb-3 -translate-x-1/2 pointer-events-none">
+/** `side` pone el globo al costado (en la portada, para que el menú fijo no lo tape). */
+const Bubble = ({ open, text, side = false }: { open: boolean; text: string; side?: boolean }) => (
+  <div
+    className={
+      side
+        ? 'absolute left-full top-1/2 ml-3 -translate-y-1/2 pointer-events-none'
+        : 'absolute left-1/2 bottom-full mb-3 -translate-x-1/2 pointer-events-none'
+    }
+  >
     <AnimatePresence>
       {open && (
         <motion.div
@@ -358,12 +365,19 @@ const Bubble = ({ open, text }: { open: boolean; text: string }) => (
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 4, scale: 0.8 }}
           transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-          style={{ originY: 1 }}
+          style={side ? { originX: 0 } : { originY: 1 }}
           className="relative whitespace-nowrap rounded-md bg-white px-2.5 py-1 font-mono text-xs font-bold text-black"
           role="status"
         >
           {text}
-          <span className="absolute left-1/2 top-full -ml-1 h-2 w-2 -translate-y-1 rotate-45 bg-white" aria-hidden="true" />
+          <span
+            className={
+              side
+                ? 'absolute right-full top-1/2 -mt-1 h-2 w-2 translate-x-1 rotate-45 bg-white'
+                : 'absolute left-1/2 top-full -ml-1 h-2 w-2 -translate-y-1 rotate-45 bg-white'
+            }
+            aria-hidden="true"
+          />
         </motion.div>
       )}
     </AnimatePresence>
@@ -465,7 +479,7 @@ const PixelBuddy = ({ className = 'mx-auto md:mx-0 mb-8' }: { className?: string
           aria-hidden={!visible}
           tabIndex={visible ? 0 : -1}
         >
-          <Walker distance={110} duration={12} look={look} overlay={<Bubble open={open} text={t('buddyHello')} />} />
+          <Walker distance={110} duration={12} look={look} overlay={<Bubble open={open} text={t('buddyHello')} side />} />
         </div>
       </motion.div>
       <Dust puffs={puffs} />
