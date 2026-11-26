@@ -4,7 +4,7 @@ import { PERSONAL_INFO, SOCIAL_LINKS } from '@/constants'
 import useSEO from '@/hooks/useSEO'
 import PixelBuddy from '@/components/PixelBuddy'
 import useLanguage from '@/i18n/useLanguage'
-import DarkKnight from '@/components/noir/DarkKnight'
+import DarkLord from '@/components/noir/DarkLord'
 
 const container: Variants = {
   hidden: {},
@@ -20,10 +20,10 @@ const Hero = () => {
   const { t, tr } = useLanguage()
   useSEO({ title: t('seoHomeTitle'), description: t('seoHomeDescription') })
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-20 pb-[14vh] text-center" aria-label={t('seoHomeTitle')}>
-      <DarkKnight className="absolute bottom-0 left-1/2 h-[62vh] aspect-[400/620] -translate-x-1/2 opacity-30 md:left-auto md:right-[2%] md:h-[84vh] md:translate-x-0 md:opacity-100" />
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-20 pb-[14vh] text-center md:text-left" aria-label={t('seoHomeTitle')}>
+      <DarkLord className="absolute bottom-0 left-1/2 h-[66vh] aspect-[520/720] -translate-x-1/2 opacity-30 md:left-auto md:right-[4%] md:h-[90vh] md:translate-x-0 md:opacity-100" />
       <motion.div
-        className="relative max-w-4xl mx-auto w-full"
+        className="relative mx-auto w-full max-w-4xl md:max-w-6xl"
         variants={container}
         initial="hidden"
         animate="show"
@@ -32,7 +32,7 @@ const Hero = () => {
           <PixelBuddy />
         </motion.div>
 
-        <motion.p variants={item} className="text-zinc-500 text-xs tracking-[0.3em] uppercase mb-8 text-center">
+        <motion.p variants={item} className="text-zinc-500 text-xs tracking-[0.3em] uppercase mb-8">
           {t('available')}
         </motion.p>
 
@@ -45,11 +45,11 @@ const Hero = () => {
           ))}
         </motion.h1>
 
-        <motion.p variants={item} className="text-xl md:text-2xl text-zinc-400 font-light max-w-lg mx-auto mb-12">
+        <motion.p variants={item} className="text-xl md:text-2xl text-zinc-400 font-light max-w-lg mx-auto md:mx-0 mb-12">
           {tr(PERSONAL_INFO.title)}. {t('tagline')}
         </motion.p>
 
-        <motion.div variants={item} className="flex flex-wrap gap-4 justify-center">
+        <motion.div variants={item} className="flex flex-wrap gap-4 justify-center md:justify-start">
           <Link
             to="/projects"
             className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-zinc-100 text-black font-medium rounded-lg transition-all text-sm"

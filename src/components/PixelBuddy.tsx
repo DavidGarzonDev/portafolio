@@ -449,7 +449,7 @@ const PixelBuddy = () => {
   }, [visible, jump, reduceMotion, land])
 
   return (
-    <div ref={slotRef} className="relative z-40 flex justify-center h-16 w-full max-w-xs mx-auto mb-8">
+    <div ref={slotRef} className="relative z-40 flex justify-center h-16 w-full max-w-xs mx-auto md:mx-0 mb-8">
       <motion.div
         ref={bodyRef}
         animate={jump}
