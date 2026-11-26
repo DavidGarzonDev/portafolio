@@ -16,19 +16,19 @@ typography:
     fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
     fontSize: "clamp(2.25rem, min(10.5vh, 14vw), 7.25rem)"
     fontWeight: 900
-    lineHeight: 0.88
+    lineHeight: 0.96
     letterSpacing: "0.005em"
   headline-second:
     fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
     fontSize: "clamp(1.75rem, min(7vh, 10vw), 4.5rem)"
     fontWeight: 900
-    lineHeight: 0.88
+    lineHeight: 0.96
     letterSpacing: "0.005em"
   headline-support:
     fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
     fontSize: "clamp(1.5rem, min(5.2vh, 8.5vw), 3.4rem)"
     fontWeight: 900
-    lineHeight: 0.88
+    lineHeight: 0.96
     letterSpacing: "0.005em"
   band:
     fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
@@ -155,9 +155,9 @@ A two-ink letterpress palette: one warm near-black stock, one warm paper-white i
 
 ### Hierarchy
 - **Display** (900, fitted to the measure with a 17vh height cap, line-height 0.86): the name. Set on one centred line across the full width of the bill; when the height cap stops it short of the measure, letter-spacing opens (to at most 0.16em) so the line still fills.
-- **Headliner** (900, clamp(2.25rem, min(10.5vh, 14vw), 7.25rem), 0.88): the top-billed project. Lineup sizes are fixed per rank, not fitted: a title that does not fit wraps onto balanced lines (text-wrap: balance) rather than shrinking.
-- **Second bill** (900, clamp(1.75rem, min(7vh, 10vw), 4.5rem), 0.88): the second project.
-- **Support bill** (900, clamp(1.5rem, min(5.2vh, 8.5vw), 3.4rem), 0.88): the remaining projects; stacked on phones, one centred row from 640px with an 8px diamond between them.
+- **Headliner** (900, clamp(2.25rem, min(10.5vh, 14vw), 7.25rem), 0.96): the top-billed project. Lineup sizes are fixed per rank, not fitted: a title that does not fit wraps onto balanced lines (text-wrap: balance) rather than shrinking.
+- **Second bill** (900, clamp(1.75rem, min(7vh, 10vw), 4.5rem), 0.96): the second project.
+- **Support bill** (900, clamp(1.5rem, min(5.2vh, 8.5vw), 3.4rem), 0.96): the remaining projects; stacked on phones, one centred row from 640px with an 8px diamond between them.
 - **Band** (900, fitted with a 5vh cap, tracking 0.08em): the role, set in stock on an ink band.
 - **Action** (900, clamp(2.25rem, min(10vh, 12vw), 6.5rem), line-height 0.86, tracking 0.04em, never wraps): "ESCRÍBEME / WRITE TO ME", in stock on the closing band.
 - **Billing** (Ultra 400, clamp(1.25rem, 3vh, 2.1rem), line-height 1, uppercase): "PRESENTA / PRESENTS", flanked by ornament rules.
