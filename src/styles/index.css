@@ -57,8 +57,8 @@ section {
 }
 
 ::selection {
-  background-color: #ffffff;
-  color: #050505;
+  background-color: #efece4;
+  color: #0b0b0a;
 }
 
 @keyframes slide {
@@ -107,24 +107,56 @@ section {
   .buddy-eyes, .buddy-antenna, .buddy-cursor { animation: none; }
 }
 
-/* ══ Estilo noir ═══════════════════════════════════════════════
-   Blanco y negro de alto contraste, grano de película, luz que estalla
-   detrás de las siluetas, viñeta y niebla. */
+/* ══ Cartel de imprenta ═══════════════════════════════════════
+   Cartel de tipos de madera impreso al revés: tinta color papel sobre
+   cartulina negra, un gris para la letra pequeña y grano de tinta. */
 
 :root {
-  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --stock: #0b0b0a;
+  --ink: #efece4;
+  --ink-dim: #8c8a84;
+  --font-woodtype: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --font-slab: 'Ultra', Georgia, serif;
 }
+
+.font-woodtype { font-family: var(--font-woodtype); font-weight: 900; letter-spacing: 0.005em; }
+.font-slab { font-family: var(--font-slab); font-weight: 400; }
 
 h1, h2, h3 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--font-woodtype);
+  font-weight: 800;
+  letter-spacing: 0.01em;
 }
+h1, h2 { text-transform: uppercase; }
 
-/* La serif tiene letras más bajas: en subtítulos se iguala su tamaño visual con Inter */
-h2, h3 {
-  font-size-adjust: ex-height 0.53;
+/* Tinta gastada: bordes irregulares y pequeños vacíos (filtro definido en InkFilter) */
+.bill-ink { filter: url(#bill-ink-fx); }
+
+/* Al pasar el mouse, la línea se entinta al revés con un barrido de rodillo */
+.bill-wipe {
+  position: absolute;
+  inset: -2px -6px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.bill-line:hover .bill-wipe,
+.bill-line:focus-visible .bill-wipe { transform: scaleX(1); }
+.bill-line:focus-visible { outline: none; }
+
+.bill-cta { color: var(--stock); }
+.bill-cta:focus-visible,
+.bill-small-link:focus-visible { outline: 2px solid var(--stock); outline-offset: 3px; }
+.bill-small-link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.bill-small-link:hover { text-decoration-thickness: 2px; }
+
+/* Superficies del navegador con la tinta del cartel */
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+html { scrollbar-color: var(--ink-dim) var(--stock); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--stock); }
+::-webkit-scrollbar-thumb { background: var(--ink-dim); border: 2px solid var(--stock); }
 
 /* Grano de película que tiembla */
 .noir-grain {
@@ -166,57 +198,7 @@ h2, h3 {
   80% { opacity: 0; }
 }
 
-/* Niebla que avanza despacio */
-.noir-fog {
-  background:
-    radial-gradient(ellipse 40% 50% at 20% 100%, rgba(212, 212, 216, 0.12), transparent 70%),
-    radial-gradient(ellipse 35% 40% at 60% 100%, rgba(212, 212, 216, 0.08), transparent 70%),
-    radial-gradient(ellipse 45% 45% at 95% 100%, rgba(212, 212, 216, 0.1), transparent 70%);
-  filter: blur(14px);
-}
-.noir-fog-a { animation: noir-fog 38s ease-in-out infinite alternate; }
-.noir-fog-b { animation: noir-fog 26s ease-in-out infinite alternate-reverse; opacity: 0.8; }
-@keyframes noir-fog {
-  from { transform: translateX(-6%); }
-  to { transform: translateX(6%); }
-}
-
-/* Círculo de luz granulada detrás del caballero */
-.noir-spot {
-  background: radial-gradient(closest-side, rgba(240, 240, 244, 0.95) 0%, rgba(226, 226, 232, 0.85) 48%, rgba(200, 200, 210, 0.35) 72%, transparent 100%);
-  animation: noir-breathe 9s ease-in-out infinite;
-}
-.noir-spot-grain {
-  background-repeat: repeat;
-  mix-blend-mode: multiply;
-  opacity: 0.6;
-  mask-image: radial-gradient(closest-side, black 55%, transparent 100%);
-  animation: noir-grain 0.9s steps(6) infinite;
-}
-@keyframes noir-breathe {
-  0%, 100% { opacity: 0.88; scale: 1; }
-  50% { opacity: 1; scale: 1.04; }
-}
-
-/* La capa ondea despacio desde los hombros */
-.noir-cape {
-  transform-box: view-box;
-  transform-origin: 200px 196px;
-  animation: noir-cape 7s ease-in-out infinite;
-}
-@keyframes noir-cape {
-  0%, 100% { transform: skewX(0deg) scaleX(1); }
-  30% { transform: skewX(-1.4deg) scaleX(1.015); }
-  65% { transform: skewX(1deg) scaleX(0.99); }
-}
-
-/* Visor que brilla tenue */
-.noir-visor { animation: noir-visor 6s ease-in-out infinite; }
-@keyframes noir-visor {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 0.9; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .noir-grain, .noir-flicker, .noir-spot, .noir-spot-grain, .noir-fog-a, .noir-fog-b, .noir-visor, .noir-cape { animation: none; }
+  .noir-grain, .noir-flicker { animation: none; }
+  .bill-wipe { transition: none; }
 }

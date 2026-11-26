@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 .env
+
+# Impeccable: carpetas de trabajo
+.impeccable/questions/
+.impeccable/mocks/
+.impeccable/review/

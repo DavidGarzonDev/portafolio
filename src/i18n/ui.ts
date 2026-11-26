@@ -31,12 +31,14 @@ export const UI = {
   sendEmailTo: { es: 'Enviar correo a', en: 'Send an email to' },
 
   // Portada
-  available: { es: 'Disponible para proyectos', en: 'Available for projects' },
   tagline: {
     es: 'Construyo software completo, de la idea al producto.',
     en: 'I build complete software, from idea to product.',
   },
-  viewProjects: { es: 'Ver proyectos', en: 'View projects' },
+  billPresents: { es: 'Presenta', en: 'Presents' },
+  billWrite: { es: 'Escríbeme', en: 'Write to me' },
+  billEmail: { es: 'Correo', en: 'Email' },
+  billImprint: { es: 'Impreso en Yumbo', en: 'Printed in Yumbo' },
   techListLabel: { es: 'Tecnologías que utilizo', en: 'Technologies I use' },
 
   // Sobre mí
