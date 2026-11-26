@@ -18,14 +18,14 @@ const press: Variants = {
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
 }
 
-/** Cada línea entra como un golpe de prensa: un poco más grande y borrosa, y se asienta. */
+/** Cada línea entra como un golpe de prensa: llega un poco grande, se aplasta al tocar y se asienta. */
 const stamp: Variants = {
-  hidden: { opacity: 0, scale: 1.04, filter: 'blur(3px)' },
+  hidden: { opacity: 0, scaleX: 1.04, scaleY: 1.08 },
   show: {
     opacity: 1,
-    scale: 1,
-    filter: 'blur(0px)',
-    transition: { duration: 0.42, ease: [0.16, 1, 0.3, 1] },
+    scaleX: [1.04, 1.01, 1],
+    scaleY: [1.08, 0.96, 1],
+    transition: { duration: 0.34, times: [0, 0.6, 1], ease: 'easeOut' },
   },
 }
 
@@ -84,7 +84,7 @@ const Hero = () => {
     <section className="relative px-4 pb-8 pt-14 sm:px-6" aria-labelledby="bill-name">
       <div className="mx-auto w-full max-w-6xl">
         {/* El muñequito camina sobre el borde superior del cartel */}
-        <PixelBuddy className="relative z-50 mx-auto -mb-[2px] md:mx-0 md:ml-6" />
+        <PixelBuddy className="relative z-50 mx-auto -mb-[5px] md:mx-0 md:ml-6" />
 
         <motion.div
           className="bill relative border-2 border-[var(--ink)] px-4 py-5 sm:px-8 sm:py-6"
@@ -93,8 +93,8 @@ const Hero = () => {
           animate="show"
         >
           {/* Nombre a toda la medida */}
-          <motion.h1 variants={stamp} id="bill-name" className="bill-ink font-woodtype uppercase text-[var(--ink)]">
-            <FitLine maxVh={17} maxTrack={0.16} className="text-center">
+          <motion.h1 variants={stamp} id="bill-name" className="font-woodtype uppercase text-[var(--ink)]">
+            <FitLine maxVh={17} maxTrack={0.16} className="bill-ink text-center">
               {PERSONAL_INFO.name}
             </FitLine>
           </motion.h1>
@@ -106,7 +106,7 @@ const Hero = () => {
                 {tr(PERSONAL_INFO.title)}
               </FitLine>
             </p>
-            <p className="mt-2 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ink-dim)] sm:text-[11px]">
+            <p className="mt-2 text-balance text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-dim)] sm:text-[11px] sm:tracking-[0.22em]">
               {t('tagline')}
             </p>
           </motion.div>
@@ -148,23 +148,24 @@ const Hero = () => {
             </li>
           </motion.ul>
 
-          {/* Línea final: ESCRÍBEME */}
+          {/* Línea final: ESCRÍBEME y sus vías, como un solo bloque centrado */}
           <motion.div
             variants={stamp}
-            className="mt-4 flex flex-col gap-3 bg-[var(--ink)] p-3 text-[var(--stock)] sm:mt-5 sm:flex-row sm:items-center sm:gap-6 sm:p-4"
+            className="mt-4 flex flex-col items-center gap-3 bg-[var(--ink)] px-3 py-4 text-[var(--stock)] sm:mt-5 sm:flex-row sm:justify-center sm:gap-8"
           >
             <a
               href={`mailto:${SOCIAL_LINKS.email}`}
-              className="bill-cta group block min-w-0 flex-1"
+              className="bill-cta group inline-flex items-center gap-[0.2em] text-[clamp(2.25rem,min(10vh,12vw),6.5rem)]"
               aria-label={`${t('billWrite')}: ${SOCIAL_LINKS.email}`}
             >
-              <FitLine maxVh={8} maxTrack={0.06} className="bill-ink font-woodtype uppercase">
+              <span className="bill-ink whitespace-nowrap pt-[0.1em] font-woodtype uppercase leading-[0.86] tracking-[0.04em]">
                 {t('billWrite')}
-                <Arrow className="ml-[0.18em] inline-block h-[0.62em] w-[0.62em] align-[0.04em] transition-transform motion-safe:group-hover:translate-x-2" />
-              </FitLine>
+              </span>
+              <Arrow className="h-[0.62em] w-[0.62em] shrink-0 transition-transform motion-safe:group-hover:translate-x-2" />
             </a>
+            <span className="hidden h-16 w-0.5 bg-[var(--stock)] sm:block" aria-hidden="true" />
             <nav
-              className="flex shrink-0 flex-wrap gap-x-5 gap-y-1 text-xs font-semibold uppercase tracking-[0.16em] sm:flex-col sm:items-end"
+              className="flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs font-semibold uppercase tracking-[0.16em] sm:flex-col sm:items-start"
               aria-label={t('socialLinks')}
             >
               <a className="bill-small-link" href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer">

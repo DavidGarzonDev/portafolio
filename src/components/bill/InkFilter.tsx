@@ -8,9 +8,9 @@ const InkFilter = () => (
     <filter id="bill-ink-fx" x="-2%" y="-10%" width="104%" height="120%" colorInterpolationFilters="sRGB">
       <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4" result="edge" />
       <feDisplacementMap in="SourceGraphic" in2="edge" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="rough" />
-      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="9" result="grain" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="4" seed="9" result="grain" />
       {/* Alfa = 1 salvo donde el ruido es alto: ahí la tinta no cargó */}
-      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -30 0 0 0 21.4" result="voids" />
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -40 0 0 0 29.2" result="voids" />
       <feComposite in="rough" in2="voids" operator="in" />
     </filter>
   </svg>
