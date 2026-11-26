@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0a0a] isolate">
-      <Particles />
+      {location.pathname !== '/' && <Particles />}
       <NoirAtmosphere />
       <InkFilter />
       <FloatingBuddy />

@@ -131,6 +131,7 @@ h1, h2 { text-transform: uppercase; }
 
 /* Tinta gastada: bordes irregulares y pequeños vacíos (filtro definido en InkFilter) */
 .bill-ink { filter: url(#bill-ink-fx); }
+.bill { background: var(--stock); }
 
 /* Al pasar el mouse, la línea se entinta al revés con un barrido de rodillo */
 .bill-wipe {

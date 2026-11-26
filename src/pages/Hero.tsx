@@ -1,3 +1,4 @@
+import type React from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { PERSONAL_INFO, PROJECTS_DATA, SOCIAL_LINKS } from '@/constants'
@@ -43,6 +44,29 @@ const Ornament = () => (
   </span>
 )
 
+interface BillLineProps {
+  to: string
+  badge: string
+  /** Tamaño de la letra según el puesto en la cartelera. */
+  size: string
+  arrow?: boolean
+  children: React.ReactNode
+}
+
+/** Una línea de la cartelera: título en madera y su condición en letra pequeña. Puede partirse en dos renglones antes que encogerse. */
+const BillLine = ({ to, badge, size, arrow = false, children }: BillLineProps) => (
+  <Link to={to} className="bill-line group relative inline-block max-w-full px-2 py-0.5">
+    <span className="bill-wipe" aria-hidden="true" />
+    <span className="relative block mix-blend-difference">
+      <span className={`bill-ink block text-balance pt-[0.12em] font-woodtype uppercase leading-[0.88] text-[var(--ink)] ${size}`}>{children}</span>
+      <span className="mt-1 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] sm:text-[11px]">
+        <span>{badge}</span>
+        {arrow && <Arrow className="h-4 w-4 transition-transform motion-safe:group-hover:translate-x-1" />}
+      </span>
+    </span>
+  </Link>
+)
+
 /** El cabeza de cartel va primero; el resto, en el orden de la cartelera. */
 const LINEUP = ['1', '4', '2', '3']
 
@@ -52,74 +76,74 @@ const Hero = () => {
   useSEO({ title: t('seoHomeTitle'), description: t('seoHomeDescription') })
 
   const projects = LINEUP.map((id) => PROJECTS_DATA.find((p) => p.id === id)).filter((p) => p !== undefined)
-  const [headliner, ...supporting] = projects
+  const [headliner, second, ...rest] = projects
+
+  const projectLink = (id: string) => `/projects#proyecto-${id}`
 
   return (
-    <section className="relative px-4 pb-10 pt-20 sm:px-6" aria-labelledby="bill-name">
+    <section className="relative px-4 pb-8 pt-14 sm:px-6" aria-labelledby="bill-name">
       <div className="mx-auto w-full max-w-6xl">
-        <PixelBuddy />
+        {/* El muñequito camina sobre el borde superior del cartel */}
+        <PixelBuddy className="relative z-50 mx-auto -mb-[2px] md:mx-0 md:ml-6" />
 
         <motion.div
-          className="bill relative border-2 border-[var(--ink)] px-4 py-5 sm:px-8 sm:py-7"
+          className="bill relative border-2 border-[var(--ink)] px-4 py-5 sm:px-8 sm:py-6"
           variants={press}
           initial={reduce ? false : 'hidden'}
           animate="show"
         >
-          {/* Nombre a todo el ancho */}
+          {/* Nombre a toda la medida */}
           <motion.h1 variants={stamp} id="bill-name" className="bill-ink font-woodtype uppercase text-[var(--ink)]">
-            <FitLine maxVh={19}>{PERSONAL_INFO.name}</FitLine>
+            <FitLine maxVh={17} maxTrack={0.16} className="text-center">
+              {PERSONAL_INFO.name}
+            </FitLine>
           </motion.h1>
 
-          {/* Cargo en franja invertida */}
-          <motion.div variants={stamp} className="mt-3 sm:mt-4">
+          {/* Cargo en franja invertida y lema como letra pequeña */}
+          <motion.div variants={stamp} className="mt-3">
             <p className="bg-[var(--ink)] px-3 py-1.5 text-center text-[var(--stock)]">
-              <FitLine maxVh={5.5} className="bill-ink font-woodtype uppercase tracking-[0.08em]">
+              <FitLine maxVh={5} className="bill-ink font-woodtype uppercase tracking-[0.08em]">
                 {tr(PERSONAL_INFO.title)}
               </FitLine>
             </p>
-            <p className="mt-2 text-center text-sm text-[var(--ink-dim)] sm:text-base">{t('tagline')}</p>
+            <p className="mt-2 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ink-dim)] sm:text-[11px]">
+              {t('tagline')}
+            </p>
           </motion.div>
 
           {/* PRESENTA */}
-          <motion.p variants={stamp} className="my-3 flex items-center gap-4 sm:my-5">
+          <motion.p variants={stamp} className="my-3 flex items-center gap-4 sm:my-4">
             <Ornament />
-            <span className="bill-ink font-slab text-[clamp(1.25rem,3.2vh,2.25rem)] uppercase leading-none text-[var(--ink)]">
+            <span className="bill-ink font-slab text-[clamp(1.25rem,3vh,2.1rem)] uppercase leading-none text-[var(--ink)]">
               {t('billPresents')}
             </span>
             <Ornament />
           </motion.p>
 
-          {/* Cartelera: cabeza de cartel y tres proyectos debajo */}
-          <motion.ul variants={stamp} className="grid min-w-0 grid-cols-1 gap-y-2 text-center" aria-label={t('projectsTitle')}>
+          {/* Cartelera por orden de importancia: la letra baja de tamaño con cada puesto */}
+          <motion.ul variants={stamp} className="grid min-w-0 justify-items-center gap-y-1 text-center" aria-label={t('projectsTitle')}>
             {headliner && (
-              <li className="min-w-0">
-                <Link to="/projects" className="bill-line group relative block">
-                  <span className="bill-wipe" aria-hidden="true" />
-                  <span className="relative block mix-blend-difference">
-                    <FitLine maxVh={11} className="bill-ink font-woodtype uppercase text-[var(--ink)]">
-                      {headliner.title}
-                    </FitLine>
-                    <span className="mt-1 flex items-center justify-center gap-3 text-[11px] uppercase tracking-[0.2em] text-[var(--ink)] sm:text-xs">
-                      <span>{tr(headliner.badge)}</span>
-                      <Arrow className="h-4 w-4 transition-transform motion-safe:group-hover:translate-x-1" />
-                    </span>
-                  </span>
-                </Link>
+              <li className="w-full min-w-0">
+                <BillLine to={projectLink(headliner.id)} badge={tr(headliner.badge)} size="text-[clamp(2.25rem,min(10.5vh,14vw),7.25rem)]" arrow>
+                  {headliner.title}
+                </BillLine>
               </li>
             )}
-            <li className="grid min-w-0 grid-cols-1 border-t border-[var(--ink-dim)] pt-2 sm:grid-cols-3 sm:divide-x sm:divide-[var(--ink-dim)]">
-              {supporting.map((p) => (
-                <Link key={p.id} to="/projects" className="bill-line group relative block min-w-0 py-1 sm:px-4 sm:first:pl-0 sm:last:pr-0">
-                  <span className="bill-wipe" aria-hidden="true" />
-                  <span className="relative block mix-blend-difference">
-                    <FitLine maxVh={6.5} className="bill-ink font-woodtype uppercase text-[var(--ink)]">
-                      {p.title}
-                    </FitLine>
-                    <span className="mt-1 block text-[10px] uppercase tracking-[0.18em] text-[var(--ink)] sm:text-[11px]">
-                      {tr(p.badge)}
-                    </span>
-                  </span>
-                </Link>
+            {second && (
+              <li className="w-full min-w-0 border-t border-[var(--ink-dim)] pt-2">
+                <BillLine to={projectLink(second.id)} badge={tr(second.badge)} size="text-[clamp(1.75rem,min(7vh,10vw),4.5rem)]">
+                  {second.title}
+                </BillLine>
+              </li>
+            )}
+            <li className="flex w-full min-w-0 flex-col items-center gap-x-6 gap-y-1 border-t border-[var(--ink-dim)] pt-2 sm:flex-row sm:justify-center">
+              {rest.map((p, i) => (
+                <span key={p.id} className="flex items-center gap-6">
+                  {i > 0 && <span className="hidden h-2 w-2 rotate-45 bg-[var(--ink)] sm:block" aria-hidden="true" />}
+                  <BillLine to={projectLink(p.id)} badge={tr(p.badge)} size="text-[clamp(1.5rem,min(5.2vh,8.5vw),3.4rem)]">
+                    {p.title}
+                  </BillLine>
+                </span>
               ))}
             </li>
           </motion.ul>
@@ -127,17 +151,17 @@ const Hero = () => {
           {/* Línea final: ESCRÍBEME */}
           <motion.div
             variants={stamp}
-            className="mt-4 flex flex-col gap-3 bg-[var(--ink)] p-3 text-[var(--stock)] sm:mt-6 sm:flex-row sm:items-center sm:gap-6 sm:p-4"
+            className="mt-4 flex flex-col gap-3 bg-[var(--ink)] p-3 text-[var(--stock)] sm:mt-5 sm:flex-row sm:items-center sm:gap-6 sm:p-4"
           >
             <a
               href={`mailto:${SOCIAL_LINKS.email}`}
-              className="bill-cta group flex min-w-0 flex-1 items-center gap-3"
+              className="bill-cta group block min-w-0 flex-1"
               aria-label={`${t('billWrite')}: ${SOCIAL_LINKS.email}`}
             >
-              <FitLine maxVh={7.5} className="bill-ink font-woodtype uppercase">
+              <FitLine maxVh={8} maxTrack={0.06} className="bill-ink font-woodtype uppercase">
                 {t('billWrite')}
+                <Arrow className="ml-[0.18em] inline-block h-[0.62em] w-[0.62em] align-[0.04em] transition-transform motion-safe:group-hover:translate-x-2" />
               </FitLine>
-              <Arrow className="h-[min(7vh,3rem)] w-[min(7vh,3rem)] shrink-0 transition-transform motion-safe:group-hover:translate-x-2" />
             </a>
             <nav
               className="flex shrink-0 flex-wrap gap-x-5 gap-y-1 text-xs font-semibold uppercase tracking-[0.16em] sm:flex-col sm:items-end"
@@ -157,9 +181,8 @@ const Hero = () => {
         </motion.div>
 
         {/* Pie de imprenta */}
-        <p className="mt-3 flex flex-col gap-1 text-[10px] uppercase tracking-[0.24em] text-[var(--ink-dim)] sm:flex-row sm:items-center sm:justify-between sm:text-[11px]">
-          <span>{t('billImprint')}</span>
-          <span>{PERSONAL_INFO.location} · 2026</span>
+        <p className="mt-2 text-center text-[10px] uppercase tracking-[0.24em] text-[var(--ink-dim)] sm:text-right sm:text-[11px]">
+          {t('billImprint')}
         </p>
       </div>
     </section>

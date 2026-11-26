@@ -38,7 +38,7 @@ export const UI = {
   billPresents: { es: 'Presenta', en: 'Presents' },
   billWrite: { es: 'Escríbeme', en: 'Write to me' },
   billEmail: { es: 'Correo', en: 'Email' },
-  billImprint: { es: 'Impreso en Yumbo', en: 'Printed in Yumbo' },
+  billImprint: { es: 'Impreso en Yumbo, Valle del Cauca · 2026', en: 'Printed in Yumbo, Valle del Cauca · 2026' },
   techListLabel: { es: 'Tecnologías que utilizo', en: 'Technologies I use' },
 
   // Sobre mí

@@ -51,10 +51,11 @@ const ProjectCard = ({ project, image, featured = false, reverse = false, contai
 
   return (
     <article
+      id={`proyecto-${project.id}`}
       ref={ref}
       onMouseMove={onMouseMove}
       className={cn(
-        'group relative h-full overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950',
+        'group relative h-full scroll-mt-24 overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950',
         'transition-[transform,border-color,box-shadow] duration-300 ease-out',
         'motion-safe:hover:-translate-y-1 hover:border-zinc-700',
         'hover:shadow-[0_24px_60px_-24px_rgba(255,255,255,0.14)]',

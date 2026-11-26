@@ -372,7 +372,7 @@ const Bubble = ({ open, text }: { open: boolean; text: string }) => (
 
 /* ── Muñequito de la portada ─────────────────────────────── */
 
-const PixelBuddy = () => {
+const PixelBuddy = ({ className = 'mx-auto md:mx-0 mb-8' }: { className?: string }) => {
   const slotRef = useRef<HTMLDivElement>(null)
   const bodyRef = useRef<HTMLDivElement>(null)
   const visible = useInHero()
@@ -449,7 +449,7 @@ const PixelBuddy = () => {
   }, [visible, jump, reduceMotion, land])
 
   return (
-    <div ref={slotRef} className="relative z-40 flex justify-center h-16 w-full max-w-xs mx-auto md:mx-0 mb-8">
+    <div ref={slotRef} className={`relative z-40 flex h-16 w-full max-w-xs items-end justify-center ${className}`}>
       <motion.div
         ref={bodyRef}
         animate={jump}

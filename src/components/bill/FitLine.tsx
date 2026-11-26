@@ -8,6 +8,11 @@ interface FitLineProps {
   maxVh?: number
   /** Altura máxima de la letra en píxeles. */
   maxPx?: number
+  /**
+   * Si el tope de altura impide llenar la medida, abre el espaciado entre letras
+   * (hasta este máximo, en em) para que la línea siga ocupando todo el ancho.
+   */
+  maxTrack?: number
 }
 
 const BASE = 100
@@ -17,7 +22,7 @@ const BASE = 100
  * mide el texto a un tamaño base y lo escala para llenar su contenedor,
  * sin pasar del alto máximo. Se recalcula al cambiar el tamaño o al cargar la fuente.
  */
-const FitLine = ({ children, className, maxVh, maxPx }: FitLineProps) => {
+const FitLine = ({ children, className, maxVh, maxPx, maxTrack = 0 }: FitLineProps) => {
   const boxRef = useRef<HTMLSpanElement>(null)
   const textRef = useRef<HTMLSpanElement>(null)
 
@@ -28,6 +33,7 @@ const FitLine = ({ children, className, maxVh, maxPx }: FitLineProps) => {
 
     const fit = () => {
       text.style.fontSize = `${BASE}px`
+      text.style.letterSpacing = ''
       const natural = text.scrollWidth
       const available = box.clientWidth
       if (!natural || !available) return
@@ -35,6 +41,14 @@ const FitLine = ({ children, className, maxVh, maxPx }: FitLineProps) => {
       if (maxVh) size = Math.min(size, (window.innerHeight * maxVh) / 100)
       if (maxPx) size = Math.min(size, maxPx)
       text.style.fontSize = `${size}px`
+      if (maxTrack > 0) {
+        const chars = Math.max((text.textContent ?? '').length - 1, 1)
+        const gap = available - text.scrollWidth
+        if (gap > 1) {
+          const track = Math.min(gap / chars, maxTrack * size)
+          text.style.letterSpacing = `${track}px`
+        }
+      }
     }
 
     fit()
@@ -46,7 +60,7 @@ const FitLine = ({ children, className, maxVh, maxPx }: FitLineProps) => {
       ro.disconnect()
       window.removeEventListener('resize', fit)
     }
-  }, [maxVh, maxPx])
+  }, [maxVh, maxPx, maxTrack])
 
   return (
     <span ref={boxRef} className={cn('block w-full min-w-0 overflow-x-clip pt-[0.14em]', className)}>
