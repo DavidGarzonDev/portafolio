@@ -51,6 +51,12 @@ typography:
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "0.2em"
+  action:
+    fontFamily: "Big Shoulders Display, Arial Narrow, sans-serif"
+    fontSize: "clamp(2.25rem, min(10vh, 12vw), 6.5rem)"
+    fontWeight: 900
+    lineHeight: 0.86
+    letterSpacing: "0.04em"
   label-link:
     fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "12px"
@@ -65,8 +71,10 @@ spacing:
   bill-y-wide: "24px"
   band-y: "6px"
   band-x: "12px"
-  closing-band: "12px"
-  closing-band-wide: "16px"
+  closing-band-y: "16px"
+  closing-band-x: "12px"
+  closing-gap: "12px"
+  closing-gap-wide: "32px"
 components:
   bill:
     backgroundColor: "{colors.stock}"
@@ -93,7 +101,10 @@ components:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.stock}"
     rounded: "{rounded.none}"
-    padding: "12px"
+    padding: "16px 12px"
+  closing-action:
+    textColor: "{colors.stock}"
+    typography: "{typography.action}"
   small-print:
     textColor: "{colors.ink-dim}"
     typography: "{typography.label}"
@@ -107,9 +118,9 @@ components:
 
 The site is a Cali letterpress show bill printed in reverse: paper-coloured ink on black stock. David's name is set in wood type across the full measure, his role sits in an inverted band, a fat slab word announces the run, the projects are billed in descending size like a lineup, and the closing band tells the visitor the one thing to do. Everything is flat, ruled and printed; nothing floats, glows or sits in a card.
 
-Density is poster density: few words, set as large as the measure allows, separated by thin rules and diamond ornaments. Type carries a worn-ink texture (displaced edges and small voids where the ink did not load), so the black-and-white palette reads as printed matter rather than as a dark UI theme. Motion is the press itself: each line stamps in and settles, and hovering a line inks it in reverse with a roller wipe.
+Density is poster density: few words, set as large as the measure allows, separated by thin rules and diamond ornaments. Type carries a worn-ink texture (displaced edges and sparse clustered voids where the ink did not load), so the black-and-white palette reads as printed matter rather than as a dark UI theme. Motion is the press itself: each line stamps in, squashes on contact and settles, and hovering a line inks it in reverse with a roller wipe.
 
-The world is applied to the home hero only. The site header, the tech-stack carousel, the footer and the About and Projects pages are incumbent chrome (Inter, zinc greys, rounded glass panels, particles) that has not been migrated; they are not part of this system and new work should not copy them. A few global rules from this world already reach that chrome: headings (h1-h3) set in wood type, the ink focus ring, the ink selection colour and the stock scrollbar.
+The world is applied to the home hero only. The site header, the tech-stack carousel, the footer and the About and Projects pages are incumbent chrome (Inter, zinc greys, rounded glass panels, text glows, particles) that has not been migrated; they are not part of this system and new work should not copy them. The particle field is no longer rendered on the home route; it still runs on every other route. A few global rules from this world already reach that chrome: headings (h1-h3) set in wood type, the ink focus ring, the ink selection colour and the stock scrollbar.
 
 **Key Characteristics:**
 - Two inks only: paper-white on near-black, with one grey for small print and rules.
@@ -117,7 +128,7 @@ The world is applied to the home hero only. The site header, the tech-stack caro
 - Fat slab (Ultra) reserved for billing words.
 - Emphasis by inversion (ink band, stock type), never by adding a colour.
 - Worn-ink texture on display type; square corners everywhere; no shadows.
-- Press-stroke motion: short stamp in, roller wipe on hover, all removed under reduced motion.
+- Press-stroke motion: short squash-and-settle stamp in, roller wipe on hover, all removed under reduced motion.
 - Bilingual by construction: every printed line is an ES/EN string.
 
 ## Colors
@@ -138,43 +149,44 @@ A two-ink letterpress palette: one warm near-black stock, one warm paper-white i
 
 **Display Font:** Big Shoulders Display, weights 800 and 900 (with Arial Narrow)
 **Billing Font:** Ultra 400 (with Georgia)
-**Small-print Font:** Inter 400 / 500 / 700 (with system-ui)
+**Small-print Font:** Inter 400 / 600 (with system-ui); 500 and 700 are also loaded for the incumbent chrome
 
 **Character:** A condensed gothic wood type stacked full-width, punctuated by one fat slab announcement word, with a plain sans set tiny and widely tracked for the conditions and fine print, the way a real bill sets its small type.
 
 ### Hierarchy
-- **Display** (900, fitted to the measure with a 17vh height cap, line-height 0.86): the name. Set on one line across the full width of the bill; when the height cap stops it short of the measure, letter-spacing opens (to at most 0.16em) so the line still fills.
-- **Headliner** (900, clamp(2.25rem, min(10.5vh, 14vw), 7.25rem), 0.88): the top-billed project.
+- **Display** (900, fitted to the measure with a 17vh height cap, line-height 0.86): the name. Set on one centred line across the full width of the bill; when the height cap stops it short of the measure, letter-spacing opens (to at most 0.16em) so the line still fills.
+- **Headliner** (900, clamp(2.25rem, min(10.5vh, 14vw), 7.25rem), 0.88): the top-billed project. Lineup sizes are fixed per rank, not fitted: a title that does not fit wraps onto balanced lines (text-wrap: balance) rather than shrinking.
 - **Second bill** (900, clamp(1.75rem, min(7vh, 10vw), 4.5rem), 0.88): the second project.
-- **Support bill** (900, clamp(1.5rem, min(5.2vh, 8.5vw), 3.4rem), 0.88): the remaining projects, side by side from 640px with a diamond between them.
+- **Support bill** (900, clamp(1.5rem, min(5.2vh, 8.5vw), 3.4rem), 0.88): the remaining projects; stacked on phones, one centred row from 640px with an 8px diamond between them.
 - **Band** (900, fitted with a 5vh cap, tracking 0.08em): the role, set in stock on an ink band.
+- **Action** (900, clamp(2.25rem, min(10vh, 12vw), 6.5rem), line-height 0.86, tracking 0.04em, never wraps): "ESCRÍBEME / WRITE TO ME", in stock on the closing band.
 - **Billing** (Ultra 400, clamp(1.25rem, 3vh, 2.1rem), line-height 1, uppercase): "PRESENTA / PRESENTS", flanked by ornament rules.
 - **Heading** (800, tracking 0.01em; h1 and h2 uppercase): global default for h1-h3 across the site.
-- **Label** (Inter, 10px rising to 11px from 640px, uppercase, tracking 0.2em to 0.24em): project conditions under each line, the tagline, the printer's imprint.
-- **Link label** (Inter, 12px, uppercase, tracking 0.16em): LinkedIn, email and CV links in the closing band.
+- **Label** (Inter 400, 10px rising to 11px from 640px, uppercase, tracking 0.18em to 0.24em): project conditions under each line and the printer's imprint; the tagline under the role band uses Inter 600.
+- **Link label** (Inter 600, 12px, uppercase, tracking 0.16em): LinkedIn, email and CV links in the closing band.
 
 ### Named Rules
-**The Full Measure Rule.** Display and band lines are composed to the width of the bill, the way wood type is locked up: measure the text, scale it to fill, cap it by viewport height, and open the tracking before leaving the line short. A lineup line that does not fit breaks onto two lines (balanced) rather than shrinking.
+**The Full Measure Rule.** The name and the role band are composed to the width of the bill, the way wood type is locked up: measure the text, scale it to fill, cap it by viewport height, and open the tracking before leaving the line short. Lineup lines and the action are set at fixed rank sizes instead; a lineup line that does not fit breaks onto balanced lines rather than shrinking.
 
-**The Billing Rank Rule.** Size states importance. Each step down the lineup is a smaller clamp; projects are never set at equal size.
+**The Billing Rank Rule.** Size states importance. Each step down the lineup is a smaller fixed clamp; projects are never set at equal size, and a long title never shrinks below its rank.
 
 **The Small Print Rule.** Inter appears only as small print: 10-12px, uppercase, tracked 0.16em or wider. It never sets a headline.
 
-**The Worn Ink Rule.** Wood type and slab lines carry the worn-ink filter (displaced edges, scattered voids). Small print stays clean, so it remains legible at 10px.
+**The Worn Ink Rule.** Wood type and slab lines carry the worn-ink filter (displaced edges, sparse clustered voids) through the `.bill-ink` class: the name, the role band, the billing word, every lineup title and the closing action. Small print stays clean, so it remains legible at 10px.
 
 ## Layout
 
-One bill fills the first viewport: a single bordered block, centred, with a maximum width of 72rem (1152px) and a 16px page gutter (24px from 640px). Inside, padding is 20px by 16px, widening to 24px by 32px from 640px. Content is a single centred column stacked in bands: name, role band with tagline, billing word between ornament rules, lineup, closing band. Lineup tiers are separated by a faded-ink hairline with 8px above the next tier. The closing band stacks the call to action over the links on phones and puts them side by side from 640px (links right-aligned in a column). The printer's imprint sits under the bill, centred on phones and right-aligned from 640px.
+One bill fills the first viewport: a single bordered block, centred, with a maximum width of 72rem (1152px) and a 16px page gutter (24px from 640px). Inside, padding is 20px by 16px, widening to 24px by 32px from 640px. Content is a single centred column stacked in bands: name, role band with tagline, billing word between ornament rules, lineup, closing band. Lineup tiers are separated by a faded-ink hairline with 8px above the next tier. The closing band (16px from the lineup, 20px from 640px; padding 16px by 12px) holds the action, a rule and the links as one centred group: on phones the action sits over a centred, wrapping row of links; from 640px the three sit side by side, 32px apart, the links stacked and left-aligned against a 2px by 64px stock rule. The printer's imprint sits under the bill, centred on phones and right-aligned from 640px.
 
 Vertical sizes are tied to viewport height (vh caps on every display line) so the whole bill fits the first screen on both phone and desktop; widths are tied to the bill's measure.
 
-The pixel mascot walks the bill's top edge, overlapping the border by 2px; centred on phones, inset 24px from the left from 768px.
+The pixel mascot stands on the bill's top rule (its slot is pulled down 5px so its feet meet the border); centred on phones, inset 24px from the left from 768px.
 
 ## Elevation & Depth
 
 The bill is flat. There are no shadows, no glass and no lifted surfaces. Depth comes from two things: inversion (ink bands read as the nearest layer) and a site-wide atmosphere layer fixed behind all content.
 
-The atmosphere layer is shipped site-wide and sits behind every page: a radial vignette that sinks the edges toward black (transparent to 45%, rgba(0,0,0,0.55) at 80%, rgba(0,0,0,0.85) at the edge) and a generated grain tile at 7% opacity, blended with screen, that jitters in six steps every 0.9s. It never touches text or images. It carries over from the earlier noir experiment; the grain reads as stock texture and fits the bill. A projector flicker (black overlay pulsing to 10% opacity on a 7s cycle) is also still mounted from that experiment; it is a film device, not a printing one, and is not a rule for new surfaces.
+The atmosphere layer is shipped site-wide and sits behind every page: a radial vignette that sinks the edges toward black (transparent to 45%, rgba(0,0,0,0.55) at 80%, rgba(0,0,0,0.85) at the edge) and a generated grain tile at 7% opacity, blended with screen, that jitters in six steps every 0.9s. It never touches text or images, and the bill paints its own stock fill, so the grain and vignette show around the bill, not through it. It carries over from the earlier noir experiment; the grain reads as stock texture and fits the bill. A projector flicker (black overlay pulsing to 10% opacity on a 7s cycle) is also still mounted from that experiment; it is a film device, not a printing one, is not part of this system and is not a rule for new surfaces.
 
 ### Named Rules
 **The Flat Stock Rule.** Nothing on the bill casts a shadow or blurs what is behind it. If an element needs to come forward, invert it.
@@ -183,46 +195,47 @@ The atmosphere layer is shipped site-wide and sits behind every page: a radial v
 
 ## Shapes
 
-Square and ruled. Every corner is 0px. The bill has a 2px paper-ink border; tiers inside it are divided by 1px faded-ink hairlines. Printer's ornaments are the only other geometry: a 6px ink square rotated 45 degrees centred on a 1px faded rule (flanking the billing word), and an 8px ink diamond between side-by-side support lines. The arrow is a square-capped stroke (2.6 width) drawn inline, scaled to the type it follows.
+Square and ruled. Every corner is 0px. The bill has a 2px paper-ink border; tiers inside it are divided by 1px faded-ink hairlines. Printer's ornaments are the only other geometry: a 6px ink square rotated 45 degrees centred on a 1px faded rule (flanking the billing word), and an 8px ink diamond between side-by-side support lines. The arrow is a square-capped stroke (2.6 width) drawn inline, scaled to the type it follows. In the closing band a 2px stock rule (64px tall, from 640px) divides the action from the links.
 
 ## Components
 
 ### Bill
-The printed sheet. Black stock fill, 2px paper-ink border, square corners, padding per Layout. Its children stamp in one after another on load (see Motion under Bill line).
+The printed sheet. Black stock fill (`.bill`, var(--stock)), 2px paper-ink border, square corners, padding per Layout. Its children stamp in one after another on load (see Motion under Bill line).
 
 ### Inverted band
-The role line and the closing band. Paper-ink fill, stock type, square, no border. The role band holds one fitted wood-type line; the closing band holds the call to action and the small links.
+The role line and the closing band. Paper-ink fill, stock type, square, no border. The role band holds one fitted wood-type line; the closing band holds the action, its rule and the small links as one centred group.
 
 ### Bill line (lineup link)
 A project title in wood type with its condition (badge) in small print underneath, centred, the whole block one link to the project.
 - **Rest:** ink type on stock, 2px by 8px padding.
 - **Hover / Focus:** a paper-ink roller wipe scales in from the left edge (0.38s, cubic-bezier(0.16, 1, 0.3, 1)), overhanging the line by 2px vertically and 6px horizontally; the type uses a difference blend so it prints in stock over the wipe. Keyboard focus triggers the same wipe in place of an outline. The headliner carries an arrow that nudges 4px right on hover.
-- **Motion (stamp):** each band enters like a press stroke: from 1.04 scale, 3px blur and zero opacity to rest in 0.42s on cubic-bezier(0.16, 1, 0.3, 1), staggered 0.08s after a 0.1s delay.
+- **Motion (stamp):** each band enters like a press stroke: opacity 0 to 1 while it squashes on contact, scaleX 1.04 to 1.01 to 1 and scaleY 1.08 to 0.96 to 1 (keyframe times 0, 0.6, 1), over 0.34s easeOut, staggered 0.08s after a 0.1s delay. No blur.
 - **Reduced motion:** no stamp (lines render in place), no wipe transition, grain and flicker stopped.
 
 ### Closing call to action
-"ESCRÍBEME / WRITE TO ME" set in fitted wood type (8vh cap, tracking up to 0.06em) in stock on the ink band, with an arrow that nudges 8px right on hover. It is a mailto link. Focus shows a 2px stock outline offset 3px.
+"ESCRÍBEME / WRITE TO ME" in the action style (clamp(2.25rem, min(10vh, 12vw), 6.5rem), tracking 0.04em, one line, worn ink) in stock on the ink band, with an arrow at 0.62em that nudges 8px right on hover. It is a mailto link, centred in the band with the links. Focus shows a 2px stock outline offset 3px.
 
 ### Small-print links
-LinkedIn, email and CV in the closing band: Inter link label, stock colour, 1px underline offset 4px that thickens to 2px on hover; 2px stock focus outline offset 3px.
+LinkedIn, email and CV in the closing band (a centred wrapping row on phones, a left-aligned stack from 640px): Inter link label, stock colour, 1px underline offset 4px that thickens to 2px on hover; 2px stock focus outline offset 3px.
 
 ### Billing word with ornament rules
 The slab announcement ("PRESENTA / PRESENTS") centred between two ornament rules that run to the bill's edges.
 
 ### Pixel mascot
-The white pixel-art mascot is a brand asset, not a styled component: it walks the bill's top edge in the hero and follows its own stepped pixel animation. It stays.
+The white pixel-art mascot is a brand asset, not a styled component: it stands on the bill's top rule in the hero and follows its own stepped pixel animation. It stays.
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** use only Black Stock (#0b0b0a), Paper Ink (#efece4) and Faded Ink (#8c8a84) for anything the system draws.
 - **Do** let project screenshots, company logos and the profile photo keep their original colours.
-- **Do** fit display lines to the measure with a viewport-height cap, and open tracking before leaving a line short.
+- **Do** fit the name and role band to the measure with a viewport-height cap, and open tracking before leaving a line short.
+- **Do** set lineup lines at fixed rank sizes and let them wrap (balanced) rather than shrink.
 - **Do** step type size down with billing rank.
 - **Do** make emphasis by inverting to an ink band with stock type.
 - **Do** separate bands with 1px faded-ink rules and diamond ornaments.
 - **Do** keep every corner square (0px) and the bill border at 2px ink.
-- **Do** enter with a short press stamp and respond to hover with the roller wipe; remove both under prefers-reduced-motion.
+- **Do** enter with a short squash-and-settle press stamp (opacity and scale only) and respond to hover with the roller wipe; remove both under prefers-reduced-motion.
 - **Do** ship every printed line as an ES/EN pair.
 
 ### Don't:
@@ -232,5 +245,5 @@ The white pixel-art mascot is a brand asset, not a styled component: it walks th
 - **Don't** set headlines in Inter, or small print in wood type.
 - **Don't** apply the worn-ink filter to small print or body text.
 - **Don't** set projects at equal size in a row; the lineup is ranked.
-- **Don't** use floating, bobbing or looping motion on the bill; motion is a press stroke that settles.
+- **Don't** use floating, bobbing or looping motion on the bill, or blur in entrances; motion is a press stroke that settles.
 - **Don't** desaturate or tint project images and logos to match the palette.
