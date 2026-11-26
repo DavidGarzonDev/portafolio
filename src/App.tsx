@@ -7,6 +7,7 @@ import Hero from './pages/Hero'
 import TechSlider from './components/TechSlider'
 import CustomCursor from './components/CustomCursor'
 import Particles from './components/Particles'
+import NoirAtmosphere from './components/noir/NoirAtmosphere'
 import { FloatingBuddy } from './components/PixelBuddy'
 import PageTransition from './components/PageTransition'
 import ScrollToTop from './components/ScrollToTop'
@@ -41,6 +42,7 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0a0a] isolate">
       <Particles />
+      <NoirAtmosphere />
       <FloatingBuddy />
       <ScrollToTop />
       <CustomCursor />

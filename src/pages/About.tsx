@@ -62,7 +62,7 @@ const CompanyLogo = ({ item }: { item: ExperienceItem }) => {
     <img
       src={LOGOS[item.logo]}
       alt={`${t('logoOf')} ${item.company}`}
-      className="flex-shrink-0 h-20 sm:h-24 w-auto max-w-[10rem] sm:max-w-[12rem] object-contain"
+      className="noir-img flex-shrink-0 h-20 sm:h-24 w-auto max-w-[10rem] sm:max-w-[12rem] object-contain"
     />
   )
 }
@@ -154,7 +154,7 @@ const About = () => {
               <img
                 src={MiFoto}
                 alt={`${t('photoOf')} ${PERSONAL_INFO.name}`}
-                className="w-full aspect-square rounded-full object-cover border border-zinc-800"
+                className="noir-img w-full aspect-square rounded-full object-cover border border-zinc-800"
               />
             </div>
 

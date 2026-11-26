@@ -4,6 +4,7 @@ import { PERSONAL_INFO, SOCIAL_LINKS } from '@/constants'
 import useSEO from '@/hooks/useSEO'
 import PixelBuddy from '@/components/PixelBuddy'
 import useLanguage from '@/i18n/useLanguage'
+import GothicSkyline from '@/components/noir/GothicSkyline'
 
 const container: Variants = {
   hidden: {},
@@ -19,9 +20,10 @@ const Hero = () => {
   const { t, tr } = useLanguage()
   useSEO({ title: t('seoHomeTitle'), description: t('seoHomeDescription') })
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6 pt-16 text-center" aria-label={t('seoHomeTitle')}>
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-20 pb-[14vh] text-center" aria-label={t('seoHomeTitle')}>
+      <GothicSkyline />
       <motion.div
-        className="max-w-4xl mx-auto w-full"
+        className="relative max-w-4xl mx-auto w-full"
         variants={container}
         initial="hidden"
         animate="show"
@@ -30,18 +32,23 @@ const Hero = () => {
           <PixelBuddy />
         </motion.div>
 
-        <motion.p variants={item} className="text-zinc-600 text-xs tracking-widest uppercase mb-8 text-center">
+        <motion.p variants={item} className="relative z-10 text-zinc-400 text-xs tracking-[0.3em] uppercase mb-8 text-center mix-blend-difference">
           {t('available')}
         </motion.p>
 
-        <motion.h1
-          variants={item}
-          className="text-6xl md:text-8xl lg:text-[9rem] font-bold text-white tracking-tight leading-none mb-6"
-        >
-          {PERSONAL_INFO.name.split(' ').map((word, i) => (
-            <span key={i} className="block">{word}</span>
-          ))}
-        </motion.h1>
+        {/* La luz estalla detrás del nombre; el nombre se invierte donde le pega */}
+        <div className="relative isolate mb-8">
+          <div className="noir-rays absolute left-1/2 top-1/2 -z-0 h-[52rem] w-[52rem] -translate-x-1/2 -translate-y-1/2" aria-hidden="true" />
+          <div className="noir-light absolute left-1/2 top-1/2 h-[28rem] w-[46rem] max-w-[100vw] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true" />
+          <motion.h1
+            variants={item}
+            className="relative z-10 text-7xl md:text-9xl lg:text-[10rem] font-semibold text-white tracking-tight leading-[0.9] mix-blend-difference"
+          >
+            {PERSONAL_INFO.name.split(' ').map((word, i) => (
+              <span key={i} className="block">{word}</span>
+            ))}
+          </motion.h1>
+        </div>
 
         <motion.p variants={item} className="text-xl md:text-2xl text-zinc-400 font-light max-w-lg mx-auto mb-12">
           {tr(PERSONAL_INFO.title)}. {t('tagline')}
@@ -61,7 +68,7 @@ const Hero = () => {
             href={SOCIAL_LINKS.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-transparent border border-zinc-800 hover:border-zinc-600 text-zinc-300 hover:text-white rounded-lg transition-all text-sm"
+            className="flex items-center gap-2 px-6 py-3 bg-black/60 backdrop-blur-sm border border-zinc-800 hover:border-zinc-600 text-zinc-300 hover:text-white rounded-lg transition-all text-sm"
           >
             LinkedIn
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
