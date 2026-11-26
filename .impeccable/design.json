@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-26T17:32:40Z",
+  "title": "Design System: Portafolio David Garzón",
+  "extensions": {
+    "colorMeta": {
+      "stock": {
+        "role": "neutral",
+        "displayName": "Black Stock",
+        "canonical": "#0b0b0a",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#1a1a18",
+          "#2c2b29",
+          "#4a4946",
+          "#6b6965",
+          "#8c8a84",
+          "#bdbab3",
+          "#efece4"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Paper Ink",
+        "canonical": "#efece4",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#1a1a18",
+          "#2c2b29",
+          "#4a4946",
+          "#6b6965",
+          "#8c8a84",
+          "#bdbab3",
+          "#efece4"
+        ]
+      },
+      "ink-dim": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "#8c8a84",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#1a1a18",
+          "#2c2b29",
+          "#4a4946",
+          "#6b6965",
+          "#8c8a84",
+          "#bdbab3",
+          "#efece4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display (name)",
+        "purpose": "The name, fitted to the full measure of the bill, capped at 17vh, tracking opens to 0.16em max."
+      },
+      "headline-headliner": {
+        "displayName": "Headliner",
+        "purpose": "Top-billed project line."
+      },
+      "headline-second": {
+        "displayName": "Second bill",
+        "purpose": "Second project line."
+      },
+      "headline-support": {
+        "displayName": "Support bill",
+        "purpose": "Remaining project lines, side by side from 640px."
+      },
+      "band": {
+        "displayName": "Band",
+        "purpose": "Role line in stock on an ink band, fitted, capped at 5vh."
+      },
+      "heading": {
+        "displayName": "Heading",
+        "purpose": "Global h1-h3 default."
+      },
+      "billing": {
+        "displayName": "Billing (slab)",
+        "purpose": "Announcement words such as PRESENTA, between ornament rules."
+      },
+      "label": {
+        "displayName": "Small print",
+        "purpose": "Project conditions, tagline, imprint. 10px, 11px from 640px."
+      },
+      "label-link": {
+        "displayName": "Link label",
+        "purpose": "LinkedIn, email and CV links in the closing band."
+      }
+    },
+    "shadows": [],
+    "textures": [
+      {
+        "name": "worn-ink",
+        "value": "SVG filter #bill-ink-fx: feTurbulence fractalNoise 0.85/2 oct displacing edges by 2.2, plus fractalNoise 0.55/3 oct thresholded (alpha -30R+21.4) to open voids",
+        "purpose": "Applied to wood type and slab lines only (.bill-ink)."
+      },
+      {
+        "name": "atmosphere-vignette",
+        "value": "radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0,0,0,0.55) 80%, rgba(0,0,0,0.85) 100%)",
+        "purpose": "Fixed layer behind all content; sinks the edges."
+      },
+      {
+        "name": "atmosphere-grain",
+        "value": "generated grain tile, opacity 0.07, mix-blend-mode screen",
+        "purpose": "Fixed layer behind all content; stock texture."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-press",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Easing for the stamp and the roller wipe."
+      },
+      {
+        "name": "stamp",
+        "value": "opacity 0 -> 1, scale 1.04 -> 1, blur 3px -> 0, 0.42s ease-press",
+        "purpose": "Each band of the bill enters like a press stroke."
+      },
+      {
+        "name": "stamp-stagger",
+        "value": "staggerChildren 0.08s, delayChildren 0.1s",
+        "purpose": "Bands stamp in one after another."
+      },
+      {
+        "name": "roller-wipe",
+        "value": "transform scaleX(0 -> 1) from left, 0.38s ease-press",
+        "purpose": "Hover and focus on a lineup line inks it in reverse."
+      },
+      {
+        "name": "arrow-nudge",
+        "value": "translateX 4px (lineup) / 8px (closing call to action) on hover, motion-safe only",
+        "purpose": "Directional cue on links with an arrow."
+      },
+      {
+        "name": "grain-jitter",
+        "value": "0.9s steps(6) infinite translate",
+        "purpose": "Atmosphere grain movement; stopped under reduced motion."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "no stamp, no wipe transition, grain and flicker stopped",
+        "purpose": "prefers-reduced-motion alternative."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "bill-max",
+        "value": "1152px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Bill",
+      "kind": "card",
+      "refersTo": "bill",
+      "description": "The printed sheet: black stock, 2px paper-ink border, square corners.",
+      "html": "<div class=\"ds-bill\"><h1 class=\"ds-bill-name\">DAVID GARZÓN</h1></div>",
+      "css": ".ds-bill{background:var(--stock,#0b0b0a);color:var(--ink,#efece4);border:2px solid var(--ink,#efece4);border-radius:0;padding:24px 32px;max-width:640px;} .ds-bill-name{font-family:'Big Shoulders Display','Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase;font-size:72px;line-height:0.86;letter-spacing:0.005em;text-align:center;margin:0;}"
+    },
+    {
+      "name": "Inverted band",
+      "kind": "custom",
+      "refersTo": "band-inverted",
+      "description": "Role line in stock wood type on an ink band, with small print under it.",
+      "html": "<div class=\"ds-band-wrap\"><p class=\"ds-band\">DESARROLLADOR FULLSTACK</p><p class=\"ds-small\">CONSTRUYO SOFTWARE COMPLETO, DE LA IDEA AL PRODUCTO.</p></div>",
+      "css": ".ds-band-wrap{background:#0b0b0a;padding:16px;} .ds-band{background:var(--ink,#efece4);color:var(--stock,#0b0b0a);font-family:'Big Shoulders Display','Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase;font-size:32px;letter-spacing:0.08em;line-height:0.86;text-align:center;padding:6px 12px;margin:0;} .ds-small{font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-dim,#8c8a84);text-align:center;margin:8px 0 0;}"
+    },
+    {
+      "name": "Bill line",
+      "kind": "custom",
+      "refersTo": "bill-line",
+      "description": "Lineup link: wood-type title with small-print condition; hover or focus runs a roller wipe that inks it in reverse.",
+      "html": "<div class=\"ds-line-wrap\"><a class=\"ds-line\" href=\"#\"><span class=\"ds-wipe\"></span><span class=\"ds-line-inner\"><span class=\"ds-line-title\">GESSAT</span><span class=\"ds-line-badge\">EMPRESA REAL · EN PRODUCCIÓN <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"square\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></span></span></a></div>",
+      "css": ".ds-line-wrap{background:#0b0b0a;padding:24px;text-align:center;} .ds-line{position:relative;display:inline-block;padding:2px 8px;text-decoration:none;outline:none;} .ds-wipe{position:absolute;inset:-2px -6px;background:var(--ink,#efece4);transform:scaleX(0);transform-origin:left center;transition:transform 0.38s cubic-bezier(0.16,1,0.3,1);} .ds-line:hover .ds-wipe,.ds-line:focus-visible .ds-wipe{transform:scaleX(1);} .ds-line-inner{position:relative;display:block;mix-blend-mode:difference;} .ds-line-title{display:block;font-family:'Big Shoulders Display','Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase;font-size:80px;line-height:0.88;letter-spacing:0.005em;padding-top:0.12em;color:var(--ink,#efece4);} .ds-line-badge{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:4px;font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink,#efece4);} .ds-line-badge svg{transition:transform 0.2s;} .ds-line:hover .ds-line-badge svg{transform:translateX(4px);} @media (prefers-reduced-motion:reduce){.ds-wipe{transition:none;}}"
+    },
+    {
+      "name": "Billing word",
+      "kind": "custom",
+      "refersTo": "billing",
+      "description": "Slab announcement word between two ornament rules (hairline with a centred diamond).",
+      "html": "<div class=\"ds-billing\"><span class=\"ds-orn\"><i></i><b></b><i></i></span><span class=\"ds-billing-word\">PRESENTA</span><span class=\"ds-orn\"><i></i><b></b><i></i></span></div>",
+      "css": ".ds-billing{display:flex;align-items:center;gap:16px;background:#0b0b0a;padding:16px;} .ds-orn{flex:1;display:flex;align-items:center;gap:8px;} .ds-orn i{flex:1;height:1px;background:var(--ink-dim,#8c8a84);} .ds-orn b{width:6px;height:6px;transform:rotate(45deg);background:var(--ink,#efece4);} .ds-billing-word{font-family:Ultra,Georgia,serif;font-weight:400;font-size:28px;line-height:1;text-transform:uppercase;color:var(--ink,#efece4);}"
+    },
+    {
+      "name": "Closing band",
+      "kind": "button",
+      "refersTo": "closing-band",
+      "description": "Primary call to action: fitted wood-type mailto on the ink band, with small-print links beside it.",
+      "html": "<div class=\"ds-close\"><a class=\"ds-cta\" href=\"#\">ESCRÍBEME <svg width=\"0.62em\" height=\"0.62em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"square\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a><nav class=\"ds-links\"><a href=\"#\">LinkedIn</a><a href=\"#\">Correo</a><a href=\"#\">Descargar CV</a></nav></div>",
+      "css": ".ds-close{display:flex;align-items:center;gap:24px;background:var(--ink,#efece4);color:var(--stock,#0b0b0a);padding:16px;border-radius:0;} .ds-cta{flex:1;font-family:'Big Shoulders Display','Arial Narrow',sans-serif;font-weight:900;text-transform:uppercase;font-size:64px;line-height:0.86;letter-spacing:0.02em;color:var(--stock,#0b0b0a);text-decoration:none;} .ds-cta svg{transition:transform 0.2s;} .ds-cta:hover svg{transform:translateX(8px);} .ds-cta:focus-visible,.ds-links a:focus-visible{outline:2px solid var(--stock,#0b0b0a);outline-offset:3px;} .ds-links{display:flex;flex-direction:column;align-items:flex-end;gap:4px;} .ds-links a{font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--stock,#0b0b0a);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;} .ds-links a:hover{text-decoration-thickness:2px;}"
+    },
+    {
+      "name": "Imprint",
+      "kind": "custom",
+      "refersTo": "small-print",
+      "description": "Printer's imprint under the bill: place and year in faded small print.",
+      "html": "<p class=\"ds-imprint\">IMPRESO EN YUMBO, VALLE DEL CAUCA · 2026</p>",
+      "css": ".ds-imprint{background:#0b0b0a;padding:8px 16px;margin:0;text-align:right;font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink-dim,#8c8a84);}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Reverse-Printed Show Bill",
+    "overview": "The site is a Cali letterpress show bill printed in reverse: paper-coloured ink on black stock. David's name is set in wood type across the full measure, his role sits in an inverted band, a fat slab word announces the run, the projects are billed in descending size like a lineup, and the closing band tells the visitor the one thing to do. Everything is flat, ruled and printed; nothing floats, glows or sits in a card.\n\nDensity is poster density: few words, set as large as the measure allows, separated by thin rules and diamond ornaments. Type carries a worn-ink texture (displaced edges and small voids where the ink did not load), so the black-and-white palette reads as printed matter rather than as a dark UI theme. Motion is the press itself: each line stamps in and settles, and hovering a line inks it in reverse with a roller wipe.\n\nThe world is applied to the home hero only. The site header, the tech-stack carousel, the footer and the About and Projects pages are incumbent chrome (Inter, zinc greys, rounded glass panels, particles) that has not been migrated; they are not part of this system and new work should not copy them. A few global rules from this world already reach that chrome: headings (h1-h3) set in wood type, the ink focus ring, the ink selection colour and the stock scrollbar.",
+    "keyCharacteristics": [
+      "Two inks only: paper-white on near-black, with one grey for small print and rules.",
+      "Condensed heavy wood type fitted to the full measure; size steps down with billing rank.",
+      "Fat slab (Ultra) reserved for billing words.",
+      "Emphasis by inversion (ink band, stock type), never by adding a colour.",
+      "Worn-ink texture on display type; square corners everywhere; no shadows.",
+      "Press-stroke motion: short stamp in, roller wipe on hover, all removed under reduced motion.",
+      "Bilingual by construction: every printed line is an ES/EN string."
+    ],
+    "rules": [
+      {
+        "name": "The Two Inks Rule",
+        "body": "The system has no hue. Stock and ink do all the work; faded ink is for small print and hairlines only. Colour enters the site only through content that owns it: project screenshots, company logos and the profile photo keep their original colours and are never desaturated or tinted.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reverse-Print Rule",
+        "body": "Emphasis is made by inverting, not by adding: the role band, the closing band and a hovered lineup line flip to ink ground with stock type.",
+        "section": "colors"
+      },
+      {
+        "name": "The Full Measure Rule",
+        "body": "Display and band lines are composed to the width of the bill, the way wood type is locked up: measure the text, scale it to fill, cap it by viewport height, and open the tracking before leaving the line short. A lineup line that does not fit breaks onto two lines (balanced) rather than shrinking.",
+        "section": "typography"
+      },
+      {
+        "name": "The Billing Rank Rule",
+        "body": "Size states importance. Each step down the lineup is a smaller clamp; projects are never set at equal size.",
+        "section": "typography"
+      },
+      {
+        "name": "The Small Print Rule",
+        "body": "Inter appears only as small print: 10-12px, uppercase, tracked 0.16em or wider. It never sets a headline.",
+        "section": "typography"
+      },
+      {
+        "name": "The Worn Ink Rule",
+        "body": "Wood type and slab lines carry the worn-ink filter (displaced edges, scattered voids). Small print stays clean, so it remains legible at 10px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Stock Rule",
+        "body": "Nothing on the bill casts a shadow or blurs what is behind it. If an element needs to come forward, invert it.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Atmosphere Stays Behind Rule",
+        "body": "Grain and vignette live in one fixed layer behind the content; they are never applied to type, panels or images.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use only Black Stock (#0b0b0a), Paper Ink (#efece4) and Faded Ink (#8c8a84) for anything the system draws.",
+      "**Do** let project screenshots, company logos and the profile photo keep their original colours.",
+      "**Do** fit display lines to the measure with a viewport-height cap, and open tracking before leaving a line short.",
+      "**Do** step type size down with billing rank.",
+      "**Do** make emphasis by inverting to an ink band with stock type.",
+      "**Do** separate bands with 1px faded-ink rules and diamond ornaments.",
+      "**Do** keep every corner square (0px) and the bill border at 2px ink.",
+      "**Do** enter with a short press stamp and respond to hover with the roller wipe; remove both under prefers-reduced-motion.",
+      "**Do** ship every printed line as an ES/EN pair."
+    ],
+    "donts": [
+      "**Don't** add a hue, an accent colour or a coloured state to the system.",
+      "**Don't** put content in cards, glass panels or rounded containers on the bill.",
+      "**Don't** use shadows, glows or backdrop blur; the only gradient is the atmosphere vignette behind the content.",
+      "**Don't** set headlines in Inter, or small print in wood type.",
+      "**Don't** apply the worn-ink filter to small print or body text.",
+      "**Don't** set projects at equal size in a row; the lineup is ranked.",
+      "**Don't** use floating, bobbing or looping motion on the bill; motion is a press stroke that settles.",
+      "**Don't** desaturate or tint project images and logos to match the palette."
+    ]
+  }
+}
