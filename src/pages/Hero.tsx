@@ -58,7 +58,7 @@ const BillLine = ({ to, badge, size, arrow = false, children }: BillLineProps) =
   <Link to={to} className="bill-line group relative inline-block max-w-full px-2 py-0.5">
     <span className="bill-wipe" aria-hidden="true" />
     <span className="relative block mix-blend-difference">
-      <span className={`bill-ink block text-balance pt-[0.12em] font-woodtype uppercase leading-[0.88] text-[var(--ink)] ${size}`}>{children}</span>
+      <span className={`bill-ink block text-balance pt-[0.12em] font-woodtype uppercase leading-[0.96] text-[var(--ink)] ${size}`}>{children}</span>
       <span className="mt-1 flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] sm:text-[11px]">
         <span>{badge}</span>
         {arrow && <Arrow className="h-4 w-4 transition-transform motion-safe:group-hover:translate-x-1" />}
@@ -84,7 +84,7 @@ const Hero = () => {
     <section className="relative px-4 pb-8 pt-14 sm:px-6" aria-labelledby="bill-name">
       <div className="mx-auto w-full max-w-6xl">
         {/* El muñequito camina sobre el borde superior del cartel */}
-        <PixelBuddy className="relative z-50 mx-auto -mb-[5px] md:mx-0 md:ml-6" />
+        <PixelBuddy className="relative z-30 mx-auto -mb-[5px] md:mx-0 md:ml-6" />
 
         <motion.div
           className="bill relative border-2 border-[var(--ink)] px-4 py-5 sm:px-8 sm:py-6"

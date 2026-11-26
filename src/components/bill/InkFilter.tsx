@@ -10,7 +10,7 @@ const InkFilter = () => (
       <feDisplacementMap in="SourceGraphic" in2="edge" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="rough" />
       <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="4" seed="9" result="grain" />
       {/* Alfa = 1 salvo donde el ruido es alto: ahí la tinta no cargó */}
-      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -40 0 0 0 29.2" result="voids" />
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -48 0 0 0 36.6" result="voids" />
       <feComposite in="rough" in2="voids" operator="in" />
     </filter>
   </svg>
