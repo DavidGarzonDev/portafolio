@@ -17,8 +17,8 @@ const makeGrain = (size = 220) => {
 }
 
 /**
- * Capa de cine antiguo sobre todo el sitio: grano que tiembla, viñeta oscura en los
- * bordes y un parpadeo muy leve de la luz. No recibe clics.
+ * Capa de cine antiguo en el fondo del sitio (detrás del contenido): grano que tiembla,
+ * viñeta oscura en los bordes y un parpadeo muy leve. No toca textos ni imágenes.
  */
 const NoirAtmosphere = () => {
   const [grain, setGrain] = useState('')
@@ -28,7 +28,7 @@ const NoirAtmosphere = () => {
   }, [])
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-40" aria-hidden="true">
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
       <div className="noir-vignette absolute inset-0" />
       <div className="noir-flicker absolute inset-0" />
       {grain && (

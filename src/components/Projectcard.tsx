@@ -90,7 +90,7 @@ const ProjectCard = ({ project, image, featured = false, reverse = false, contai
             src={image}
             alt={`${t('projectScreenshot')} ${title}`}
             className={cn(
-              'noir-img absolute inset-0 h-full w-full motion-safe:group-hover:scale-[1.04]',
+              'absolute inset-0 h-full w-full transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]',
               containImage ? 'object-contain' : 'object-cover'
             )}
             loading={priority ? 'eager' : 'lazy'}

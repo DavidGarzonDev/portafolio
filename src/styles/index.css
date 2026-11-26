@@ -129,7 +129,7 @@ h2, h3 {
 /* Grano de película que tiembla */
 .noir-grain {
   background-repeat: repeat;
-  opacity: 0.085;
+  opacity: 0.07;
   mix-blend-mode: screen;
   animation: noir-grain 0.9s steps(6) infinite;
 }
@@ -230,16 +230,6 @@ h2, h3 {
   37% { opacity: 0.85; }
   40% { transform: translate(110vw, -30px) scaleY(1); opacity: 0; }
   100% { transform: translate(110vw, -30px); opacity: 0; }
-}
-
-/* Imágenes en blanco y negro de alto contraste; recuperan el color al pasar el mouse */
-.noir-img {
-  filter: grayscale(1) contrast(1.25) brightness(0.92);
-  transition: filter 0.6s ease, transform 0.7s ease-out;
-}
-.group:hover .noir-img,
-.noir-img:hover {
-  filter: grayscale(0) contrast(1) brightness(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
