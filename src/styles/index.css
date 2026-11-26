@@ -166,35 +166,6 @@ h2, h3 {
   80% { opacity: 0; }
 }
 
-/* Luz que estalla detrás del nombre */
-.noir-light {
-  background:
-    radial-gradient(closest-side, #fff 0%, #fff 18%, rgba(255, 255, 255, 0.85) 38%, rgba(255, 255, 255, 0.35) 62%, rgba(255, 255, 255, 0.08) 82%, transparent 100%);
-  filter: blur(4px);
-  animation: noir-breathe 9s ease-in-out infinite;
-}
-.noir-rays {
-  background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.07) 8deg, transparent 18deg, transparent 40deg,
-    rgba(255, 255, 255, 0.05) 50deg, transparent 62deg, transparent 110deg, rgba(255, 255, 255, 0.06) 118deg, transparent 130deg,
-    transparent 200deg, rgba(255, 255, 255, 0.05) 212deg, transparent 222deg, transparent 290deg, rgba(255, 255, 255, 0.07) 300deg, transparent 312deg);
-  mask-image: radial-gradient(closest-side, black 20%, transparent 100%);
-  animation: noir-rays 60s linear infinite;
-}
-@keyframes noir-breathe {
-  0%, 100% { opacity: 0.9; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.06); }
-}
-@keyframes noir-rays {
-  to { transform: rotate(360deg); }
-}
-
-/* Cielo con niebla detrás del castillo, para que la silueta se recorte */
-.noir-horizon {
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 100%, rgba(225, 225, 230, 0.38), transparent 70%),
-    linear-gradient(to bottom, transparent 0%, rgba(160, 160, 168, 0.1) 45%, rgba(200, 200, 206, 0.28) 100%);
-}
-
 /* Niebla que avanza despacio */
 .noir-fog {
   background:
@@ -210,29 +181,30 @@ h2, h3 {
   to { transform: translateX(6%); }
 }
 
-/* Ventanas del castillo con luz temblorosa */
-.noir-window { animation: noir-window 5s ease-in-out infinite; }
-@keyframes noir-window {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 0.9; }
-  52% { opacity: 0.4; }
-  54% { opacity: 0.85; }
+/* Círculo de luz granulada detrás del caballero */
+.noir-spot {
+  background: radial-gradient(closest-side, rgba(240, 240, 244, 0.95) 0%, rgba(226, 226, 232, 0.85) 48%, rgba(200, 200, 210, 0.35) 72%, transparent 100%);
+  animation: noir-breathe 9s ease-in-out infinite;
+}
+.noir-spot-grain {
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  mask-image: radial-gradient(closest-side, black 55%, transparent 100%);
+  animation: noir-grain 0.9s steps(6) infinite;
+}
+@keyframes noir-breathe {
+  0%, 100% { opacity: 0.88; scale: 1; }
+  50% { opacity: 1; scale: 1.04; }
 }
 
-/* Un ave cruza el cielo cada cierto tiempo */
-.noir-bird { animation: noir-bird 22s linear infinite; opacity: 0; }
-@keyframes noir-bird {
-  0% { transform: translate(-10vw, 40px) scaleY(1); opacity: 0; }
-  3% { opacity: 0.85; }
-  10% { transform: translate(20vw, 10px) scaleY(0.6); }
-  20% { transform: translate(50vw, -20px) scaleY(1); }
-  30% { transform: translate(80vw, 0) scaleY(0.6); }
-  37% { opacity: 0.85; }
-  40% { transform: translate(110vw, -30px) scaleY(1); opacity: 0; }
-  100% { transform: translate(110vw, -30px); opacity: 0; }
+/* Visor que brilla tenue */
+.noir-visor { animation: noir-visor 6s ease-in-out infinite; }
+@keyframes noir-visor {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .noir-grain, .noir-flicker, .noir-light, .noir-rays, .noir-fog-a, .noir-fog-b, .noir-window { animation: none; }
-  .noir-bird { display: none; }
+  .noir-grain, .noir-flicker, .noir-spot, .noir-spot-grain, .noir-fog-a, .noir-fog-b, .noir-visor { animation: none; }
 }

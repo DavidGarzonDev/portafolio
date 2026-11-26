@@ -4,7 +4,7 @@ import { PERSONAL_INFO, SOCIAL_LINKS } from '@/constants'
 import useSEO from '@/hooks/useSEO'
 import PixelBuddy from '@/components/PixelBuddy'
 import useLanguage from '@/i18n/useLanguage'
-import GothicSkyline from '@/components/noir/GothicSkyline'
+import DarkKnight from '@/components/noir/DarkKnight'
 
 const container: Variants = {
   hidden: {},
@@ -21,7 +21,7 @@ const Hero = () => {
   useSEO({ title: t('seoHomeTitle'), description: t('seoHomeDescription') })
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-20 pb-[14vh] text-center" aria-label={t('seoHomeTitle')}>
-      <GothicSkyline />
+      <DarkKnight className="absolute bottom-0 left-1/2 h-[62vh] aspect-[400/620] -translate-x-1/2 opacity-30 md:left-auto md:right-[2%] md:h-[84vh] md:translate-x-0 md:opacity-100" />
       <motion.div
         className="relative max-w-4xl mx-auto w-full"
         variants={container}
@@ -32,23 +32,18 @@ const Hero = () => {
           <PixelBuddy />
         </motion.div>
 
-        <motion.p variants={item} className="relative z-10 text-zinc-400 text-xs tracking-[0.3em] uppercase mb-8 text-center mix-blend-difference">
+        <motion.p variants={item} className="text-zinc-500 text-xs tracking-[0.3em] uppercase mb-8 text-center">
           {t('available')}
         </motion.p>
 
-        {/* La luz estalla detrás del nombre; el nombre se invierte donde le pega */}
-        <div className="relative isolate mb-8">
-          <div className="noir-rays absolute left-1/2 top-1/2 -z-0 h-[52rem] w-[52rem] -translate-x-1/2 -translate-y-1/2" aria-hidden="true" />
-          <div className="noir-light absolute left-1/2 top-1/2 h-[28rem] w-[46rem] max-w-[100vw] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true" />
-          <motion.h1
-            variants={item}
-            className="relative z-10 text-7xl md:text-9xl lg:text-[10rem] font-semibold text-white tracking-tight leading-[0.9] mix-blend-difference"
-          >
-            {PERSONAL_INFO.name.split(' ').map((word, i) => (
-              <span key={i} className="block">{word}</span>
-            ))}
-          </motion.h1>
-        </div>
+        <motion.h1
+          variants={item}
+          className="text-7xl md:text-9xl lg:text-[10rem] font-semibold text-white tracking-tight leading-[0.9] mb-8 drop-shadow-[0_0_40px_rgba(0,0,0,0.9)]"
+        >
+          {PERSONAL_INFO.name.split(' ').map((word, i) => (
+            <span key={i} className="block">{word}</span>
+          ))}
+        </motion.h1>
 
         <motion.p variants={item} className="text-xl md:text-2xl text-zinc-400 font-light max-w-lg mx-auto mb-12">
           {tr(PERSONAL_INFO.title)}. {t('tagline')}
