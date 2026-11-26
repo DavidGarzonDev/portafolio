@@ -198,6 +198,18 @@ h2, h3 {
   50% { opacity: 1; scale: 1.04; }
 }
 
+/* La capa ondea despacio desde los hombros */
+.noir-cape {
+  transform-box: view-box;
+  transform-origin: 200px 196px;
+  animation: noir-cape 7s ease-in-out infinite;
+}
+@keyframes noir-cape {
+  0%, 100% { transform: skewX(0deg) scaleX(1); }
+  30% { transform: skewX(-1.4deg) scaleX(1.015); }
+  65% { transform: skewX(1deg) scaleX(0.99); }
+}
+
 /* Visor que brilla tenue */
 .noir-visor { animation: noir-visor 6s ease-in-out infinite; }
 @keyframes noir-visor {
@@ -206,5 +218,5 @@ h2, h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .noir-grain, .noir-flicker, .noir-spot, .noir-spot-grain, .noir-fog-a, .noir-fog-b, .noir-visor { animation: none; }
+  .noir-grain, .noir-flicker, .noir-spot, .noir-spot-grain, .noir-fog-a, .noir-fog-b, .noir-visor, .noir-cape { animation: none; }
 }
