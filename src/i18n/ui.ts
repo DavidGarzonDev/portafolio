@@ -15,8 +15,8 @@ export const UI = {
   },
   seoProjectsTitle: { es: 'Proyectos — David Garzón', en: 'Projects — David Garzón' },
   seoProjectsDescription: {
-    es: 'Proyectos reales en producción: Conectate OSS, Gessat y el menú web de Pizzatelo.',
-    en: 'Real projects in production: Conectate OSS, Gessat and the Pizzatelo web menu.',
+    es: 'Proyectos reales en producción: Conectate OSS, el sitio web de Conéctate, Gessat y el menú web de Pizzatelo.',
+    en: 'Real projects in production: Conectate OSS, the Conéctate website, Gessat and the Pizzatelo web menu.',
   },
 
   // Encabezado y pie

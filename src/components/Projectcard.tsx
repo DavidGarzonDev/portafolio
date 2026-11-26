@@ -9,6 +9,10 @@ interface ProjectCardProps {
   image?: string
   /** Tarjeta destacada: ocupa todo el ancho con la imagen al lado del texto. */
   featured?: boolean
+  /** En la destacada, pone la imagen a la derecha. */
+  reverse?: boolean
+  /** Muestra la imagen completa en vez de recortarla. */
+  containImage?: boolean
   priority?: boolean
 }
 
@@ -31,7 +35,7 @@ const LockIcon = () => (
   </svg>
 )
 
-const ProjectCard = ({ project, image, featured = false, priority = false }: ProjectCardProps) => {
+const ProjectCard = ({ project, image, featured = false, reverse = false, containImage = false, priority = false }: ProjectCardProps) => {
   const { t, tr } = useLanguage()
   const ref = useRef<HTMLElement>(null)
   const { title, siteLink, githubLink, technologies } = project
@@ -54,7 +58,9 @@ const ProjectCard = ({ project, image, featured = false, priority = false }: Pro
         'transition-[transform,border-color,box-shadow] duration-300 ease-out',
         'motion-safe:hover:-translate-y-1 hover:border-zinc-700',
         'hover:shadow-[0_24px_60px_-24px_rgba(255,255,255,0.14)]',
-        featured ? 'flex flex-col md:grid md:grid-cols-[1.1fr_1fr]' : 'flex flex-col'
+        featured
+          ? cn('flex flex-col md:grid', reverse ? 'md:grid-cols-[1fr_1.1fr]' : 'md:grid-cols-[1.1fr_1fr]')
+          : 'flex flex-col'
       )}
     >
       {/* Luz que sigue al cursor */}
@@ -71,8 +77,13 @@ const ProjectCard = ({ project, image, featured = false, priority = false }: Pro
         <div
           className={cn(
             'relative overflow-hidden aspect-video',
-            featured ? 'bg-[#09090b]' : 'bg-zinc-900',
-            featured ? 'md:aspect-auto md:h-full md:min-h-[22rem] border-b md:border-b-0 md:border-r border-zinc-900' : 'border-b border-zinc-900'
+            containImage ? 'bg-[#09090b]' : 'bg-zinc-900',
+            featured
+              ? cn(
+                  'md:aspect-auto md:h-full md:min-h-[22rem] border-b md:border-b-0 border-zinc-900',
+                  reverse ? 'md:order-last md:border-l' : 'md:border-r'
+                )
+              : 'border-b border-zinc-900'
           )}
         >
           <img
@@ -80,8 +91,7 @@ const ProjectCard = ({ project, image, featured = false, priority = false }: Pro
             alt={`${t('projectScreenshot')} ${title}`}
             className={cn(
               'absolute inset-0 h-full w-full transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]',
-              // La destacada se muestra completa: su portada ya trae el fondo oscuro de la tarjeta.
-              featured ? 'object-contain' : 'object-cover'
+              containImage ? 'object-contain' : 'object-cover'
             )}
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"

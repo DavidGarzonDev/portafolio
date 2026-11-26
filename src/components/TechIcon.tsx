@@ -4,6 +4,7 @@ import {
   SiChatwoot,
   SiDocker,
   SiFastapi,
+  SiFramer,
   SiFlask,
   SiGit,
   SiJavascript,
@@ -19,6 +20,7 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiVite,
+  SiWebgl,
 } from 'react-icons/si'
 
 const ICONS: Record<string, IconType> = {
@@ -33,6 +35,8 @@ const ICONS: Record<string, IconType> = {
   JavaScript: SiJavascript,
   TailwindCSS: SiTailwindcss,
   Vite: SiVite,
+  WebGL: SiWebgl,
+  Motion: SiFramer,
   Docker: SiDocker,
   Proxmox: SiProxmox,
   Git: SiGit,

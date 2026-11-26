@@ -35,6 +35,17 @@ export const PROJECTS_DATA: readonly ProjectData[] = [
     technologies: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Docker', 'Proxmox', 'n8n'],
   },
   {
+    id: '4',
+    title: 'Sitio web de Conéctate',
+    description: {
+      es: 'Rediseño completo del sitio de Conéctate, contado por una fibra óptica de luz en WebGL que recorre la página. Consulta de cobertura por barrio, selector de velocidad animado, chat propio en tiempo real conectado a Chatwoot, WhatsApp con mensajes por plan, reporte de pagos, PQRSF y test de velocidad. SEO de 67 a 93 sobre 100.',
+      en: "Full redesign of Conéctate's website, told through a WebGL fiber-optic light that runs through the page. Neighborhood coverage lookup, animated speed selector, custom real-time chat connected to Chatwoot, WhatsApp with per-plan messages, payment reporting, customer requests and speed test. SEO score raised from 67 to 93 out of 100.",
+    },
+    badge: { es: 'Empresa real · En producción', en: 'Real company · In production' },
+    siteLink: 'https://conectate.com.co',
+    technologies: ['JavaScript', 'Vite', 'TailwindCSS', 'WebGL', 'Motion', 'Chatwoot', 'SEO'],
+  },
+  {
     id: '2',
     title: 'Gessat',
     description: {
